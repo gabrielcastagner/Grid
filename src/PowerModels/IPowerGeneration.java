@@ -1,4 +1,4 @@
-package PowerModles;
+package PowerModels;
 
 public interface IPowerGeneration {
 
