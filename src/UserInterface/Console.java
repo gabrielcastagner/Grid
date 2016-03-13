@@ -23,7 +23,7 @@ public class Console extends ScrolledComposite{
 		consoleMessageTabel.setForeground(fg);
 		//Opening message
 		TableItem openingMessage = new TableItem(consoleMessageTabel, SWT.NONE);
-		openingMessage.setText(new String[]{"Hello, and Welcome to the Gear Train Calculator."});
+		openingMessage.setText(new String[]{"Hello, and Welcome to Grid."});
 		
 		setContent(consoleMessageTabel);
 	}
