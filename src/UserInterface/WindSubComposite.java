@@ -1,6 +1,7 @@
 package UserInterface;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -20,50 +21,50 @@ public class WindSubComposite extends Composite {
 		setBackground(ColorPalette.CUSTOM_BLACK);
 		setForeground(ColorPalette.CUSTOM_BLUE);
 		setLayout(null);
-		setBounds(0, 100, 540, 200);
+		setBounds(25, 100, 540, 200);
 	}
 
 	private void setElementsToComposite() {
 
 		Label lblRadius = new Label(this, SWT.NONE);
 		lblRadius.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblRadius.setBounds(25, 0, 163, 35);
+		lblRadius.setBounds(0, 0, 163, 35);
 		lblRadius.setText("Blade Radius:");
 		lblRadius.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblRadius.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		Label lblDensity = new Label(this, SWT.NONE);
 		lblDensity.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblDensity.setBounds(25, 40, 163, 35);
+		lblDensity.setBounds(0, 40, 163, 35);
 		lblDensity.setText("Air Density:");
 		lblDensity.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblDensity.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		Label lblWindSpeed = new Label(this, SWT.NONE);
 		lblWindSpeed.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblWindSpeed.setBounds(25, 80, 163, 35);
+		lblWindSpeed.setBounds(0, 80, 163, 35);
 		lblWindSpeed.setText("Wind Speed:");
 		lblWindSpeed.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblWindSpeed.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		Label lblEfficiency = new Label(this, SWT.NONE);
 		lblEfficiency.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblEfficiency.setBounds(25, 120, 163, 35);
+		lblEfficiency.setBounds(0, 120, 163, 35);
 		lblEfficiency.setText("Model Efficiency:");
 		lblEfficiency.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblEfficiency.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		bladeRadiusText = new Text(this, SWT.BORDER);
-		bladeRadiusText.setBounds(189, 0, 196, 35);
+		bladeRadiusText.setBounds(164, 0, 150, 25);
 
 		airDensityText = new Text(this, SWT.BORDER);
-		airDensityText.setBounds(189, 40, 196, 35);
+		airDensityText.setBounds(164, 40, 150, 25);
 
 		windSpeedText = new Text(this, SWT.BORDER);
-		windSpeedText.setBounds(189, 80, 196, 35);
+		windSpeedText.setBounds(164, 80, 150, 25);
 
 		efficiencyText = new Text(this, SWT.BORDER);
-		efficiencyText.setBounds(189, 120, 196, 35);
+		efficiencyText.setBounds(164, 120, 150, 25);
 
 		textBoxes = new Text[] { bladeRadiusText, airDensityText, windSpeedText, efficiencyText };
 

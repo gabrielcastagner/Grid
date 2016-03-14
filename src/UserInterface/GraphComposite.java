@@ -36,6 +36,13 @@ public class GraphComposite extends Composite{
 		
 		
 		
+	}
+	
+	private void createTable(){
+		
+	}
+	
+	private void createGraph(){
 		
 	}
 

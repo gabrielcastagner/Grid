@@ -18,7 +18,11 @@ import org.eclipse.wb.swt.SWTResourceManager;
 public class PrimaryComposite extends Composite {
 
 	private Button buttonAdd;
+	private Button buttonRemove;
+	private Button buttonAnalyze;
 	private Console consoleScrolledComposite;
+	private Console dataDisplay;
+	private TableList inputData;
 
 	private final String[] powerOption = { "Solar", "Wind" };
 	private Combo comboPowerOptions;
@@ -40,35 +44,61 @@ public class PrimaryComposite extends Composite {
 	}
 
 	private void setElementsToComposite() {
+		// Console For interacting with user.
 		consoleScrolledComposite = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL,
 				ColorPalette.CUSTOM_WHITE, ColorPalette.CUSTOM_BLACK);
 		consoleScrolledComposite.setBounds(25, 474, 1024, 150);
 
+		// Temporary Console For Displaying Data
+		dataDisplay = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		dataDisplay.setBounds(560, 50, 480, 350);
+		dataDisplay.clearConsole();
+		dataDisplay.addToConsole("Temporary Data Display Console");
+
+		inputData = new TableList(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		inputData.setBounds(25, 50, 480, 200);
+
 		currentSubComposite.setLayout(layout);
 		currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLUE);
-		currentSubComposite.setBounds(0, 100, 520, 150);
+		currentSubComposite.setBounds(25, 325, 300, 150);
 
-		Label lblUnits = new Label(this, SWT.NONE);
-		lblUnits.setSize(163, 33);
-		lblUnits.setLocation(25, 30);
-		lblUnits.setText("Power Type:");
-		lblUnits.setForeground(SWTResourceManager.getColor(52, 152, 219));
-		lblUnits.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblUnits.setBackground(ColorPalette.CUSTOM_BLACK);
-		lblUnits.setForeground(ColorPalette.CUSTOM_BLUE);
+		Label lblPType = new Label(this, SWT.NONE);
+		lblPType.setSize(163, 33);
+		lblPType.setLocation(25, 275);
+		lblPType.setText("Power Type:");
+		lblPType.setForeground(SWTResourceManager.getColor(52, 152, 219));
+		lblPType.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblPType.setBackground(ColorPalette.CUSTOM_BLACK);
+		lblPType.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		buttonAdd = new Button(this, SWT.NONE);
-		buttonAdd.setBounds(136, 433, 166, 35);
+		buttonAdd.setBounds(340, 325, 166, 25);
 		buttonAdd.setText("Add Power Source");
 		buttonAdd.addListener(SWT.Selection, event -> {
 			consoleScrolledComposite
 					.addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + " Power Source has been added");
 		});
 
+		buttonRemove = new Button(this, SWT.NONE);
+		buttonRemove.setBounds(340, 365, 166, 25);
+		buttonRemove.setText("Remove Power Source");
+		buttonRemove.addListener(SWT.Selection, event -> {
+			consoleScrolledComposite.addToConsole("Power Source has been Removed");
+		});
+
+		buttonAnalyze = new Button(this, SWT.NONE);
+		buttonAnalyze.setBounds(340, 405, 166, 25);
+		buttonAnalyze.setText("Analyze");
+		buttonAnalyze.addListener(SWT.Selection, event -> {
+			dataDisplay.addToConsole("Data Being Analyzed...");
+		});
+
 		comboPowerOptions = new Combo(this, SWT.NONE);
 		comboPowerOptions.setItems(powerOption);
-		comboPowerOptions.setBounds(189, 30, 94, 33);
+		comboPowerOptions.setBounds(189, 275, 94, 30);
 		comboPowerOptions.select(0);
 		setSubComposit();
 		comboPowerOptions.addSelectionListener(new SelectionAdapter() {

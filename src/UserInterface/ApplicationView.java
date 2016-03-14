@@ -32,9 +32,6 @@ public class ApplicationView {
 	private MenuItem menuHelpItemProgramHelp;
 	private MenuItem menuHelpItemGeneralHelp;
 
-	private MenuItem menuModeAdd;
-	private MenuItem menuModeAnalysis;
-
 	// FileBrowser
 	private FileDialog fileBrowser;
 
@@ -68,9 +65,8 @@ public class ApplicationView {
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		parent.setLayout(layout);
 
-		// primaryComposite = new PrimaryComposite(parentShell, SWT.NONE);
-		Composite[] compositeScreens = { new PrimaryComposite(parentShell, SWT.NONE), new GraphComposite(parentShell, SWT.NONE) };
-		
+		primaryComposite = new PrimaryComposite(parentShell, SWT.NONE);
+
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
 		mntmFile.setText("File");
 
@@ -91,33 +87,6 @@ public class ApplicationView {
 
 		menuFileItemSaveAs = new MenuItem(menu_file, SWT.NONE);
 		menuFileItemSaveAs.setText("Save As...");
-
-		MenuItem mntmMode = new MenuItem(menu, SWT.CASCADE);
-		mntmMode.setText("Modes");
-
-		Menu menu_mode = new Menu(mntmMode);
-		menu_mode.setLocation(new Point(0, 0));
-		mntmMode.setMenu(menu_mode);
-
-		menuModeAdd = new MenuItem(menu_mode, SWT.NONE);
-		menuModeAdd.setText("Add Item");
-		menuModeAdd.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				primaryComposite = compositeScreens[0];
-				SelectComposite.PRIMARY_COMPOSITE.setCurrent();
-				System.out.println("In Add Mode");
-			}
-		});
-
-		menuModeAnalysis = new MenuItem(menu_mode, SWT.NONE);
-		menuModeAnalysis.setText("Analyze");
-		menuModeAnalysis.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				primaryComposite = compositeScreens[1];
-				SelectComposite.PRIMARY_COMPOSITE.setCurrent();
-				System.out.println("In Analysis Mode");
-			}
-		});
 
 		MenuItem mntmHelp = new MenuItem(menu, SWT.CASCADE);
 		mntmHelp.setText("Help");

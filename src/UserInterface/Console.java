@@ -24,7 +24,6 @@ public class Console extends ScrolledComposite{
 		//Opening message
 		TableItem openingMessage = new TableItem(consoleMessageTabel, SWT.NONE);
 		openingMessage.setText(new String[]{"Hello, and Welcome to Grid."});
-		
 		setContent(consoleMessageTabel);
 	}
 	
