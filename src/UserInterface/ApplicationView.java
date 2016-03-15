@@ -18,6 +18,8 @@ public class ApplicationView {
 	// Main Display
 	private Shell parentShell;
 	private Display display;
+	private int shellWidth, shellHeight;
+	
 
 	// Composites
 	private final static StackLayout layout = new StackLayout();
@@ -52,9 +54,16 @@ public class ApplicationView {
 	 * Create contents of the window.
 	 */
 	protected void createMainContents() {
-		parentShell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN);
+		parentShell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.MAX);
 		parentShell.setToolTipText("");
-		parentShell.setSize(1080, 720);
+		//parentShell.setSize(1080, 720);
+		
+		shellWidth = display.getClientArea().width;
+		shellHeight = display.getClientArea().height;
+		parentShell.setLocation(0,0);
+		parentShell.setSize(shellWidth, shellHeight);
+		//parentShell.setFullScreen(true);
+		parentShell.setMaximized(true);
 		parentShell.setText("-Grid-");
 		parentShell.setBackground(ColorPalette.CUSTOM_BLACK);
 		parentShell.setLayout(null);
