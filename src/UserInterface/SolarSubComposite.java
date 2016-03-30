@@ -1,7 +1,6 @@
 package UserInterface;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -20,7 +19,7 @@ public class SolarSubComposite extends Composite {
 		addElementsToComposite();
 		setBackground(ColorPalette.CUSTOM_BLACK);
 		setForeground(ColorPalette.CUSTOM_BLUE);
-		setLayout(new RowLayout());
+		setLayout(null);
 		setBounds(0, 100, 540, 200);
 	}
 
@@ -36,7 +35,7 @@ public class SolarSubComposite extends Composite {
 		Label lblPowerloss = new Label(this, SWT.NONE);
 		lblPowerloss.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblPowerloss.setBounds(25, 40, 163, 35);
-		lblPowerloss.setText("Powerloss Coefficient:");
+		lblPowerloss.setText("Powerloss Coeff:");
 		lblPowerloss.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblPowerloss.setForeground(ColorPalette.CUSTOM_BLUE);
 
@@ -55,16 +54,16 @@ public class SolarSubComposite extends Composite {
 		lblExposure.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		areaText = new Text(this, SWT.BORDER);
-		areaText.setBounds(189, 0, 196, 35);
+		areaText.setBounds(189, 0, 196, 25);
 
 		powerLossCoefficientText = new Text(this, SWT.BORDER);
-		powerLossCoefficientText.setBounds(189, 40, 196, 35);
+		powerLossCoefficientText.setBounds(189, 40, 196, 25);
 
 		solarPowerEfficienyText = new Text(this, SWT.BORDER);
-		solarPowerEfficienyText.setBounds(189, 80, 196, 35);
+		solarPowerEfficienyText.setBounds(189, 80, 196, 25);
 
 		exposureText = new Text(this, SWT.BORDER);
-		exposureText.setBounds(189, 120, 196, 35);
+		exposureText.setBounds(189, 120, 196, 25);
 
 		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, exposureText };
 	}

@@ -10,46 +10,47 @@ package PowerModels;
  */
 public class WindModel implements IPowerGeneration{
 
-	private double yield;
-	private double avgExposure;
-	private double plCoeff;
+	private double airDensity;
+	private double windSpd;
+	private double effCoeff;
 	
-	public WindModel(double yield, double avgExposure, double plCoeff){
-		this.yield = yield;
-		this.avgExposure = avgExposure;
-		this.plCoeff = plCoeff;
+	public WindModel(double airDensity, double windSpd, double effCoeff){
+		this.airDensity = airDensity;
+		this.windSpd = windSpd;
+		this.effCoeff = effCoeff;
 	}
 	
-	public double calculatePower(double area) {
-		return area * yield * avgExposure * plCoeff;
+	public double calculatePower(double radius){
+		return .5*airDensity*(radius * radius * Math.PI)*(Math.pow(windSpd, 3))*effCoeff;
 	}
 
 	public double timeToPayOff() {
 		return 0;
 	}
 
-	public double getYield() {
-		return yield;
+	public double getAirDensity() {
+		return airDensity;
 	}
 
-	public void setYield(double yield) {
-		this.yield = yield;
+	public void setAirDensity(double airDensity) {
+		this.airDensity = airDensity;
 	}
 
-	public double getAvgExposure() {
-		return avgExposure;
+	public double getWindSpd() {
+		return windSpd;
 	}
 
-	public void setAvgExposure(double avgExposure) {
-		this.avgExposure = avgExposure;
+	public void setWindSpd(double windSpd) {
+		this.windSpd = windSpd;
 	}
 
-	public double getPlCoeff() {
-		return plCoeff;
+	public double getEffCoeff() {
+		return effCoeff;
 	}
 
-	public void setPlCoeff(double plCoeff) {
-		this.plCoeff = plCoeff;
+	public void setEffCoeff(double effCoeff) {
+		this.effCoeff = effCoeff;
 	}
-
+	
+	
 }
