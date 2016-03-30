@@ -21,6 +21,7 @@ public class PrimaryComposite extends Composite {
 	private int displayWidth, displayHeight;
 	private final int edgePaddingWidth = 40;
 	private final int edgePaddingHeight = 70;
+	private final int compBuffer = 20;
 	
 	
 	
@@ -76,7 +77,7 @@ public class PrimaryComposite extends Composite {
 		currentSubComposite.setLayout(layout);
 		currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLUE);
-		currentSubComposite.setBounds(edgePaddingWidth, displayHeight/2 + edgePaddingHeight, displayWidth/4 - 3*edgePaddingWidth, displayHeight/4 - edgePaddingHeight);
+		currentSubComposite.setBounds(edgePaddingWidth, displayHeight/2 + edgePaddingHeight+compBuffer, displayWidth/4 - 3*edgePaddingWidth, displayHeight/4 - edgePaddingHeight - compBuffer);
 
 		Label lblPType = new Label(this, SWT.NONE);
 		lblPType.setSize(163, 33);
@@ -96,14 +97,14 @@ public class PrimaryComposite extends Composite {
 		});
 
 		buttonRemove = new Button(this, SWT.NONE);
-		buttonRemove.setBounds(displayWidth/4, displayHeight/2 + edgePaddingWidth + 30, 166, 25);
+		buttonRemove.setBounds(displayWidth/4, displayHeight/2 + 2*edgePaddingWidth, 166, 25);
 		buttonRemove.setText("Remove Power Source");
 		buttonRemove.addListener(SWT.Selection, event -> {
 			consoleScrolledComposite.addToConsole("Power Source has been Removed");
 		});
 
 		buttonAnalyze = new Button(this, SWT.NONE);
-		buttonAnalyze.setBounds(displayWidth/4, displayHeight/2 + edgePaddingWidth + 55, 166, 25);
+		buttonAnalyze.setBounds(displayWidth/4, displayHeight/2 + 3*edgePaddingWidth, 166, 25);
 		buttonAnalyze.setText("Analyze");
 		buttonAnalyze.addListener(SWT.Selection, event -> {
 			dataDisplay.addToConsole("Data Being Analyzed...");
@@ -111,7 +112,7 @@ public class PrimaryComposite extends Composite {
 
 		comboPowerOptions = new Combo(this, SWT.NONE);
 		comboPowerOptions.setItems(powerOption);
-		comboPowerOptions.setBounds(displayWidth/4 - 6*edgePaddingWidth, (int) (0.53*displayHeight), 94, 30);
+		comboPowerOptions.setBounds(edgePaddingWidth+163+edgePaddingWidth, (int) (0.53*displayHeight), 94, 30);
 		comboPowerOptions.select(0);
 		setSubComposit();
 		comboPowerOptions.addSelectionListener(new SelectionAdapter() {
