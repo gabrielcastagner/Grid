@@ -77,7 +77,7 @@ public class PrimaryComposite extends Composite {
 		currentSubComposite.setLayout(layout);
 		currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLUE);
-		currentSubComposite.setBounds(edgePaddingWidth, displayHeight/2 + edgePaddingHeight+compBuffer, displayWidth/4 - 3*edgePaddingWidth, displayHeight/4 - edgePaddingHeight - compBuffer);
+		currentSubComposite.setBounds(edgePaddingWidth, displayHeight/2 + edgePaddingHeight+compBuffer, 3*displayWidth/16 - edgePaddingWidth, displayHeight/4 - edgePaddingHeight - compBuffer);
 
 		Label lblPType = new Label(this, SWT.NONE);
 		lblPType.setSize(163, 33);
@@ -89,7 +89,7 @@ public class PrimaryComposite extends Composite {
 		lblPType.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		buttonAdd = new Button(this, SWT.NONE);
-		buttonAdd.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + edgePaddingWidth + 10, 166, 30);
+		buttonAdd.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + edgePaddingWidth + 10, 180, 30);
 		buttonAdd.setText("Add Power Source");
 		buttonAdd.addListener(SWT.Selection, event -> {
 			consoleScrolledComposite
@@ -97,14 +97,14 @@ public class PrimaryComposite extends Composite {
 		});
 
 		buttonRemove = new Button(this, SWT.NONE);
-		buttonRemove.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 2*edgePaddingWidth + 10, 166, 30);
+		buttonRemove.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 2*edgePaddingWidth + 10, 180, 30);
 		buttonRemove.setText("Remove Power Source");
 		buttonRemove.addListener(SWT.Selection, event -> {
 			consoleScrolledComposite.addToConsole("Power Source has been Removed");
 		});
 
 		buttonAnalyze = new Button(this, SWT.NONE);
-		buttonAnalyze.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 3*edgePaddingWidth +10, 166, 30);
+		buttonAnalyze.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 3*edgePaddingWidth +10, 180, 30);
 		buttonAnalyze.setText("Analyze");
 		buttonAnalyze.addListener(SWT.Selection, event -> {
 			dataDisplay.addToConsole("Data Being Analyzed...");
@@ -112,7 +112,7 @@ public class PrimaryComposite extends Composite {
 
 		comboPowerOptions = new Combo(this, SWT.NONE);
 		comboPowerOptions.setItems(powerOption);
-		comboPowerOptions.setBounds(edgePaddingWidth+163+edgePaddingWidth, (int) (0.53*displayHeight), 94, 30);
+		comboPowerOptions.setBounds(edgePaddingWidth+163, (int) (0.53*displayHeight), 94, 30);
 		comboPowerOptions.select(0);
 		setSubComposit();
 		comboPowerOptions.addSelectionListener(new SelectionAdapter() {
