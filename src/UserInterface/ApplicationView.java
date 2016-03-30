@@ -2,6 +2,8 @@ package UserInterface;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -19,7 +21,7 @@ public class ApplicationView {
 
 	// Composites
 	private final static StackLayout layout = new StackLayout();
-	private static PrimaryComposite primaryComposite;
+	private static Composite primaryComposite;
 
 	// Menu Bar
 	private MenuItem menuFileItemNew;
@@ -35,6 +37,7 @@ public class ApplicationView {
 
 	/**
 	 * Open the window.
+	 * 
 	 * @wbp.parser.entryPoint
 	 */
 	public void open() {
@@ -57,15 +60,13 @@ public class ApplicationView {
 		parentShell.setLayout(null);
 		Menu menu = new Menu(parentShell, SWT.BAR);
 		parentShell.setMenuBar(menu);
-		
+
 		final Composite parent = new Composite(parentShell, SWT.NONE);
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		parent.setLayout(layout);
 
 		primaryComposite = new PrimaryComposite(parentShell, SWT.NONE);
-		
-		SelectComposite.PRIMARY_COMPOSITE.setCurrent();
-		
+
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
 		mntmFile.setText("File");
 
