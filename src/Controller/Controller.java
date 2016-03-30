@@ -22,6 +22,11 @@ public class Controller {
 		} catch (SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
+		//TODO Console stuff here
+		System.out.println("PRINT TO CONSOLE \"Gathering Assets and Loading the Program...\"");
+		Parser.DataSetParser.parseWindDataSet();
+		System.out.println("PRINT TO CONSOLE \"Program Loaded.\"");
+		
 	}
 
 	/**
