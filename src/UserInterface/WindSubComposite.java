@@ -57,16 +57,16 @@ public class WindSubComposite extends Composite {
 		lblEfficiency.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		bladeRadiusText = new Text(this, SWT.BORDER);
-		bladeRadiusText.setBounds(164, 0, textBoxLength, 25);
+		bladeRadiusText.setBounds(164, 0, textBoxLength, 30);
 
 		airDensityText = new Text(this, SWT.BORDER);
-		airDensityText.setBounds(164, 40, textBoxLength, 25);
+		airDensityText.setBounds(164, 40, textBoxLength, 30);
 
 		windSpeedText = new Text(this, SWT.BORDER);
-		windSpeedText.setBounds(164, 80, textBoxLength, 25);
+		windSpeedText.setBounds(164, 80, textBoxLength, 30);
 
 		efficiencyText = new Text(this, SWT.BORDER);
-		efficiencyText.setBounds(164, 120, textBoxLength, 25);
+		efficiencyText.setBounds(164, 120, textBoxLength, 30);
 
 		textBoxes = new Text[] { bladeRadiusText, airDensityText, windSpeedText, efficiencyText };
 

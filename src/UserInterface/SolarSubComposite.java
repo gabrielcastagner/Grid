@@ -57,16 +57,16 @@ public class SolarSubComposite extends Composite {
 		lblExposure.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		areaText = new Text(this, SWT.BORDER);
-		areaText.setBounds(164, 0, textBoxLength, 25);
+		areaText.setBounds(164, 0, textBoxLength, 30);
 
 		powerLossCoefficientText = new Text(this, SWT.BORDER);
-		powerLossCoefficientText.setBounds(164, 40, textBoxLength, 25);
+		powerLossCoefficientText.setBounds(164, 40, textBoxLength, 30);
 
 		solarPowerEfficienyText = new Text(this, SWT.BORDER);
-		solarPowerEfficienyText.setBounds(164, 80, textBoxLength, 25);
+		solarPowerEfficienyText.setBounds(164, 80, textBoxLength, 30);
 
 		exposureText = new Text(this, SWT.BORDER);
-		exposureText.setBounds(164, 120, textBoxLength, 25);
+		exposureText.setBounds(164, 120, textBoxLength, 30);
 
 		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, exposureText };
 	}
