@@ -89,7 +89,7 @@ public class PrimaryComposite extends Composite {
 		lblPType.setForeground(ColorPalette.CUSTOM_BLUE);
 
 		buttonAdd = new Button(this, SWT.NONE);
-		buttonAdd.setBounds(displayWidth/4, displayHeight/2 + edgePaddingWidth, 166, 25);
+		buttonAdd.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + edgePaddingWidth + 10, 166, 30);
 		buttonAdd.setText("Add Power Source");
 		buttonAdd.addListener(SWT.Selection, event -> {
 			consoleScrolledComposite
@@ -97,14 +97,14 @@ public class PrimaryComposite extends Composite {
 		});
 
 		buttonRemove = new Button(this, SWT.NONE);
-		buttonRemove.setBounds(displayWidth/4, displayHeight/2 + 2*edgePaddingWidth, 166, 25);
+		buttonRemove.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 2*edgePaddingWidth + 10, 166, 30);
 		buttonRemove.setText("Remove Power Source");
 		buttonRemove.addListener(SWT.Selection, event -> {
 			consoleScrolledComposite.addToConsole("Power Source has been Removed");
 		});
 
 		buttonAnalyze = new Button(this, SWT.NONE);
-		buttonAnalyze.setBounds(displayWidth/4, displayHeight/2 + 3*edgePaddingWidth, 166, 25);
+		buttonAnalyze.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 3*edgePaddingWidth +10, 166, 30);
 		buttonAnalyze.setText("Analyze");
 		buttonAnalyze.addListener(SWT.Selection, event -> {
 			dataDisplay.addToConsole("Data Being Analyzed...");
