@@ -120,7 +120,6 @@ public class PrimaryComposite extends Composite {
 				setSubComposit();
 			}
 		});
-
 		comboBoxes = new Combo[] { comboPowerOptions };
 	}
 
