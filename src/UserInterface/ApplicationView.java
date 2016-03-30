@@ -62,7 +62,6 @@ public class ApplicationView {
 		shellHeight = display.getClientArea().height;
 		parentShell.setLocation(0,0);
 		parentShell.setSize(shellWidth, shellHeight);
-		//parentShell.setFullScreen(true);
 		parentShell.setMaximized(true);
 		parentShell.setText("-Grid-");
 		parentShell.setBackground(ColorPalette.CUSTOM_BLACK);
