@@ -51,8 +51,8 @@ public class PrimaryComposite extends Composite {
 
 	public PrimaryComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
-		setBackground(ColorPalette.CUSTOM_BLACK);
-		setForeground(ColorPalette.CUSTOM_BLUE);
+		//setBackground(ColorPalette.CUSTOM_BLACK);
+		//setForeground(ColorPalette.CUSTOM_BLUE);
 		setLayout(null);
 		displayHeight= arg0.getBounds().height;
 		displayWidth = arg0.getBounds().width;
@@ -78,8 +78,8 @@ public class PrimaryComposite extends Composite {
 		inputData.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.45));
 
 		currentSubComposite.setLayout(layout);
-		currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
-		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLUE);
+		//currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
+		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight/2 + edgePaddingHeight+compBuffer, 3*displayWidth/16 - edgePaddingWidth, displayHeight/4 - edgePaddingHeight - compBuffer);
 
 		Label lblPType = new Label(this, SWT.NONE);
@@ -88,8 +88,8 @@ public class PrimaryComposite extends Composite {
 		lblPType.setText("Power Type:");
 		lblPType.setForeground(SWTResourceManager.getColor(52, 152, 219));
 		lblPType.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblPType.setBackground(ColorPalette.CUSTOM_BLACK);
-		lblPType.setForeground(ColorPalette.CUSTOM_BLUE);
+		//lblPType.setBackground(ColorPalette.CUSTOM_BLACK);
+		lblPType.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		buttonAdd = new Button(this, SWT.NONE);
 		buttonAdd.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + edgePaddingWidth + 10, 180, 30);
@@ -118,6 +118,7 @@ public class PrimaryComposite extends Composite {
 		comboPowerOptions.setBounds(edgePaddingWidth+163, (int) (0.53*displayHeight), 94, 30);
 		comboPowerOptions.select(0);
 		setSubComposit();
+		comboPowerOptions.setBackground(ColorPalette.CUSTOM_WHITE);
 //		comboPowerOptions.addSelectionListener(new SelectionAdapter() {
 //			public void widgetSelected(SelectionEvent e) {
 //				setSubComposit();
@@ -138,6 +139,8 @@ public class PrimaryComposite extends Composite {
 	// =====================Getters and Setter and Mcgeers====================== //
 	public void setSubComposit() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
+		currentSubComposite.setBackgroundImage(getBackgroundImage());
+		currentSubComposite.setBackgroundMode(SWT.INHERIT_FORCE);
 		currentSubComposite.layout();
 	}
 

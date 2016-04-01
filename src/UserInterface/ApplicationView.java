@@ -4,6 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -21,6 +22,8 @@ public class ApplicationView {
 	private Shell parentShell;
 	private Display display;
 	private int shellWidth, shellHeight;
+	private Image backgroundMountains;
+	private final String bGPath = "resource\\BG.jpg";
 	
 
 	// Composites
@@ -60,6 +63,8 @@ public class ApplicationView {
 		parentShell.setToolTipText("");
 		//parentShell.setSize(1080, 720);
 		
+		backgroundMountains = new Image(display,bGPath);
+		
 		shellWidth = display.getClientArea().width;
 		shellHeight = display.getClientArea().height;
 		parentShell.setLocation(0,0);
@@ -74,8 +79,11 @@ public class ApplicationView {
 		final Composite parent = new Composite(parentShell, SWT.NONE);
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		parent.setLayout(layout);
+		parent.setBackgroundImage(backgroundMountains);
 
 		primaryComposite = new PrimaryComposite(parentShell, SWT.NONE);
+		primaryComposite.setBackgroundImage(backgroundMountains);
+		primaryComposite.setBackgroundMode(SWT.INHERIT_FORCE);
 
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
 		mntmFile.setText("File");
