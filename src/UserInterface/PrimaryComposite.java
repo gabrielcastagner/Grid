@@ -31,7 +31,7 @@ public class PrimaryComposite extends Composite {
 	private Button buttonAnalyze;
 	private Console consoleScrolledComposite;
 	private Console dataDisplay;
-	private TableList inputData;
+	private TableComposite inputData;
 
 	private final String[] powerOption = { "Solar", "Wind" };
 	private Combo comboPowerOptions;
@@ -48,12 +48,9 @@ public class PrimaryComposite extends Composite {
 		setBackground(ColorPalette.CUSTOM_BLACK);
 		setForeground(ColorPalette.CUSTOM_BLUE);
 		setLayout(null);
-		//setBounds(0, 0, 1080, 720);
 		displayHeight= arg0.getBounds().height;
 		displayWidth = arg0.getBounds().width;
 		setBounds(0, 0, displayWidth, displayHeight);
-		System.out.println(displayHeight);
-		System.out.println(displayWidth);
 		setElementsToComposite();
 	}
 
@@ -70,7 +67,7 @@ public class PrimaryComposite extends Composite {
 		dataDisplay.clearConsole();
 		dataDisplay.addToConsole("Temporary Data Display Console");
 
-		inputData = new TableList(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+		inputData = new TableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
 				ColorPalette.CUSTOM_BLACK);
 		inputData.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.45));
 
@@ -91,35 +88,35 @@ public class PrimaryComposite extends Composite {
 		buttonAdd = new Button(this, SWT.NONE);
 		buttonAdd.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + edgePaddingWidth + 10, 180, 30);
 		buttonAdd.setText("Add Power Source");
-		buttonAdd.addListener(SWT.Selection, event -> {
-			consoleScrolledComposite
-					.addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + " Power Source has been added");
-		});
+//		buttonAdd.addListener(SWT.Selection, event -> {
+//			consoleScrolledComposite
+//					.addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + " Power Source has been added");
+//		});
 
 		buttonRemove = new Button(this, SWT.NONE);
 		buttonRemove.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 2*edgePaddingWidth + 10, 180, 30);
 		buttonRemove.setText("Remove Power Source");
-		buttonRemove.addListener(SWT.Selection, event -> {
-			consoleScrolledComposite.addToConsole("Power Source has been Removed");
-		});
+//		buttonRemove.addListener(SWT.Selection, event -> {
+//			consoleScrolledComposite.addToConsole("Power Source has been Removed");
+//		});
 
 		buttonAnalyze = new Button(this, SWT.NONE);
 		buttonAnalyze.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 3*edgePaddingWidth +10, 180, 30);
 		buttonAnalyze.setText("Analyze");
-		buttonAnalyze.addListener(SWT.Selection, event -> {
-			dataDisplay.addToConsole("Data Being Analyzed...");
-		});
+//		buttonAnalyze.addListener(SWT.Selection, event -> {
+//			dataDisplay.addToConsole("Data Being Analyzed...");
+//		});
 
 		comboPowerOptions = new Combo(this, SWT.NONE);
 		comboPowerOptions.setItems(powerOption);
 		comboPowerOptions.setBounds(edgePaddingWidth+163, (int) (0.53*displayHeight), 94, 30);
 		comboPowerOptions.select(0);
 		setSubComposit();
-		comboPowerOptions.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				setSubComposit();
-			}
-		});
+//		comboPowerOptions.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				setSubComposit();
+//			}
+//		});
 		comboBoxes = new Combo[] { comboPowerOptions };
 	}
 
@@ -130,9 +127,32 @@ public class PrimaryComposite extends Composite {
 		consoleScrolledComposite.clearConsole();
 	}
 
+	
+	
+	// =====================Getters and Setter and Mcgeers====================== //
 	public void setSubComposit() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
 		currentSubComposite.layout();
+	}
+
+	public Button getButtonRemove() {
+		return buttonRemove;
+	}
+
+	public void setButtonRemove(Button buttonRemove) {
+		this.buttonRemove = buttonRemove;
+	}
+
+	public Button getButtonAdd() {
+		return buttonAdd;
+	}
+
+	public Button getButtonAnalyze() {
+		return buttonAnalyze;
+	}
+
+	public Combo getComboPowerOptions() {
+		return comboPowerOptions;
 	}
 
 }

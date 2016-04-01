@@ -1,4 +1,4 @@
-package UserInterface;
+	package UserInterface;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
@@ -42,16 +42,9 @@ public class WindSubComposite extends Composite {
 		lblDensity.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblDensity.setForeground(ColorPalette.CUSTOM_BLUE);
 
-		Label lblWindSpeed = new Label(this, SWT.NONE);
-		lblWindSpeed.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblWindSpeed.setBounds(0, 80, 163, 35);
-		lblWindSpeed.setText("Wind Speed:");
-		lblWindSpeed.setBackground(ColorPalette.CUSTOM_BLACK);
-		lblWindSpeed.setForeground(ColorPalette.CUSTOM_BLUE);
-
 		Label lblEfficiency = new Label(this, SWT.NONE);
 		lblEfficiency.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblEfficiency.setBounds(0, 120, 163, 35);
+		lblEfficiency.setBounds(0, 80, 163, 35);
 		lblEfficiency.setText("Model Efficiency:");
 		lblEfficiency.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblEfficiency.setForeground(ColorPalette.CUSTOM_BLUE);
@@ -62,19 +55,30 @@ public class WindSubComposite extends Composite {
 		airDensityText = new Text(this, SWT.BORDER);
 		airDensityText.setBounds(164, 40, textBoxLength, 30);
 
-		windSpeedText = new Text(this, SWT.BORDER);
-		windSpeedText.setBounds(164, 80, textBoxLength, 30);
-
 		efficiencyText = new Text(this, SWT.BORDER);
-		efficiencyText.setBounds(164, 120, textBoxLength, 30);
+		efficiencyText.setBounds(164, 80, textBoxLength, 30);
 
 		textBoxes = new Text[] { bladeRadiusText, airDensityText, windSpeedText, efficiencyText };
 
 	}
 
+
+
 	public void refreshView() {
 		for (Text c : textBoxes)
 			c.setText("");
 	}
+	
+	//=================== Getters =========================================//
+	public Text getBladeRadiusText() {
+		return bladeRadiusText;
+	}
 
+	public Text getAirDensityText() {
+		return airDensityText;
+	}
+
+	public Text getEfficiencyText() {
+		return efficiencyText;
+	}
 }
