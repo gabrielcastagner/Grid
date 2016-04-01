@@ -14,6 +14,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import UserInterface.Elements.ColorPalette;
+
 public class ApplicationView {
 	// ================View Variables needed by Controller=================//
 	// Main Display

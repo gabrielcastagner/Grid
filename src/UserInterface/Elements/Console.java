@@ -1,4 +1,4 @@
-package UserInterface;
+package UserInterface.Elements;
 
 
 import org.eclipse.swt.SWT;

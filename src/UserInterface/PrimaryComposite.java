@@ -15,6 +15,12 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import UserInterface.Elements.ColorPalette;
+import UserInterface.Elements.Console;
+import UserInterface.Elements.SolarSubComposite;
+import UserInterface.Elements.WindSubComposite;
+import UserInterface.Elements.Table.SolarTableComposite;
+
 public class PrimaryComposite extends Composite {
 	
 	//Things used for relative screen sizing.
@@ -31,7 +37,7 @@ public class PrimaryComposite extends Composite {
 	private Button buttonAnalyze;
 	private Console consoleScrolledComposite;
 	private Console dataDisplay;
-	private TableComposite inputData;
+	private SolarTableComposite inputData;
 
 	private final String[] powerOption = { "Solar", "Wind" };
 	private Combo comboPowerOptions;
@@ -67,7 +73,7 @@ public class PrimaryComposite extends Composite {
 		dataDisplay.clearConsole();
 		dataDisplay.addToConsole("Temporary Data Display Console");
 
-		inputData = new TableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+		inputData = new SolarTableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
 				ColorPalette.CUSTOM_BLACK);
 		inputData.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.45));
 
