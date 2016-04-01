@@ -1,5 +1,5 @@
 
-	package UserInterface;
+	package UserInterface.Elements;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
@@ -7,8 +7,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
-
-import UserInterface.Elements.ColorPalette;
 
 public class WindSubComposite extends Composite {
 
