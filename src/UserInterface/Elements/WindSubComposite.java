@@ -1,4 +1,4 @@
-	package UserInterface;
+	package UserInterface.Elements;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
