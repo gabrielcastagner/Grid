@@ -78,6 +78,9 @@ public class TableComposite extends ScrolledComposite {
 		inputTable.remove(rowNumber);
 		inputTable.pack();
 	}
+	public void modifyItem(TableItem itemToBeChanged, int column){
+		//TODO//
+	}
 	
 	//======================= Getters =====================================//
 	public Table getTable(){

@@ -107,7 +107,7 @@ public class PrimaryComposite extends Composite {
 //			dataDisplay.addToConsole("Data Being Analyzed...");
 //		});
 
-		comboPowerOptions = new Combo(this, SWT.NONE);
+		comboPowerOptions = new Combo(this, SWT.READ_ONLY);
 		comboPowerOptions.setItems(powerOption);
 		comboPowerOptions.setBounds(edgePaddingWidth+163, (int) (0.53*displayHeight), 94, 30);
 		comboPowerOptions.select(0);
