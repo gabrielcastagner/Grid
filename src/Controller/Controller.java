@@ -3,6 +3,7 @@ package Controller;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import Parser.DataParser;
 import UserInterface.ApplicationView;
 
 public class Controller {
@@ -22,6 +23,11 @@ public class Controller {
 		} catch (SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
+		//TODO Console stuff here
+		System.out.println("PRINT TO CONSOLE \"Gathering Assets and Loading the Program...\"");
+		DataParser.parse();
+		System.out.println("PRINT TO CONSOLE \"Program Loaded.\"");
+		
 	}
 
 	/**
