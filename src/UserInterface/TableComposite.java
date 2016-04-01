@@ -46,9 +46,6 @@ public class TableComposite extends ScrolledComposite {
 			column.setText(columnHeaders[i]);
 		}
 		setContent(inputTable);
-		addItemtoTableWind("1", 2, 3, columnwidth);
-		addItemtoTableWind("2", 2, 3, columnwidth);
-		addItemtoTableWind("3", 2, 3, columnwidth);
 		
 	}
 
