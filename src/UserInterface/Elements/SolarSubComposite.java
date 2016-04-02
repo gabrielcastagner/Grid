@@ -23,6 +23,8 @@ public class SolarSubComposite extends Composite {
 		addElementsToComposite();
 //		setBackground(ColorPalette.CUSTOM_BLACK);
 //		setForeground(ColorPalette.CUSTOM_BLUE);
+		setBackground(null);
+
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
 		setLayout(null);

@@ -23,6 +23,7 @@ public class WindSubComposite extends Composite {
 
 //		setBackground(ColorPalette.CUSTOM_BLACK);
 //		setForeground(ColorPalette.CUSTOM_BLUE);
+		setBackground(null);
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
 

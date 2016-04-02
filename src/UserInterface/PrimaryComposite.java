@@ -55,6 +55,7 @@ public class PrimaryComposite extends Composite {
 		super(arg0, arg1);
 		// setBackground(ColorPalette.CUSTOM_BLACK);
 		// setForeground(ColorPalette.CUSTOM_BLUE);
+		setBackground(null);
 		setLayout(null);
 		displayHeight = arg0.getBounds().height;
 		displayWidth = arg0.getBounds().width;
@@ -98,8 +99,8 @@ public class PrimaryComposite extends Composite {
 		windInputTab.setControl(windInputData);
 
 		currentSubComposite.setLayout(layout);
-		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
-		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
+		//currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
+		//currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
 				3 * displayWidth / 16 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
 
@@ -151,8 +152,6 @@ public class PrimaryComposite extends Composite {
 	// //
 	public void setSubComposite() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
-		currentSubComposite.setBackgroundImage(getBackgroundImage());
-		currentSubComposite.setBackgroundMode(SWT.INHERIT_FORCE);
 		currentSubComposite.layout();
 	}
 
