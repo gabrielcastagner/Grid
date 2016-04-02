@@ -11,7 +11,7 @@ package PowerModels;
 public interface IPowerGeneration {
 	
 
-	double calculatePower(double area);
+	double calculatePower();
 	
 	double timeToPayOff();
 	

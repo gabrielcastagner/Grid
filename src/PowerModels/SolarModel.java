@@ -10,9 +10,16 @@ package PowerModels;
  */
 public class SolarModel implements IPowerGeneration{
 
-	private double yield;
-	private double avgExposure;
-	private double plCoeff;
+	private double yield;			//% yield for power conversion
+	private double avgExposure;		//Average Solar Exposure in w/m^2
+	private double plCoeff;			//PowerLoss Coefficient
+	private double area;			//Single panel area
+	private int numberOfPanels;		//Single panel area
+	
+	
+	public SolarModel(){
+		this.numberOfPanels = 1;
+	}
 	
 	public SolarModel(double yield, double avgExposure, double plCoeff){
 		this.yield = yield;
@@ -20,7 +27,7 @@ public class SolarModel implements IPowerGeneration{
 		this.plCoeff = plCoeff;
 	}
 	
-	public double calculatePower(double area) {
+	public double calculatePower() {
 		return area * yield * avgExposure * plCoeff;
 	}
 
@@ -52,4 +59,21 @@ public class SolarModel implements IPowerGeneration{
 		this.plCoeff = plCoeff;
 	}
 
+	public double getArea() {
+		return area;
+	}
+
+	public void setArea(double area) {
+		this.area = area;
+	}
+
+	public int getNumberOfPanels() {
+		return numberOfPanels;
+	}
+
+	public void setNumberOfPanels(int numberOfPanels) {
+		this.numberOfPanels = numberOfPanels;
+	}
+	
+	
 }

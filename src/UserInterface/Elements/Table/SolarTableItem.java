@@ -13,13 +13,17 @@ import org.eclipse.swt.widgets.TableItem;
 
 import Constants.FilePaths;
 
-public class SolarTableItem extends TableItem {
+public class SolarTableItem{
 
 	private TableEditor editor;
 	private Button removeItemButton;
-
+	private TableItem item;
+	private Table solarTable;
+	
 	public SolarTableItem(Table table, int SWTargs) {
-		super(table, SWTargs);
+		solarTable = table;
+		item = new TableItem(table, SWTargs);
+		
 		editor = new TableEditor(table);
 		removeItemButton = new Button(table, SWT.NULL);
 
@@ -27,13 +31,13 @@ public class SolarTableItem extends TableItem {
 
 		InputStream TrashInputStream = SolarTableComposite.class.getResourceAsStream(FilePaths.TRASH_ICON_PATH);
 
-		Image trashIcon = new Image(getDisplay(), TrashInputStream);
+		Image trashIcon = new Image(item.getDisplay(), TrashInputStream);
 		ImageData trashIconData = trashIcon.getImageData();
 		trashIconData = trashIconData.scaledTo(20, 20);
-		trashIcon = new Image(this.getDisplay(), trashIconData);
+		trashIcon = new Image(item.getDisplay(), trashIconData);
 		removeItemButton.setImage(trashIcon);
 
-		editor.setEditor(removeItemButton, this, 6);
+		editor.setEditor(removeItemButton, item, 6);
 		//input.setText(0, new Button(inputTable, SWT.NONE));
 		//setText(2, "Yes");
 		//setText(3, "No");
@@ -44,55 +48,60 @@ public class SolarTableItem extends TableItem {
 	public void destroy(){
 		removeItemButton.dispose();
 		editor.dispose();
-		this.dispose();
+		item.dispose();
+		solarTable.pack();
 	}
 	
 	//SETTERS
-	//TODO Align these to their proper columns
+	
 	public void setEfficiency(String s){
-		setText(1, s);
+		item.setText(1, s);
 	}
 	
 	public void setArea(String s){
-		setText(2, s);
+		item.setText(2, s);
 	}
 	
 	public void setRadius(String s){
-		setText(3, s);
+		item.setText(3, s);
 	}
 	
 	public void setPowerLoss(String s){
-		setText(4, s);
+		item.setText(4, s);
 	}
 	
-	public void getSolarExposure(String s){
-		setText(5, s);
+	public void setSolarExposure(String s){
+		item.setText(5, s);
 	}
+	
 	
 	//GETTERS
 	public String getEfficiency(){
-		return getText(1);
+		return item.getText(1);
 	}
 	
 	public String getArea(){
-		return getText(2);
+		return item.getText(2);
 	}
 	
 	public String getRadius(){
-		return getText(3);
+		return item.getText(3);
 	}
 	
 	public String getPowerLoss(){
-		return getText(4);
+		return item.getText(4);
 	}
 	
 	public String getSolarExposure(){
-		return getText(5);
+		return item.getText(5);
 	}
 	
 	public Button getRemoveButton(){
 		return this.removeItemButton;
 	}
 	
-	
+	public Table getTable(){
+		return this.solarTable;
+	}
+
 }

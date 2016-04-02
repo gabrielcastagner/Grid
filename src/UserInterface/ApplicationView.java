@@ -31,7 +31,7 @@ public class ApplicationView {
 
 	// Composites
 	private final static StackLayout layout = new StackLayout();
-	private static Composite primaryComposite;
+	private static PrimaryComposite primaryComposite;
 
 	// Menu Bar
 	private MenuItem menuFileItemNew;
@@ -193,6 +193,10 @@ public class ApplicationView {
 		return menuHelpItemGeneralHelp;
 	}
 
+	public PrimaryComposite getPrimaryComposite(){
+		return this.primaryComposite;
+	}
+	
 	public enum SelectComposite {
 		PRIMARY_COMPOSITE(primaryComposite);
 

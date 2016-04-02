@@ -78,15 +78,15 @@ public class WindSubComposite extends Composite {
 	}
 	
 	//=================== Getters =========================================//
-	public Text getBladeRadiusText() {
-		return bladeRadiusText;
+	public String getBladeRadiusText() {
+		return bladeRadiusText.toString();
 	}
 
-	public Text getAirDensityText() {
-		return airDensityText;
+	public String getAirDensityText() {
+		return airDensityText.toString();
 	}
 
-	public Text getEfficiencyText() {
-		return efficiencyText;
+	public String getEfficiencyText() {
+		return efficiencyText.toString();
 	}
 }

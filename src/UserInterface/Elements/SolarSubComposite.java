@@ -86,19 +86,20 @@ public class SolarSubComposite extends Composite {
 
 	
 	// =====================Getters for text Boxes Code====================== //
-	public Text getAreaText() {
-		return areaText;
+	public String getAreaText() {
+		return areaText.getText();
 	}
 
-	public Text getPowerLossCoefficientText() {
-		return powerLossCoefficientText;
+	public String getPowerLossCoefficientText() {
+		return powerLossCoefficientText.getText();
 	}
 
-	public Text getSolarPowerEfficienyText() {
-		return solarPowerEfficienyText;
+	public String getSolarPowerEfficienyText() {
+		return solarPowerEfficienyText.getText();
 	}
 
-	public Text getExposureText() {
-		return exposureText;
+	//TODO Remove this
+	public String getExposureText() {
+		return exposureText.getText();
 	}
 }
