@@ -143,6 +143,7 @@ public class Controller {
 	
 	
 	public boolean matchesDoubleCharSequence(String s){
+		s = s.trim();
 		if(s.isEmpty())
 			return false;
 		Matcher m = invalidDouble.matcher(s);
