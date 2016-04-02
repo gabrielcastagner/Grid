@@ -15,20 +15,21 @@ public class WindSubComposite extends Composite {
 	private Text airDensityText;
 	private Text efficiencyText;
 	private Text[] textBoxes;
+	int xbound, ybound;
 	
 	private final int textBoxLength = 125;
 
 	public WindSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
 		setElementsToComposite();
-
+		xbound = arg0.getBounds().width;
+		ybound = arg0.getBounds().height;
 //		setBackground(ColorPalette.CUSTOM_BLACK);
 //		setForeground(ColorPalette.CUSTOM_BLUE);
+		setBackground(null);
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
-
 		setLayout(null);
-		setBounds(25, 100, 540, 200);
 	}
 
 	private void setElementsToComposite() {
