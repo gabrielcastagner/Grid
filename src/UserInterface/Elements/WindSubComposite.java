@@ -26,9 +26,7 @@ public class WindSubComposite extends Composite {
 		setBackground(null);
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
-
 		setLayout(null);
-		setBounds(25, 100, 540, 200);
 	}
 
 	private void setElementsToComposite() {

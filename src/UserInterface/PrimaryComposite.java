@@ -21,6 +21,7 @@ import UserInterface.Elements.ColorPalette;
 import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
+import UserInterface.Elements.Table.OutputTableComposite;
 import UserInterface.Elements.Table.SolarTableComposite;
 import UserInterface.Elements.Table.WindTableComposite;
 
@@ -37,9 +38,14 @@ public class PrimaryComposite extends Composite {
 	private Button buttonAnalyze;
 	private Console consoleScrolledComposite;
 	private Console dataDisplay;
+
 	private SolarTableComposite inputData;
 	private WindTableComposite windInputData;
+	private OutputTableComposite outputData;
+
+	// Tab Folders for holding the tabs
 	private TabFolder tabTables;
+	private TabFolder tabOutputs;
 
 	private final String[] powerOption = { "Solar", "Wind" };
 	private Combo comboPowerOptions;
@@ -70,14 +76,36 @@ public class PrimaryComposite extends Composite {
 		consoleScrolledComposite.setBounds(edgePaddingWidth, (int) (displayHeight * 0.75),
 				displayWidth - 2 * edgePaddingWidth, 150);
 
-		// Temporary Console For Displaying Data
-		dataDisplay = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
-				ColorPalette.CUSTOM_BLACK);
-		dataDisplay.setBounds((int) (displayWidth * 0.5), edgePaddingHeight, displayWidth / 2 - edgePaddingWidth,
+		tabOutputs = new TabFolder(this, SWT.NONE);
+		tabOutputs.setBounds((int) (displayWidth * 0.5), edgePaddingHeight, displayWidth / 2 - edgePaddingWidth,
 				(int) (displayHeight * 0.65));
-		dataDisplay.clearConsole();
-		dataDisplay.addToConsole("Temporary Data Display Console");
 
+		// Temporary Console For Displaying Data
+		dataDisplay = new Console(tabOutputs, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		dataDisplay.setBounds(tabOutputs.getBounds());
+		dataDisplay.clearConsole();
+		dataDisplay.addToConsole("Temporary Data Display Console", true);
+		
+		outputData = new OutputTableComposite(tabOutputs, SWT.BORDER | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		outputData.setBounds(tabOutputs.getBounds());
+		
+		TabItem tableOutTab = new TabItem(tabOutputs, SWT.NONE);
+		tableOutTab.setText("Output Table");
+		tableOutTab.setControl(outputData);
+		
+		TabItem graphicalTab = new TabItem(tabOutputs, SWT.NONE);
+		graphicalTab.setText("Graph");
+		graphicalTab.setControl(dataDisplay);
+		
+		
+		
+		
+		
+		
+		
+		
 		tabTables = new TabFolder(this, SWT.NONE);
 		tabTables.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth / 2 - 2 * edgePaddingWidth,
 				(int) (displayHeight * 0.44));
@@ -99,8 +127,8 @@ public class PrimaryComposite extends Composite {
 		windInputTab.setControl(windInputData);
 
 		currentSubComposite.setLayout(layout);
-		//currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
-		//currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
+		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
+		// currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
 				3 * displayWidth / 16 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
 
@@ -175,8 +203,16 @@ public class PrimaryComposite extends Composite {
 		return comboPowerOptions;
 	}
 
-	public SolarTableComposite getSolarTable(){
+	public SolarTableComposite getSolarTable() {
 		return this.inputData;
+	}
+
+	public WindTableComposite getWindTable() {
+		return this.windInputData;
+	}
+
+	public OutputTableComposite getOutputTable() {
+		return this.outputData;
 	}
 
 	public Console getConsoleScrolledComposite() {
@@ -186,10 +222,9 @@ public class PrimaryComposite extends Composite {
 	public WindSubComposite getWindSubComposite() {
 		return (WindSubComposite) subComposites[1];
 	}
-	
+
 	public SolarSubComposite getSolarSubComposite() {
 		return (SolarSubComposite) subComposites[0];
 	}
-	
-	
+
 }

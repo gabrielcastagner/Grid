@@ -28,7 +28,6 @@ public class SolarSubComposite extends Composite {
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
 		setLayout(null);
-		setBounds(0, 100, 540, 200);
 	}
 
 	private void addElementsToComposite() {

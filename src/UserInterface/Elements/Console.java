@@ -1,6 +1,5 @@
 package UserInterface.Elements;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Color;
@@ -8,9 +7,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
-public class Console extends ScrolledComposite{
-	//Tables
+public class Console extends ScrolledComposite {
+	// Tables
 	private Table consoleMessageTabel;
+
 	public Console(Composite arg0, int arg1, Color bg, Color fg) {
 		super(arg0, arg1);
 		setExpandHorizontal(true);
@@ -21,27 +21,30 @@ public class Console extends ScrolledComposite{
 		setMinSize(consoleMessageTabel.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		consoleMessageTabel.setBackground(bg);
 		consoleMessageTabel.setForeground(fg);
-		//Opening message
+		// Opening message
 		TableItem openingMessage = new TableItem(consoleMessageTabel, SWT.NONE);
-		openingMessage.setText(new String[]{"Hello, and Welcome to Grid."});
+		openingMessage.setText(new String[] { "Hello, and Welcome to Grid." });
 		setContent(consoleMessageTabel);
 	}
-	
+
 	/**
 	 * Add a new message to the UI console
-	 * @param message, is a string to be appended to the console
+	 * 
+	 * @param message,
+	 *            is a string to be appended to the console
 	 */
-	public void addToConsole(String message){
+	public void addToConsole(String message, boolean isError) {
 		TableItem t = new TableItem(consoleMessageTabel, SWT.NONE);
-		t.setText(new String[]{message});
-		layout();	
+		t.setForeground((isError) ? ColorPalette.CUSTOM_RED : ColorPalette.CUSTOM_BLACK);
+		t.setText(new String[] { message });
+		layout();
 	}
-	
+
 	/**
 	 * Clear the on screen UI console
 	 */
-	public void clearConsole(){
-		//consoleMessageTabel.clearAll();
+	public void clearConsole() {
+		// consoleMessageTabel.clearAll();
 		consoleMessageTabel.removeAll();
 	}
 
