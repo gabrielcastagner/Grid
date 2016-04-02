@@ -80,7 +80,6 @@ public class ApplicationView {
 		parentShell.setSize(shellWidth, shellHeight);
 		parentShell.setMaximized(true);
 		parentShell.setText("-Grid-");
-		parentShell.setBackground(ColorPalette.CUSTOM_BLACK);
 		parentShell.setLayout(null);
 		Menu menu = new Menu(parentShell, SWT.BAR);
 		parentShell.setMenuBar(menu);

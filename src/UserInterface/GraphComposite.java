@@ -27,7 +27,6 @@ public class GraphComposite extends Composite{
 	public GraphComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
 		setElementsToComposite();
-		setBackground(ColorPalette.CUSTOM_BLACK);
 		setForeground(ColorPalette.CUSTOM_BLUE);
 		setLayout(null);
 		setBounds(0, 0, 1080, 720);

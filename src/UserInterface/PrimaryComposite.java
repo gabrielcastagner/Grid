@@ -151,8 +151,6 @@ public class PrimaryComposite extends Composite {
 	// //
 	public void setSubComposite() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
-		currentSubComposite.setBackgroundImage(getBackgroundImage());
-		currentSubComposite.setBackgroundMode(SWT.INHERIT_FORCE);
 		currentSubComposite.layout();
 	}
 
