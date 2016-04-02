@@ -2,19 +2,12 @@ package UserInterface;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import UserInterface.Elements.ColorPalette;
@@ -130,7 +123,7 @@ public class PrimaryComposite extends Composite {
 		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		// currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
-				3 * displayWidth / 16 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
+				displayWidth /4 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
 
 		Label lblPType = new Label(this, SWT.NONE);
 		lblPType.setSize(163, 33);

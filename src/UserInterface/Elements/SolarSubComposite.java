@@ -17,13 +17,15 @@ public class SolarSubComposite extends Composite {
 	private Text[] textBoxes;
 	private RowLayout layout = new RowLayout();
 	private final int textBoxLength = 125;
+	int xbound, ybound;
 
 	public SolarSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
 		addElementsToComposite();
-//		setBackground(ColorPalette.CUSTOM_BLACK);
-//		setForeground(ColorPalette.CUSTOM_BLUE);
 		setBackground(null);
+		
+		xbound = arg0.getBounds().width;
+		ybound = arg0.getBounds().height;
 
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
