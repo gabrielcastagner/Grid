@@ -63,12 +63,11 @@ public class Controller {
 		
 		//Link Input actions to Elements
 		initController();
-		
-		//TODO Console stuff here
-		System.out.println("PRINT TO CONSOLE \"Gathering Assets and Loading the Program...\"");
+
+		console.addToConsole("Gathering Assets and Loading the Program...", false);
+		//TODO Generate Graph Here
 		DataParser.parse();
-		System.out.println("PRINT TO CONSOLE \"Program Loaded.\"");
-		
+		console.addToConsole("Program Loaded.", false);	
 	}
 
 	private void initController() {
@@ -97,6 +96,7 @@ public class Controller {
 							solarTableItems.remove(itemID);
 						}
 					});
+					console.addToConsole("New Solar Panel Model Added.", false);
 				}
 				else if(primaryComposite.getComboPowerOptions().getSelectionIndex() == 1){
 					//Create The controller
@@ -119,6 +119,8 @@ public class Controller {
 							windTableItems.remove(itemID);
 						};
 					});
+					
+					console.addToConsole("New Wind Turbine Model Added.", false);
 				}
 			}
 		});
@@ -126,8 +128,13 @@ public class Controller {
 		primaryComposite.getButtonAnalyze().addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				//TODO Print to Console
+				console.addToConsole("Analyzing Input Data...", false);
 				//Analyze Solar data
+				if(solarTableItems.isEmpty() && windTableItems.isEmpty()){
+					console.addToConsole("Error: No inputs specified", true);
+					return;
+				}
+				
 				if(!solarTableItems.isEmpty())
 					for(UUID id: solarTableItems.keySet())
 						solarTableItems.get(id).analyze();
@@ -135,6 +142,8 @@ public class Controller {
 				if(!windTableItems.isEmpty())
 					for(UUID id: windTableItems.keySet())
 						windTableItems.get(id).analyze();
+				
+				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
 			}	
 		});
 		
@@ -143,9 +152,7 @@ public class Controller {
 			public void widgetSelected(SelectionEvent e) {
 			primaryComposite.setSubComposite();
 			}
-		});
-		
-		
+		});	
 	}
 	
 	public boolean inputsToSolarModel(SolarModel model){
@@ -154,6 +161,7 @@ public class Controller {
 				matchesDoubleCharSequence(sc.getPowerLossCoefficientText()) &&
 				matchesDoubleCharSequence(sc.getSolarPowerEfficienyText()))){
 			//TODO other inputs
+			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
 		}
 		
@@ -171,6 +179,7 @@ public class Controller {
 				matchesDoubleCharSequence(wc.getBladeRadiusText()) &&
 				matchesDoubleCharSequence(wc.getEfficiencyText()))){
 			//TODO other inputs
+			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
 		}
 		

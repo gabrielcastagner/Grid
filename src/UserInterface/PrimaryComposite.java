@@ -200,10 +200,6 @@ public class PrimaryComposite extends Composite {
 		return this.inputData;
 	}
 
-	public WindTableComposite getWindTable() {
-		return this.windInputData;
-	}
-
 	public OutputTableComposite getOutputTable() {
 		return this.outputData;
 	}
