@@ -13,10 +13,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import Constants.FilePaths;
+
 public class TableComposite extends ScrolledComposite {
-	
-	
-	private final String trashIconPath = "resource\\trash.png";
 	
 	private Table inputTable;
 	private TableItem input;
@@ -48,35 +47,9 @@ public class TableComposite extends ScrolledComposite {
 		setContent(inputTable);
 		
 	}
-
-	public void addItemtoTableWind(String efficiency, double bladeRadius, double cost, int colWidth) {
-		TableEditor edits = new TableEditor(inputTable);
-		edits.grabHorizontal = true;
-		Image trashIcon = new Image(getDisplay(), trashIconPath);
-		
-		Button remove = new Button(inputTable, SWT.NULL);
-		//remove.setText("X");
-		remove.setImage(trashIcon);
-		
-		input = new TableItem(inputTable, SWT.NULL);
-		edits.setEditor(remove, input, 6);
-		input.setText(1,efficiency);
-		//input.setText(0, new Button(inputTable, SWT.NONE));
-		input.setText(2, "Yes");
-		input.setText(3, "No");
-		input.setText(4, "A table item");
-	}
-
-	public void addItemtoTableSolar(double area, double powerLossCoeff, double efficiency, double exposure,
-			double cost) {
-
-	}
-	public void removeItems(int rowNumber){
-		inputTable.remove(rowNumber);
-		inputTable.pack();
-	}
+	
 	public void modifyItem(TableItem itemToBeChanged, int column){
-		//TODO//
+		//TODO Implement if time permits
 	}
 	
 	//======================= Getters =====================================//

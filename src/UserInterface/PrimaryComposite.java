@@ -134,13 +134,9 @@ public class PrimaryComposite extends Composite {
 		comboPowerOptions.setItems(powerOption);
 		comboPowerOptions.setBounds(edgePaddingWidth + 163, (int) (0.53 * displayHeight), 94, 30);
 		comboPowerOptions.select(0);
-		setSubComposit();
+		setSubComposite();
 		comboPowerOptions.setBackground(ColorPalette.CUSTOM_WHITE);
-		// comboPowerOptions.addSelectionListener(new SelectionAdapter() {
-		// public void widgetSelected(SelectionEvent e) {
-		// setSubComposit();
-		// }
-		// });
+
 		comboBoxes = new Combo[] { comboPowerOptions };
 	}
 
@@ -153,7 +149,7 @@ public class PrimaryComposite extends Composite {
 
 	// =====================Getters and Setter and Mcgeers======================
 	// //
-	public void setSubComposit() {
+	public void setSubComposite() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
 		currentSubComposite.setBackgroundImage(getBackgroundImage());
 		currentSubComposite.setBackgroundMode(SWT.INHERIT_FORCE);
@@ -180,4 +176,21 @@ public class PrimaryComposite extends Composite {
 		return comboPowerOptions;
 	}
 
+	public SolarTableComposite getSolarTable(){
+		return this.inputData;
+	}
+
+	public Console getConsoleScrolledComposite() {
+		return consoleScrolledComposite;
+	}
+
+	public WindSubComposite getWindSubComposite() {
+		return (WindSubComposite) subComposites[1];
+	}
+	
+	public SolarSubComposite getSolarSubComposite() {
+		return (SolarSubComposite) subComposites[0];
+	}
+	
+	
 }

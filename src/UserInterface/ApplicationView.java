@@ -1,10 +1,13 @@
 package UserInterface;
 
+import java.io.InputStream;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -14,7 +17,9 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import Constants.FilePaths;
 import UserInterface.Elements.ColorPalette;
+import UserInterface.Elements.Table.SolarTableComposite;
 
 public class ApplicationView {
 	// ================View Variables needed by Controller=================//
@@ -23,12 +28,10 @@ public class ApplicationView {
 	private Display display;
 	private int shellWidth, shellHeight;
 	private Image backgroundMountains;
-	private final String bGPath = "resource\\BG.jpg";
-	
 
 	// Composites
 	private final static StackLayout layout = new StackLayout();
-	private static Composite primaryComposite;
+	private static PrimaryComposite primaryComposite;
 
 	// Menu Bar
 	private MenuItem menuFileItemNew;
@@ -63,7 +66,13 @@ public class ApplicationView {
 		parentShell.setToolTipText("");
 		//parentShell.setSize(1080, 720);
 		
-		backgroundMountains = new Image(display,bGPath);
+		InputStream backgroundInputSteam = SolarTableComposite.class.getResourceAsStream(FilePaths.BACKGROUND_PATH);
+		
+		Image bgIcon = new Image(getDisplay(), backgroundInputSteam);
+		ImageData bgIconData = bgIcon.getImageData();
+		bgIconData = bgIconData.scaledTo(this.getDisplay().getBounds().width, this.getDisplay().getBounds().height);
+		
+		backgroundMountains = new Image(display, bgIconData);
 		
 		shellWidth = display.getClientArea().width;
 		shellHeight = display.getClientArea().height;
@@ -184,6 +193,10 @@ public class ApplicationView {
 		return menuHelpItemGeneralHelp;
 	}
 
+	public PrimaryComposite getPrimaryComposite(){
+		return this.primaryComposite;
+	}
+	
 	public enum SelectComposite {
 		PRIMARY_COMPOSITE(primaryComposite);
 
