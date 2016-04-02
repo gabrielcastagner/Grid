@@ -92,10 +92,6 @@ public class SolarTableItem{
 		return item.getText(4);
 	}
 	
-	public String getSolarExposure(){
-		return item.getText(5);
-	}
-	
 	public Button getRemoveButton(){
 		return this.removeItemButton;
 	}

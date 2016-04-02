@@ -5,6 +5,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
@@ -78,14 +79,14 @@ public class WindSubComposite extends Composite {
 	
 	//=================== Getters =========================================//
 	public String getBladeRadiusText() {
-		return bladeRadiusText.toString();
+		return bladeRadiusText.getText();
 	}
 
 	public String getAirDensityText() {
-		return airDensityText.toString();
+		return airDensityText.getText();
 	}
 
 	public String getEfficiencyText() {
-		return efficiencyText.toString();
+		return efficiencyText.getText();
 	}
 }

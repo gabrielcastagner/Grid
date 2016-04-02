@@ -41,18 +41,16 @@ public class SolarItemController implements IPowerItemController{
 	private void m2vSetArea(){
 		item.setArea(Double.toString(model.getArea()));
 	}
-	
-	private void m2vSetSolarExposure(){
-		//TODO link Graph to the solar exposure in the table
-	}
 
-	protected UUID destroy(){
+	@Override
+	public UUID destroy(){
 		this.item.destroy();
 		return this.uuid;
 	}
 	
 	//Pass the button to the main controller
-	protected Button getRemoveButton(){
+	@Override
+	public Button getRemoveButton(){
 		return item.getRemoveButton();
 	}
 	
@@ -61,7 +59,6 @@ public class SolarItemController implements IPowerItemController{
 		v2mSetArea();
 		v2mSetEfficiency();
 		v2mSetPowerLossCoeff();
-		m2vSetSolarExposure();
 		
 		model.calculatePower();	
 		
@@ -69,6 +66,7 @@ public class SolarItemController implements IPowerItemController{
 		//item.getTable().pack();
 	}
 
+	@Override
 	public void updateViewToModelState() {
 		m2vSetArea();
 		m2vSetEfficiency();
