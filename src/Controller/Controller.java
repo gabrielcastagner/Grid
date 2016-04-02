@@ -26,7 +26,7 @@ public class Controller {
 	private Display display;
 	private PrimaryComposite primaryComposite;
 	private Table solarTable;
-	private static final Pattern validDouble = Pattern.compile("[^0-9\\.]+");
+	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
 	
 	
 	private static HashMap<UUID, SolarItemController> solarTableItems;
@@ -145,7 +145,7 @@ public class Controller {
 	public boolean matchesDoubleCharSequence(String s){
 		if(s.isEmpty())
 			return false;
-		Matcher m = validDouble.matcher(s);
+		Matcher m = invalidDouble.matcher(s);
 		return !m.find();
 		
 	}
