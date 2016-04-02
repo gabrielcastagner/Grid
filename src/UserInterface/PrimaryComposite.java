@@ -20,6 +20,7 @@ import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
 import UserInterface.Elements.Table.SolarTableComposite;
+import UserInterface.Elements.Table.WindTableComposite;
 
 public class PrimaryComposite extends Composite {
 	
@@ -38,6 +39,7 @@ public class PrimaryComposite extends Composite {
 	private Console consoleScrolledComposite;
 	private Console dataDisplay;
 	private SolarTableComposite inputData;
+	private WindTableComposite windInputData;
 
 	private final String[] powerOption = { "Solar", "Wind" };
 	private Combo comboPowerOptions;
@@ -75,8 +77,13 @@ public class PrimaryComposite extends Composite {
 
 		inputData = new SolarTableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
 				ColorPalette.CUSTOM_BLACK);
-		inputData.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.45));
+		inputData.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.22));
+		
+		windInputData = new WindTableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		windInputData.setBounds(edgePaddingWidth, (int) (displayHeight*0.22 + edgePaddingHeight), displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.22));
 
+		
 		currentSubComposite.setLayout(layout);
 		//currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
@@ -92,7 +99,7 @@ public class PrimaryComposite extends Composite {
 		lblPType.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		buttonAdd = new Button(this, SWT.NONE);
-		buttonAdd.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + edgePaddingWidth + 10, 180, displayHeight/30);
+		buttonAdd.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + edgePaddingWidth + 10, displayWidth/10, displayHeight/30);
 		buttonAdd.setText("Add Power Source");
 //		buttonAdd.addListener(SWT.Selection, event -> {
 //			consoleScrolledComposite
@@ -100,14 +107,14 @@ public class PrimaryComposite extends Composite {
 //		});
 
 		buttonRemove = new Button(this, SWT.NONE);
-		buttonRemove.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 2*edgePaddingWidth + 10, 180, displayHeight/30);
+		buttonRemove.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + 2*edgePaddingWidth + 20, displayWidth/10, displayHeight/30);
 		buttonRemove.setText("Remove Power Source");
 //		buttonRemove.addListener(SWT.Selection, event -> {
 //			consoleScrolledComposite.addToConsole("Power Source has been Removed");
 //		});
 
 		buttonAnalyze = new Button(this, SWT.NONE);
-		buttonAnalyze.setBounds(displayWidth/4+ compBuffer, displayHeight/2 + 3*edgePaddingWidth +10, 180, displayHeight/30);
+		buttonAnalyze.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + 3*edgePaddingWidth +30, displayWidth/10, displayHeight/30);
 		buttonAnalyze.setText("Analyze");
 //		buttonAnalyze.addListener(SWT.Selection, event -> {
 //			dataDisplay.addToConsole("Data Being Analyzed...");

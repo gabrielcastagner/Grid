@@ -21,17 +21,17 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-public class SolarTableComposite extends ScrolledComposite {
+public class WindTableComposite extends ScrolledComposite {
 	
 	
 	private final String TRASH_ICON_PATH = "/trash.png";
 	
 	private Table inputTable;
-	private String[] columnHeaders = { "Type", "Area", "Power Loss", "Exposure", "Efficiency","Cost", "" };
+	private String[] columnHeaders = { "Type", "Blade", "Efficiency Factor", "Cost", "" };
 	//private
 	
 	
-	public SolarTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
+	public WindTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
 
 		super(arg0, arg1);
 		int columnwidth = ((arg0.getBounds().width / 2 - 2 * 40) - 50) / (columnHeaders.length-1);
@@ -59,8 +59,8 @@ public class SolarTableComposite extends ScrolledComposite {
 		
 	}
 
-	public SolarTableItem addNewItemtoTableSolar() {
-		SolarTableItem w = new SolarTableItem(inputTable, SWT.NULL);
+	public WindTableItem addNewItemtoTableSolar() {
+		WindTableItem w = new WindTableItem(inputTable, SWT.NULL);
 		pack();
 		return w;
 	}
