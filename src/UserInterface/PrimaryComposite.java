@@ -10,6 +10,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
@@ -23,16 +25,13 @@ import UserInterface.Elements.Table.SolarTableComposite;
 import UserInterface.Elements.Table.WindTableComposite;
 
 public class PrimaryComposite extends Composite {
-	
-	//Things used for relative screen sizing.
+
+	// Things used for relative screen sizing.
 	private int displayWidth, displayHeight;
 	private final int edgePaddingWidth = 40;
 	private final int edgePaddingHeight = 70;
 	private final int compBuffer = 20;
-	
-	
-	
-	
+
 	private Button buttonAdd;
 	private Button buttonRemove;
 	private Button buttonAnalyze;
@@ -40,6 +39,7 @@ public class PrimaryComposite extends Composite {
 	private Console dataDisplay;
 	private SolarTableComposite inputData;
 	private WindTableComposite windInputData;
+	private TabFolder tabTables;
 
 	private final String[] powerOption = { "Solar", "Wind" };
 	private Combo comboPowerOptions;
@@ -53,10 +53,10 @@ public class PrimaryComposite extends Composite {
 
 	public PrimaryComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
-		//setBackground(ColorPalette.CUSTOM_BLACK);
-		//setForeground(ColorPalette.CUSTOM_BLUE);
+		// setBackground(ColorPalette.CUSTOM_BLACK);
+		// setForeground(ColorPalette.CUSTOM_BLUE);
 		setLayout(null);
-		displayHeight= arg0.getBounds().height;
+		displayHeight = arg0.getBounds().height;
 		displayWidth = arg0.getBounds().width;
 		setBounds(0, 0, displayWidth, displayHeight);
 		setElementsToComposite();
@@ -66,65 +66,81 @@ public class PrimaryComposite extends Composite {
 		// Console For interacting with user.
 		consoleScrolledComposite = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL,
 				ColorPalette.CUSTOM_WHITE, ColorPalette.CUSTOM_BLACK);
-		consoleScrolledComposite.setBounds(edgePaddingWidth, (int) (displayHeight*0.75), displayWidth - 2*edgePaddingWidth, 150);
+		consoleScrolledComposite.setBounds(edgePaddingWidth, (int) (displayHeight * 0.75),
+				displayWidth - 2 * edgePaddingWidth, 150);
 
 		// Temporary Console For Displaying Data
 		dataDisplay = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
 				ColorPalette.CUSTOM_BLACK);
-		dataDisplay.setBounds((int) (displayWidth*0.5), edgePaddingHeight, displayWidth/2 -edgePaddingWidth, (int) (displayHeight*0.65));
+		dataDisplay.setBounds((int) (displayWidth * 0.5), edgePaddingHeight, displayWidth / 2 - edgePaddingWidth,
+				(int) (displayHeight * 0.65));
 		dataDisplay.clearConsole();
 		dataDisplay.addToConsole("Temporary Data Display Console");
 
-		inputData = new SolarTableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
-				ColorPalette.CUSTOM_BLACK);
-		inputData.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.22));
-		
-		windInputData = new WindTableComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
-				ColorPalette.CUSTOM_BLACK);
-		windInputData.setBounds(edgePaddingWidth, (int) (displayHeight*0.22 + edgePaddingHeight), displayWidth/2 - 2*edgePaddingWidth, (int) (displayHeight*0.22));
+		tabTables = new TabFolder(this, SWT.NONE);
+		tabTables.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth / 2 - 2 * edgePaddingWidth,
+				(int) (displayHeight * 0.44));
 
-		
+		inputData = new SolarTableComposite(tabTables, SWT.BORDER | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		inputData.setBounds(tabTables.getBounds());
+
+		windInputData = new WindTableComposite(tabTables, SWT.BORDER | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
+				ColorPalette.CUSTOM_BLACK);
+		windInputData.setBounds(tabTables.getBounds());
+
+		TabItem solarInputTab = new TabItem(tabTables, SWT.NONE);
+		solarInputTab.setText("Solar");
+		solarInputTab.setControl(inputData);
+
+		TabItem windInputTab = new TabItem(tabTables, SWT.NONE);
+		windInputTab.setText("Wind");
+		windInputTab.setControl(windInputData);
+
 		currentSubComposite.setLayout(layout);
-		//currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
+		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
-		currentSubComposite.setBounds(edgePaddingWidth, displayHeight/2 + edgePaddingHeight+compBuffer, 3*displayWidth/16 - edgePaddingWidth, displayHeight/4 - edgePaddingHeight - compBuffer);
+		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
+				3 * displayWidth / 16 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
 
 		Label lblPType = new Label(this, SWT.NONE);
 		lblPType.setSize(163, 33);
-		lblPType.setLocation(edgePaddingWidth, (int) (0.53*displayHeight));
+		lblPType.setLocation(edgePaddingWidth, (int) (0.53 * displayHeight));
 		lblPType.setText("Power Type:");
 		lblPType.setForeground(SWTResourceManager.getColor(52, 152, 219));
 		lblPType.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		//lblPType.setBackground(ColorPalette.CUSTOM_BLACK);
+		// lblPType.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblPType.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		buttonAdd = new Button(this, SWT.NONE);
-		buttonAdd.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + edgePaddingWidth + 10, displayWidth/10, displayHeight/30);
+		buttonAdd.setBounds(displayWidth / 4 + 8 * compBuffer, displayHeight / 2 + edgePaddingWidth + 10,
+				displayWidth / 10, displayHeight / 30);
 		buttonAdd.setText("Add Power Source");
-//		buttonAdd.addListener(SWT.Selection, event -> {
-//			consoleScrolledComposite
-//					.addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + " Power Source has been added");
-//		});
-
+		// buttonAdd.addListener(SWT.Selection, event -> {
+		// consoleScrolledComposite
+		// .addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + "
+		// Power Source has been added");
+		// });
 
 		buttonAnalyze = new Button(this, SWT.NONE);
-		buttonAnalyze.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + 2*edgePaddingWidth + 20, displayWidth/10, displayHeight/30);
+		buttonAnalyze.setBounds(displayWidth / 4 + 8 * compBuffer, displayHeight / 2 + 2 * edgePaddingWidth + 20,
+				displayWidth / 10, displayHeight / 30);
 		buttonAnalyze.setText("Analyze");
-//		buttonAnalyze.addListener(SWT.Selection, event -> {
-//			dataDisplay.addToConsole("Data Being Analyzed...");
-//		});
+		// buttonAnalyze.addListener(SWT.Selection, event -> {
+		// dataDisplay.addToConsole("Data Being Analyzed...");
+		// });
 
 		comboPowerOptions = new Combo(this, SWT.READ_ONLY);
 		comboPowerOptions.setItems(powerOption);
-		comboPowerOptions.setBounds(edgePaddingWidth+163, (int) (0.53*displayHeight), 94, 30);
+		comboPowerOptions.setBounds(edgePaddingWidth + 163, (int) (0.53 * displayHeight), 94, 30);
 		comboPowerOptions.select(0);
 		setSubComposit();
 		comboPowerOptions.setBackground(ColorPalette.CUSTOM_WHITE);
-//		comboPowerOptions.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent e) {
-//				setSubComposit();
-//			}
-//		});
+		// comboPowerOptions.addSelectionListener(new SelectionAdapter() {
+		// public void widgetSelected(SelectionEvent e) {
+		// setSubComposit();
+		// }
+		// });
 		comboBoxes = new Combo[] { comboPowerOptions };
 	}
 
@@ -135,9 +151,8 @@ public class PrimaryComposite extends Composite {
 		consoleScrolledComposite.clearConsole();
 	}
 
-	
-	
-	// =====================Getters and Setter and Mcgeers====================== //
+	// =====================Getters and Setter and Mcgeers======================
+	// //
 	public void setSubComposit() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
 		currentSubComposite.setBackgroundImage(getBackgroundImage());
