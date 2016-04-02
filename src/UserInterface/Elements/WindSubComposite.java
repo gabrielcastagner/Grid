@@ -13,7 +13,6 @@ public class WindSubComposite extends Composite {
 	private Text bladeRadiusText;
 	private Text airDensityText;
 	private Text efficiencyText;
-	private Text windSpeedText;
 	private Text[] textBoxes;
 	
 	private final int textBoxLength = 125;
@@ -66,7 +65,7 @@ public class WindSubComposite extends Composite {
 		efficiencyText.setBackground(ColorPalette.CUSTOM_WHITE);
 		efficiencyText.setBounds(164, 80, textBoxLength, 30);
 
-		textBoxes = new Text[] { bladeRadiusText, airDensityText, windSpeedText, efficiencyText };
+		textBoxes = new Text[] { bladeRadiusText, airDensityText, efficiencyText };
 
 	}
 

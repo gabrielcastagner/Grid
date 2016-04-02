@@ -106,15 +106,9 @@ public class PrimaryComposite extends Composite {
 //					.addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + " Power Source has been added");
 //		});
 
-		buttonRemove = new Button(this, SWT.NONE);
-		buttonRemove.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + 2*edgePaddingWidth + 20, displayWidth/10, displayHeight/30);
-		buttonRemove.setText("Remove Power Source");
-//		buttonRemove.addListener(SWT.Selection, event -> {
-//			consoleScrolledComposite.addToConsole("Power Source has been Removed");
-//		});
 
 		buttonAnalyze = new Button(this, SWT.NONE);
-		buttonAnalyze.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + 3*edgePaddingWidth +30, displayWidth/10, displayHeight/30);
+		buttonAnalyze.setBounds(displayWidth/4+ 8*compBuffer, displayHeight/2 + 2*edgePaddingWidth + 20, displayWidth/10, displayHeight/30);
 		buttonAnalyze.setText("Analyze");
 //		buttonAnalyze.addListener(SWT.Selection, event -> {
 //			dataDisplay.addToConsole("Data Being Analyzed...");

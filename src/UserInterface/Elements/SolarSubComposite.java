@@ -52,13 +52,6 @@ public class SolarSubComposite extends Composite {
 		//lblPowerEfficiency.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblPowerEfficiency.setForeground(ColorPalette.CUSTOM_BLACK);
 
-		Label lblExposure = new Label(this, SWT.NONE);
-		lblExposure.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblExposure.setBounds(0, 120, 163, 35);
-		lblExposure.setText("Panel Exposure:");
-		//lblExposure.setBackground(ColorPalette.CUSTOM_BLACK);
-		lblExposure.setForeground(ColorPalette.CUSTOM_BLACK);
-
 		areaText = new Text(this, SWT.BORDER);
 		areaText.setBackground(ColorPalette.CUSTOM_WHITE);
 		areaText.setBounds(164, 0, textBoxLength, 30);
@@ -71,11 +64,7 @@ public class SolarSubComposite extends Composite {
 		solarPowerEfficienyText.setBackground(ColorPalette.CUSTOM_WHITE);
 		solarPowerEfficienyText.setBounds(164, 80, textBoxLength, 30);
 
-		exposureText = new Text(this, SWT.BORDER);
-		exposureText.setBackground(ColorPalette.CUSTOM_WHITE);
-		exposureText.setBounds(164, 120, textBoxLength, 30);
-
-		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, exposureText };
+		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText };
 	}
 
 	public void refreshView() {
@@ -96,9 +85,5 @@ public class SolarSubComposite extends Composite {
 
 	public Text getSolarPowerEfficienyText() {
 		return solarPowerEfficienyText;
-	}
-
-	public Text getExposureText() {
-		return exposureText;
 	}
 }

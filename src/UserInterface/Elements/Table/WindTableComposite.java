@@ -27,14 +27,14 @@ public class WindTableComposite extends ScrolledComposite {
 	private final String TRASH_ICON_PATH = "/trash.png";
 	
 	private Table inputTable;
-	private String[] columnHeaders = { "Type", "Blade", "Efficiency Factor", "Cost", "" };
+	private String[] columnHeaders = { "Longitude","Latitude","Blade Radius", "Efficiency Factor","#", "Cost Per Unit", "" };
 	//private
 	
 	
 	public WindTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
 
 		super(arg0, arg1);
-		int columnwidth = ((arg0.getBounds().width / 2 - 2 * 40) - 50) / (columnHeaders.length-1);
+		int columnwidth = ((arg0.getBounds().width / 2 - 2 * 40) - 75) / (columnHeaders.length-1);
 
 		setExpandHorizontal(true);
 		setExpandVertical(true);
