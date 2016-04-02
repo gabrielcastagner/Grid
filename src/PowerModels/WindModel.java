@@ -22,6 +22,9 @@ public class WindModel implements IPowerGeneration{
 		this.effCoeff = effCoeff;
 	}
 	
+	public WindModel() {
+	}
+
 	public double calculatePower(){
 		return .5*airDensity*(radius * radius * Math.PI)*(Math.pow(windSpd, 3))*effCoeff;
 	}

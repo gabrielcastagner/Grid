@@ -55,25 +55,16 @@ public class SolarTableItem{
 	//SETTERS
 	
 	public void setEfficiency(String s){
-		item.setText(1, s);
+		item.setText(4, s);
 	}
 	
 	public void setArea(String s){
 		item.setText(2, s);
 	}
-	
-	public void setRadius(String s){
+
+	public void setPowerLoss(String s){
 		item.setText(3, s);
 	}
-	
-	public void setPowerLoss(String s){
-		item.setText(4, s);
-	}
-	
-	public void setSolarExposure(String s){
-		item.setText(5, s);
-	}
-	
 	
 	//GETTERS
 	public String getEfficiency(){
@@ -84,16 +75,8 @@ public class SolarTableItem{
 		return item.getText(2);
 	}
 	
-	public String getRadius(){
-		return item.getText(3);
-	}
-	
 	public String getPowerLoss(){
 		return item.getText(4);
-	}
-	
-	public String getSolarExposure(){
-		return item.getText(5);
 	}
 	
 	public Button getRemoveButton(){

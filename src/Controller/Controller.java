@@ -14,10 +14,14 @@ import org.eclipse.swt.widgets.Table;
 
 import Parser.DataParser;
 import PowerModels.SolarModel;
+import PowerModels.WindModel;
 import UserInterface.ApplicationView;
 import UserInterface.PrimaryComposite;
+import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
+import UserInterface.Elements.WindSubComposite;
 import UserInterface.Elements.Table.SolarTableItem;
+import UserInterface.Elements.Table.WindTableItem;
 
 public class Controller {
 
@@ -25,11 +29,14 @@ public class Controller {
 	private Shell parentShell;
 	private Display display;
 	private PrimaryComposite primaryComposite;
-	private Table solarTable;
+	private Table solarTable, windTable;
+	private Console console;
+	
 	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
 	
 	
 	private static HashMap<UUID, SolarItemController> solarTableItems;
+	private static HashMap<UUID, WindItemController> windTableItems;
 	
 	
 	
@@ -39,15 +46,22 @@ public class Controller {
 		// initViewEventHandeling();
 
 		try {
+			//Link View to Controller Elements
 			display = view.getDisplay();
 			parentShell = view.getParentShell();
 			primaryComposite = view.getPrimaryComposite();
 			solarTable = primaryComposite.getSolarTable().getTable();
+			windTable = primaryComposite.getWindTable().getTable();
+			console = primaryComposite.getConsoleScrolledComposite();
 			
 		} catch (SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
+		//Init data structures
 		solarTableItems = new HashMap<>();
+		windTableItems = new HashMap<>();
+		
+		//Link Input actions to Elements
 		initController();
 		
 		//TODO Console stuff here
@@ -85,19 +99,26 @@ public class Controller {
 					});
 				}
 				else if(primaryComposite.getComboPowerOptions().getSelectionIndex() == 1){
-					//TODO add WIND stuff here
-					/*SolarItemController c = new SolarItemController(
-							new SolarTableItem(solarTable, SWT.NULL), 
-							new SolarModel(), itemID);
+					//Create The controller
+					WindModel model = new WindModel();
+					if(!inputsToWindModel(model))
+						return;
 					
-					solarTableItems.put(itemID, c);
-					solarTableItems.get(itemID).getRemoveButton().addSelectionListener(new SelectionAdapter() {
+					WindItemController c = new WindItemController(
+							new WindTableItem(windTable, SWT.NULL),
+							model, itemID);
+					
+					c.updateViewToModelState();
+					//Keep reference to the controller
+					windTableItems.put(itemID, c);
+					
+					windTableItems.get(itemID).getRemoveButton().addSelectionListener(new SelectionAdapter() {
 						@Override
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
-							solarTableItems.remove(itemID);
-						}
-					});*/
+							windTableItems.remove(itemID);
+						};
+					});
 				}
 			}
 		});
@@ -106,12 +127,14 @@ public class Controller {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				//TODO Print to Console
-				
+				//Analyze Solar data
 				if(!solarTableItems.isEmpty())
 					for(UUID id: solarTableItems.keySet())
 						solarTableItems.get(id).analyze();
-				
-				//TODO do WIND DATA HERE
+				//Analyze Wind data
+				if(!windTableItems.isEmpty())
+					for(UUID id: windTableItems.keySet())
+						windTableItems.get(id).analyze();
 			}	
 		});
 		
@@ -141,6 +164,22 @@ public class Controller {
 		return true;
 	}
 	
+	private boolean inputsToWindModel(WindModel model) {
+		WindSubComposite wc = primaryComposite.getWindSubComposite();
+		
+		if(!(matchesDoubleCharSequence(wc.getAirDensityText()) &&
+				matchesDoubleCharSequence(wc.getBladeRadiusText()) &&
+				matchesDoubleCharSequence(wc.getEfficiencyText()))){
+			//TODO other inputs
+			return false;
+		}
+		
+		
+		model.setAirDensity(Double.parseDouble(wc.getAirDensityText()));
+		model.setRadius(Double.parseDouble(wc.getBladeRadiusText()));
+		model.setEffCoeff(Double.parseDouble(wc.getEfficiencyText()));
+		return true;
+	}
 	
 	public boolean matchesDoubleCharSequence(String s){
 		s = s.trim();

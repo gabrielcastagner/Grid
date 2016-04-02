@@ -208,6 +208,10 @@ public class PrimaryComposite extends Composite {
 		return this.outputData;
 	}
 
+	public WindTableComposite getWindTable(){
+		return this.windInputData;
+	}
+	
 	public Console getConsoleScrolledComposite() {
 		return consoleScrolledComposite;
 	}

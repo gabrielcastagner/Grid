@@ -13,13 +13,16 @@ import org.eclipse.swt.widgets.TableItem;
 
 import Constants.FilePaths;
 
-public class WindTableItem extends TableItem {
+public class WindTableItem{
 
 	private TableEditor editor;
 	private Button removeItemButton;
-
+	private Table table;
+	private TableItem item;
+	
 	public WindTableItem(Table table, int SWTargs) {
-		super(table, SWTargs);
+		item = new TableItem(table, SWTargs);
+		this.table = table;
 		editor = new TableEditor(table);
 		removeItemButton = new Button(table, SWT.NULL);
 
@@ -27,71 +30,68 @@ public class WindTableItem extends TableItem {
 
 		InputStream TrashInputStream = SolarTableComposite.class.getResourceAsStream(FilePaths.TRASH_ICON_PATH);
 
-		Image trashIcon = new Image(getDisplay(), TrashInputStream);
+		Image trashIcon = new Image(item.getDisplay(), TrashInputStream);
 		ImageData trashIconData = trashIcon.getImageData();
 		trashIconData = trashIconData.scaledTo(20, 20);
-		trashIcon = new Image(this.getDisplay(), trashIconData);
+		trashIcon = new Image(item.getDisplay(), trashIconData);
 		removeItemButton.setImage(trashIcon);
 
-		editor.setEditor(removeItemButton, this, 6);
-		//input.setText(0, new Button(inputTable, SWT.NONE));
-		//setText(2, "Yes");
-		//setText(3, "No");
-		//setText(4, "A table item");
+		editor.setEditor(removeItemButton, item, 5);
 	}
 	
 	//Behaviour
 	public void destroy(){
 		removeItemButton.dispose();
 		editor.dispose();
-		this.dispose();
+		item.dispose();
 	}
 	
 	//SETTERS
 	//TODO Align these to their proper columns
 	public void setEfficiency(String s){
-		setText(1, s);
+		item.setText(0, s);
 	}
 	
 	public void setArea(String s){
-		setText(2, s);
+		item.setText(1, s);
 	}
 	
 	public void setRadius(String s){
-		setText(3, s);
+		item.setText(2, s);
 	}
 	
-	public void setPowerLoss(String s){
-		setText(4, s);
+	public void setAirDensity(String s){
+		item.setText(3, s);
 	}
 	
 	public void getSolarExposure(String s){
-		setText(5, s);
+		//item.setText(4, s);
 	}
 	
 	//GETTERS
 	public String getEfficiency(){
-		return getText(1);
+		return item.getText(1);
 	}
 	
 	public String getArea(){
-		return getText(2);
+		return item.getText(2);
 	}
 	
 	public String getRadius(){
-		return getText(3);
+		return item.getText(3);
 	}
 	
-	public String getPowerLoss(){
-		return getText(4);
+	public String getAirDensity(){
+		return item.getText(4);
 	}
 	
-	public String getSolarExposure(){
-		return getText(5);
-	}
 	
 	public Button getRemoveButton(){
 		return this.removeItemButton;
+	}
+
+	public Table getTable() {
+		return this.table;
 	}
 	
 	
