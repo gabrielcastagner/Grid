@@ -17,6 +17,7 @@ import PowerModels.SolarModel;
 import PowerModels.WindModel;
 import UserInterface.ApplicationView;
 import UserInterface.PrimaryComposite;
+import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
 import UserInterface.Elements.Table.SolarTableItem;
@@ -29,6 +30,8 @@ public class Controller {
 	private Display display;
 	private PrimaryComposite primaryComposite;
 	private Table solarTable, windTable;
+	private Console console;
+	
 	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
 	
 	
@@ -49,6 +52,7 @@ public class Controller {
 			primaryComposite = view.getPrimaryComposite();
 			solarTable = primaryComposite.getSolarTable().getTable();
 			windTable = primaryComposite.getWindTable().getTable();
+			console = primaryComposite.getConsoleScrolledComposite();
 			
 		} catch (SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
