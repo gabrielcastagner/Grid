@@ -5,7 +5,11 @@ import java.util.UUID;
 import org.eclipse.swt.widgets.Button;
 
 import PowerModels.WindModel;
+<<<<<<< HEAD
 import UserInterface.Elements.Table.OutputTableItem;
+=======
+import PowerModels.Graph.Location;
+>>>>>>> refs/remotes/origin/master
 import UserInterface.Elements.Table.WindTableItem;
 
 public class WindItemController implements IPowerItemController{
@@ -32,7 +36,21 @@ public class WindItemController implements IPowerItemController{
 	}
 	
 	private void v2mSetAirDensity(){
-		model.setAirDensity(Double.parseDouble(item.getArea()));
+		model.setAirDensity(Double.parseDouble(item.getAirDensity()));
+	}
+	
+	private void v2mSetNumberOfTurbines(){
+		model.setQuantity(Integer.parseInt(item.getNumberOfTurbines()));
+	}
+	
+	private void v2mSetCostPerUnit(){
+		model.setCostPerUnit(Double.parseDouble(item.getCostPerTurbine()));
+	}
+	
+	private void v2mSetLocation(){
+		model.setLocation(new Location(
+				Math.round(Double.parseDouble(item.getLatitude())),
+				Math.round(Double.parseDouble(item.getLongitude()))));
 	}
 	
 	private void m2vSetEfficiency(){
@@ -47,12 +65,29 @@ public class WindItemController implements IPowerItemController{
 		item.setRadius(Double.toString(model.getRadius()));
 	}
 	
+	private void m2vSetNumberOfPanels(){
+		item.setNumberOfTurbines(Double.toString(model.getQuantity()));
+	}
+	
+	private void m2vSetCostPerUnit(){
+		item.setCostPerTurbine(Double.toString(model.getCostPerUnit()));
+	}
+	
+	private void m2vSetLocation(){
+		item.setLatitude(Double.toString(model.getLocation().getLatitude()));
+		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
+	}
+	
 	@Override
 	public void analyze() {
 		model.calculatePower();	
 		v2mSetAirDensity();
 		v2mSetEfficiency();
 		v2mSetRadius();
+		v2mSetCostPerUnit();
+		v2mSetLocation();
+		v2mSetNumberOfTurbines();
+		
 		item.getTable().layout();
 		item.getTable().pack();
 	}
@@ -73,6 +108,9 @@ public class WindItemController implements IPowerItemController{
 		m2vSetRadius();
 		m2vSetEfficiency();
 		m2vSetAirDensity();
+		m2vSetCostPerUnit();
+		m2vSetLocation();
+		m2vSetNumberOfPanels();
 		
 		item.getTable().layout();
 		output.getTable().layout();

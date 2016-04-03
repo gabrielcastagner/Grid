@@ -26,8 +26,8 @@ public class SolarTableComposite extends ScrolledComposite {
 	private final String TRASH_ICON_PATH = "/trash.png";
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Longitude", "Latitude", "Area", "Power Loss", "Efficiency", "#",
-			"Cost Per Unit", "" };
+	private String[] columnHeaders = { "Longitude", "Latitude", "Area(m^2)", "Power Loss", "Efficiency", "#",
+			"Cost Per Unit($)", "" };
 	// private
 
 	public SolarTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
@@ -39,7 +39,7 @@ public class SolarTableComposite extends ScrolledComposite {
 		setExpandVertical(true);
 		setBackground(bg);
 		setForeground(fg);
-		inputTable = new Table(this, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL);
+		inputTable = new Table(this, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL );
 		inputTable.setLinesVisible(true);
 		inputTable.setHeaderVisible(true);
 		inputTable.setTouchEnabled(true);

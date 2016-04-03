@@ -13,19 +13,27 @@ public class SolarSubComposite extends Composite {
 	private Text areaText;
 	private Text powerLossCoefficientText;
 	private Text solarPowerEfficienyText;
-	private Text exposureText;
+	private Text numberText;
+	private Text costText;
+	private Text longText;
+	private Text latText;
+
 	private Text[] textBoxes;
 	private RowLayout layout = new RowLayout();
-	private final int textBoxLength = 125;
-	int xbound, ybound;
+	private int lblLength, lblHeight;
+	private int xbound, ybound, padding;
 
 	public SolarSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
-		addElementsToComposite();
-		setBackground(null);
-		
+
 		xbound = arg0.getBounds().width;
 		ybound = arg0.getBounds().height;
+		lblHeight = ybound / 7;
+		lblLength = 3 * xbound / 8;
+		padding = xbound / 100;
+
+		addElementsToComposite();
+		setBackground(null);
 
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
@@ -36,38 +44,81 @@ public class SolarSubComposite extends Composite {
 
 		Label lblAreaText = new Label(this, SWT.NONE);
 		lblAreaText.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblAreaText.setBounds(0, 0, 163, 35);
+		lblAreaText.setBounds(0, 0, lblLength, lblHeight);
 		lblAreaText.setText("Panel Area:");
-		//lblAreaText.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblAreaText.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblPowerloss = new Label(this, SWT.NONE);
 		lblPowerloss.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblPowerloss.setBounds(0, 40, 163, 35);
+		lblPowerloss.setBounds(0, (lblHeight + padding), lblLength, lblHeight);
 		lblPowerloss.setText("Powerloss Coefficient:");
-		//lblPowerloss.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblPowerloss.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblPowerEfficiency = new Label(this, SWT.NONE);
 		lblPowerEfficiency.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblPowerEfficiency.setBounds(0, 80, 163, 35);
+		lblPowerEfficiency.setBounds(0, 2 * (lblHeight + padding), lblLength, lblHeight);
 		lblPowerEfficiency.setText("Panel Efficiency:");
-		//lblPowerEfficiency.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblPowerEfficiency.setForeground(ColorPalette.CUSTOM_BLACK);
 
+		Label lblNumber = new Label(this, SWT.NONE);
+		lblNumber.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblNumber.setBounds(0, 3 * (lblHeight + padding), lblLength, lblHeight);
+		lblNumber.setText("Quantity #:");
+		lblNumber.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		// Right 3
+		Label lblCost = new Label(this, SWT.NONE);
+		lblCost.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblCost.setBounds(3 * lblLength / 2 + padding, 0, 5 * lblLength / 9, lblHeight);
+		lblCost.setText("Cost/Unit:");
+		lblCost.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		Label lblLong = new Label(this, SWT.NONE);
+		lblLong.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblLong.setBounds(3 * lblLength / 2 + padding, lblHeight + padding, 5 * lblLength / 9, lblHeight);
+		lblLong.setText("Longitude:");
+		lblLong.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		Label lblLat = new Label(this, SWT.NONE);
+		lblLat.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblLat.setBounds(3 * lblLength / 2 + padding, 2 * lblHeight + 2 * padding, 5 * lblLength / 9, lblHeight);
+		lblLat.setText("Latitude:");
+		lblLat.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		// Left 4
 		areaText = new Text(this, SWT.BORDER);
 		areaText.setBackground(ColorPalette.CUSTOM_WHITE);
-		areaText.setBounds(164, 0, textBoxLength, 30);
+		areaText.setBounds(lblLength, 0, lblLength / 2, lblHeight);
 
 		powerLossCoefficientText = new Text(this, SWT.BORDER);
 		powerLossCoefficientText.setBackground(ColorPalette.CUSTOM_WHITE);
-		powerLossCoefficientText.setBounds(164, 40, textBoxLength, 30);
+		powerLossCoefficientText.setBounds(lblLength, (lblHeight + padding), lblLength / 2, lblHeight);
 
 		solarPowerEfficienyText = new Text(this, SWT.BORDER);
 		solarPowerEfficienyText.setBackground(ColorPalette.CUSTOM_WHITE);
-		solarPowerEfficienyText.setBounds(164, 80, textBoxLength, 30);
+		solarPowerEfficienyText.setBounds(lblLength, 2 * (lblHeight + padding), lblLength / 2, lblHeight);
 
-		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText };
+		numberText = new Text(this, SWT.BORDER);
+		numberText.setBackground(ColorPalette.CUSTOM_WHITE);
+		numberText.setBounds(lblLength, 3 * (lblHeight + padding), lblLength / 2, lblHeight);
+
+		// Right 3
+		costText = new Text(this, SWT.BORDER);
+		costText.setBackground(ColorPalette.CUSTOM_WHITE);
+		costText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, 0, lblLength / 2, lblHeight);
+
+		longText = new Text(this, SWT.BORDER);
+		longText.setBackground(ColorPalette.CUSTOM_WHITE);
+		longText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, (lblHeight + padding),
+				lblLength / 2, lblHeight);
+
+		latText = new Text(this, SWT.BORDER);
+		latText.setBackground(ColorPalette.CUSTOM_WHITE);
+		latText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, 2 * (lblHeight + padding),
+				lblLength / 2, lblHeight);
+
+		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, numberText, costText,
+				longText, latText };
 	}
 
 	public void refreshView() {
@@ -75,8 +126,6 @@ public class SolarSubComposite extends Composite {
 			c.setText("");
 	}
 
-
-	
 	// =====================Getters for text Boxes Code====================== //
 	public String getAreaText() {
 		return areaText.getText();
@@ -89,4 +138,24 @@ public class SolarSubComposite extends Composite {
 	public String getSolarPowerEfficienyText() {
 		return solarPowerEfficienyText.getText();
 	}
+
+	public String getNumberText() {
+		return numberText.getText();
+	}
+
+	public String getCostText() {
+		return costText.getText();
+
+	}
+
+	public String getLongText() {
+		return longText.getText();
+
+	}
+
+	public String getLatText() {
+		return latText.getText();
+
+	}
+
 }

@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Table;
 import Parser.DataParser;
 import PowerModels.SolarModel;
 import PowerModels.WindModel;
+import PowerModels.Graph.Location;
 import UserInterface.ApplicationView;
 import UserInterface.PrimaryComposite;
 import UserInterface.Elements.Console;
@@ -34,7 +35,7 @@ public class Controller {
 	private Console console;
 	
 	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
-	
+	private static final Pattern invalidInteger = Pattern.compile("[^0-9]+");
 	
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
@@ -65,12 +66,11 @@ public class Controller {
 		
 		//Link Input actions to Elements
 		initController();
-		
-		//TODO Console stuff here
-		System.out.println("PRINT TO CONSOLE \"Gathering Assets and Loading the Program...\"");
+
+		console.addToConsole("Gathering Assets and Loading the Program...", false);
+		//TODO Generate Graph Here
 		DataParser.parse();
-		System.out.println("PRINT TO CONSOLE \"Program Loaded.\"");
-		
+		console.addToConsole("Program Loaded.", false);	
 	}
 
 	private void initController() {
@@ -99,6 +99,7 @@ public class Controller {
 							solarTableItems.remove(itemID);
 						}
 					});
+					console.addToConsole("New Solar Panel Model Added.", false);
 				}
 				else if(primaryComposite.getComboPowerOptions().getSelectionIndex() == 1){
 					//Create The controller
@@ -121,6 +122,8 @@ public class Controller {
 							windTableItems.remove(itemID);
 						};
 					});
+					
+					console.addToConsole("New Wind Turbine Model Added.", false);
 				}
 			}
 		});
@@ -128,8 +131,13 @@ public class Controller {
 		primaryComposite.getButtonAnalyze().addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				//TODO Print to Console
+				console.addToConsole("Analyzing Input Data...", false);
 				//Analyze Solar data
+				if(solarTableItems.isEmpty() && windTableItems.isEmpty()){
+					console.addToConsole("Error: No inputs specified", true);
+					return;
+				}
+				
 				if(!solarTableItems.isEmpty())
 					for(UUID id: solarTableItems.keySet())
 						solarTableItems.get(id).analyze();
@@ -137,6 +145,8 @@ public class Controller {
 				if(!windTableItems.isEmpty())
 					for(UUID id: windTableItems.keySet())
 						windTableItems.get(id).analyze();
+				
+				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
 			}	
 		});
 		
@@ -145,41 +155,66 @@ public class Controller {
 			public void widgetSelected(SelectionEvent e) {
 			primaryComposite.setSubComposite();
 			}
-		});
-		
-		
+		});	
 	}
 	
 	public boolean inputsToSolarModel(SolarModel model){
 		SolarSubComposite sc = primaryComposite.getSolarSubComposite();
-		if(!(matchesDoubleCharSequence(sc.getAreaText()) &&
+		if(!(	matchesDoubleCharSequence(sc.getAreaText()) &&
 				matchesDoubleCharSequence(sc.getPowerLossCoefficientText()) &&
-				matchesDoubleCharSequence(sc.getSolarPowerEfficienyText()))){
+				matchesDoubleCharSequence(sc.getSolarPowerEfficienyText())&&
+				matchesDoubleCharSequence(sc.getCostText())&&
+				matchesDoubleCharSequence(sc.getLatText())&&
+				matchesDoubleCharSequence(sc.getLongText())&&
+				matchesDoubleCharSequence(sc.getNumberText()))){
 			//TODO other inputs
+			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
 		}
 		
+		if(! matchesIntegerCharSequence(sc.getNumberText())){
+			console.addToConsole("Error: Number of Solar Panels requires a whole number input", true);
+			return false;
+		}
 		
 		model.setArea(Double.parseDouble(sc.getAreaText()));
 		model.setPlCoeff(Double.parseDouble(sc.getPowerLossCoefficientText()));
 		model.setYield(Double.parseDouble(sc.getSolarPowerEfficienyText()));
+		model.setCostPerUnit(Double.parseDouble(sc.getCostText()));
+		model.setNumberOfPanels((int)Double.parseDouble(sc.getNumberText()));
+		model.setLocation(new Location(
+				Double.parseDouble(sc.getLatText()),
+				Double.parseDouble(sc.getLongText())));
 		return true;
 	}
 	
 	private boolean inputsToWindModel(WindModel model) {
 		WindSubComposite wc = primaryComposite.getWindSubComposite();
 		
-		if(!(matchesDoubleCharSequence(wc.getAirDensityText()) &&
+		if(!(	matchesDoubleCharSequence(wc.getAirDensityText()) &&
 				matchesDoubleCharSequence(wc.getBladeRadiusText()) &&
-				matchesDoubleCharSequence(wc.getEfficiencyText()))){
-			//TODO other inputs
+				matchesDoubleCharSequence(wc.getEfficiencyText())&&
+				matchesDoubleCharSequence(wc.getCostText()) &&
+				matchesDoubleCharSequence(wc.getLatText()) &&
+				matchesDoubleCharSequence(wc.getLongText())&&
+				matchesDoubleCharSequence(wc.getNumberText()))){
+			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
 		}
 		
-		
+		if(! matchesIntegerCharSequence(wc.getNumberText())){
+			console.addToConsole("Error: Number of Wind Turbines requires a whole number input", true);
+			return false;
+		}
+
 		model.setAirDensity(Double.parseDouble(wc.getAirDensityText()));
 		model.setRadius(Double.parseDouble(wc.getBladeRadiusText()));
 		model.setEffCoeff(Double.parseDouble(wc.getEfficiencyText()));
+		model.setCostPerUnit(Double.parseDouble(wc.getCostText()));
+		model.setQuantity(Integer.parseInt(wc.getNumberText()));
+		model.setLocation(new Location(
+				Double.parseDouble(wc.getLatText()),
+				Double.parseDouble(wc.getLongText())));
 		return true;
 	}
 	
@@ -188,6 +223,15 @@ public class Controller {
 		if(s.isEmpty())
 			return false;
 		Matcher m = invalidDouble.matcher(s);
+		return !m.find();
+		
+	}
+	
+	public boolean matchesIntegerCharSequence(String s){
+		s = s.trim();
+		if(s.isEmpty())
+			return false;
+		Matcher m = invalidInteger.matcher(s);
 		return !m.find();
 		
 	}
