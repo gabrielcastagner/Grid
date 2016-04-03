@@ -116,7 +116,7 @@ public class PrimaryComposite extends Composite {
 		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		// currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
-				displayWidth /4 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
+				2*displayWidth /7 , displayHeight / 4 - edgePaddingHeight - compBuffer);
 		setUpSubComps();
 
 		Label lblPType = new Label(this, SWT.NONE);

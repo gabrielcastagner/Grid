@@ -1,5 +1,5 @@
 
-	package UserInterface.Elements;
+package UserInterface.Elements;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
@@ -13,18 +13,24 @@ public class WindSubComposite extends Composite {
 	private Text bladeRadiusText;
 	private Text airDensityText;
 	private Text efficiencyText;
+	private Text numberText;
+	private Text costText;
+	private Text longText;
+	private Text latText;
+
 	private Text[] textBoxes;
-	int xbound, ybound;
-	
-	private final int textBoxLength = 125;
+	private int xbound, ybound, padding;
+	private int lblLength, lblHeight;
 
 	public WindSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
-		setElementsToComposite();
+
 		xbound = arg0.getBounds().width;
 		ybound = arg0.getBounds().height;
-//		setBackground(ColorPalette.CUSTOM_BLACK);
-//		setForeground(ColorPalette.CUSTOM_BLUE);
+		lblHeight = ybound / 7;
+		lblLength = 3 * xbound / 8;
+		padding = xbound / 100;
+		setElementsToComposite();
 		setBackground(null);
 		setBackgroundMode(SWT.INHERIT_FORCE);
 		setBackgroundImage(getBackgroundImage());
@@ -35,49 +41,88 @@ public class WindSubComposite extends Composite {
 
 		Label lblRadius = new Label(this, SWT.NONE);
 		lblRadius.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblRadius.setBounds(0, 0, 163, 35);
+		lblRadius.setBounds(0, 0, lblLength, lblHeight);
 		lblRadius.setText("Blade Radius:");
-		//lblRadius.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblRadius.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblDensity = new Label(this, SWT.NONE);
 		lblDensity.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblDensity.setBounds(0, 40, 163, 35);
+		lblDensity.setBounds(0, (lblHeight + padding), lblLength, lblHeight);
 		lblDensity.setText("Air Density:");
-		//lblDensity.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblDensity.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblEfficiency = new Label(this, SWT.NONE);
 		lblEfficiency.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblEfficiency.setBounds(0, 80, 163, 35);
+		lblEfficiency.setBounds(0, 2 * (lblHeight + padding), lblLength, lblHeight);
 		lblEfficiency.setText("Model Efficiency:");
-		//lblEfficiency.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblEfficiency.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		Label lblNumber = new Label(this, SWT.NONE);
+		lblNumber.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblNumber.setBounds(0, 3 * (lblHeight + padding), lblLength, lblHeight);
+		lblNumber.setText("Quantity #:");
+		lblNumber.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		// Right 3
+		Label lblCost = new Label(this, SWT.NONE);
+		lblCost.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblCost.setBounds(3 * lblLength / 2 + padding, 0, 5 * lblLength / 9, lblHeight);
+		lblCost.setText("Cost/Unit:");
+		lblCost.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		Label lblLong = new Label(this, SWT.NONE);
+		lblLong.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblLong.setBounds(3 * lblLength / 2 + padding, lblHeight + padding, 5 * lblLength / 9, lblHeight);
+		lblLong.setText("Longitude:");
+		lblLong.setForeground(ColorPalette.CUSTOM_BLACK);
+
+		Label lblLat = new Label(this, SWT.NONE);
+		lblLat.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblLat.setBounds(3 * lblLength / 2 + padding, 2 * lblHeight + 2 * padding, 5 * lblLength / 9, lblHeight);
+		lblLat.setText("Latitude:");
+		lblLat.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		bladeRadiusText = new Text(this, SWT.BORDER);
 		bladeRadiusText.setBackground(ColorPalette.CUSTOM_WHITE);
-		bladeRadiusText.setBounds(164, 0, textBoxLength, 30);
+		bladeRadiusText.setBounds(lblLength, 0, lblLength / 2, lblHeight);
 
 		airDensityText = new Text(this, SWT.BORDER);
 		airDensityText.setBackground(ColorPalette.CUSTOM_WHITE);
-		airDensityText.setBounds(164, 40, textBoxLength, 30);
+		airDensityText.setBounds(lblLength, (lblHeight + padding), lblLength / 2, lblHeight);
 
 		efficiencyText = new Text(this, SWT.BORDER);
 		efficiencyText.setBackground(ColorPalette.CUSTOM_WHITE);
-		efficiencyText.setBounds(164, 80, textBoxLength, 30);
+		efficiencyText.setBounds(lblLength, 2 * (lblHeight + padding), lblLength / 2, lblHeight);
+
+		numberText = new Text(this, SWT.BORDER);
+		numberText.setBackground(ColorPalette.CUSTOM_WHITE);
+		numberText.setBounds(lblLength, 3 * (lblHeight + padding), lblLength / 2, lblHeight);
+
+		// Right 3
+		costText = new Text(this, SWT.BORDER);
+		costText.setBackground(ColorPalette.CUSTOM_WHITE);
+		costText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, 0, lblLength / 2, lblHeight);
+
+		longText = new Text(this, SWT.BORDER);
+		longText.setBackground(ColorPalette.CUSTOM_WHITE);
+		longText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, (lblHeight + padding),
+				lblLength / 2, lblHeight);
+
+		latText = new Text(this, SWT.BORDER);
+		latText.setBackground(ColorPalette.CUSTOM_WHITE);
+		latText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, 2 * (lblHeight + padding),
+				lblLength / 2, lblHeight);
 
 		textBoxes = new Text[] { bladeRadiusText, airDensityText, efficiencyText };
 
 	}
 
-
-
 	public void refreshView() {
 		for (Text c : textBoxes)
 			c.setText("");
 	}
-	
-	//=================== Getters =========================================//
+
+	// =================== Getters =========================================//
 	public String getBladeRadiusText() {
 		return bladeRadiusText.toString();
 	}
@@ -88,5 +133,24 @@ public class WindSubComposite extends Composite {
 
 	public String getEfficiencyText() {
 		return efficiencyText.toString();
+	}
+
+	public String getNumberText() {
+		return numberText.getText();
+	}
+
+	public String getCostText() {
+		return costText.getText();
+
+	}
+
+	public String getLongText() {
+		return longText.getText();
+
+	}
+
+	public String getLatText() {
+		return latText.getText();
+
 	}
 }
