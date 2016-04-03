@@ -8,7 +8,6 @@ The main focus of grid is the comparision between solar and wind farms, however 
   
 ### TODO
 
-Graph
 Chart Data
 Tabular Data
 Sort Data -Simon
