@@ -12,13 +12,12 @@ public class SolarItemController extends IPowerItemController implements Compara
 	private final SolarTableItem item;
 	private final SolarModel model;
 	private final UUID uuid;
-	private final OutputTableItem output;
+	private OutputTableItem output;
 	
-	public SolarItemController(SolarTableItem item, SolarModel model, UUID uuid, OutputTableItem output){
+	public SolarItemController(SolarTableItem item, SolarModel model, UUID uuid){
 		this.item = item;
 		this.model = model;
 		this.uuid = uuid;
-		this.output = output;
 	}
 	
 	//View to Model link
@@ -75,6 +74,10 @@ public class SolarItemController extends IPowerItemController implements Compara
 	}
 	
 	//Output table
+	public void buildOutput(OutputTableItem output){
+		this.output = output;
+	}
+	
 	private void m2vOutputType(){
 		output.setType(model.getType());
 	}
@@ -161,6 +164,11 @@ public class SolarItemController extends IPowerItemController implements Compara
 	@Override
 	public double returnPower() {
 		return model.getPower();
+	}
+
+	@Override
+	public double returnPowerPerDollar() {
+		return model.getPower()/(model.getCostPerUnit()*model.getNumberOfPanels());
 	}
 
 }

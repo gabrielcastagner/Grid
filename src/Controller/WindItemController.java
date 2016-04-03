@@ -14,13 +14,12 @@ public class WindItemController extends IPowerItemController{
 	private final WindTableItem item;
 	private final WindModel model;
 	private final UUID uuid;
-	private final OutputTableItem output;
+	private OutputTableItem output;
 	
-	public WindItemController(WindTableItem item, WindModel model, UUID uuid, OutputTableItem output){
+	public WindItemController(WindTableItem item, WindModel model, UUID uuid){
 		this.item = item;
 		this.model = model;
 		this.uuid = uuid;
-		this.output = output;
 
 	}
 	
@@ -97,6 +96,10 @@ public class WindItemController extends IPowerItemController{
 		output.setCostPer(Double.toString(model.getCostPerUnit()));
 	}
 	
+	public void buildOutput(OutputTableItem output){
+		this.output = output;
+	}
+	
 	@Override
 	public void analyze() {
 		model.calculatePower();	
@@ -151,6 +154,11 @@ public class WindItemController extends IPowerItemController{
 	}
 
 	@Override
+	public double returnPowerPerDollar() {
+		return model.getPower()/(model.getCostPerUnit()*model.getQuantity());
+	}
+	
+	@Override
 	public int compareTo(IPowerItemController o) {
 		if(this.returnPower() < o.returnPower())
 			return -1;
@@ -159,6 +167,8 @@ public class WindItemController extends IPowerItemController{
 		else
 			return 1;
 	}
+
+
 	
 
 }

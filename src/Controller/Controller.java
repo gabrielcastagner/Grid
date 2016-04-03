@@ -89,7 +89,7 @@ public class Controller {
 					
 					SolarItemController c = new SolarItemController(
 							new SolarTableItem(solarTable, SWT.NULL), 
-							model, itemID, new OutputTableItem(outputTable, SWT.NULL));
+							model, itemID);
 					
 					c.updateModelStateToView();
 					//Keep reference to the controller
@@ -111,7 +111,7 @@ public class Controller {
 					
 					WindItemController c = new WindItemController(
 							new WindTableItem(windTable, SWT.NULL),
-							model, itemID, new OutputTableItem(outputTable, SWT.NULL));
+							model, itemID);
 					
 					c.updateModelStateToView();
 					//Keep reference to the controller
@@ -158,6 +158,7 @@ public class Controller {
 				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()));
 				
 				for(IPowerItemController  i: combined){
+					i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
 					i.updateOutputTable();
 				}
 				
