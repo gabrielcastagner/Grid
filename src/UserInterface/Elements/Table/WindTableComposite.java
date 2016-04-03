@@ -26,7 +26,7 @@ public class WindTableComposite extends ScrolledComposite {
 	private final String TRASH_ICON_PATH = "/trash.png";
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Longitude", "Latitude", "Blade Radius(m)", "Efficiency Factor", "#",
+	private String[] columnHeaders = { "Longitude", "Latitude", "Blade (m) ","Air Density", "Efficiency", "#",
 			"Cost Per Unit($)", "" };
 	// private
 
