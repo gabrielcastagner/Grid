@@ -39,7 +39,7 @@ public class Controller {
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
 	
-	
+
 	
 	public Controller(ApplicationView v) {
 		view = v;

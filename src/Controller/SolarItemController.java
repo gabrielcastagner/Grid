@@ -75,6 +75,7 @@ public class SolarItemController implements IPowerItemController{
 		m2vSetPowerLossCoeff();
 		
 		item.getTable().layout();
-		output.getTable().layout();
 	}
+	
+	
 }
