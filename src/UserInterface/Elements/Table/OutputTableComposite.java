@@ -37,7 +37,7 @@ public class OutputTableComposite extends ScrolledComposite {
 		for (int i = 0; i < columnHeaders.length; i++) {
 			TableColumn column = new TableColumn(inputTable, SWT.NONE);
 			column.setResizable(false);
-			column.setWidth((i == columnHeaders.length - 1) ? 50 : columnwidth);
+			column.setWidth((i == columnHeaders.length - 1) ? 150 : columnwidth);
 			column.setText(columnHeaders[i]);
 		}
 		setContent(inputTable);

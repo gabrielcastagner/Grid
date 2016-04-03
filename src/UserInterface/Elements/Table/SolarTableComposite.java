@@ -26,8 +26,8 @@ public class SolarTableComposite extends ScrolledComposite {
 	private final String TRASH_ICON_PATH = "/trash.png";
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Longitude", "Latitude", "Area", "Power Loss", "Efficiency", "#",
-			"Cost Per Unit", "" };
+	private String[] columnHeaders = { "Longitude", "Latitude", "Area(m^2)", "Power Loss", "Efficiency", "#",
+			"Cost Per Unit($)", "" };
 	// private
 
 	public SolarTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
