@@ -11,7 +11,7 @@ The main focus of grid is the comparision between solar and wind farms, however 
 Graph
 Chart Data
 Tabular Data
-Sort Data
+Sort Data -Simon
 Add More inputs
 Format properly
 Print all errors and processes to the console

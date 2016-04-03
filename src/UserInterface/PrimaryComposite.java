@@ -9,11 +9,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.swtchart.Chart;
 
 import UserInterface.Elements.ColorPalette;
 import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
+import UserInterface.Elements.Graph.DataGraph;
 import UserInterface.Elements.Table.OutputTableComposite;
 import UserInterface.Elements.Table.SolarTableComposite;
 import UserInterface.Elements.Table.WindTableComposite;
@@ -30,7 +32,7 @@ public class PrimaryComposite extends Composite {
 	private Button buttonRemove;
 	private Button buttonAnalyze;
 	private Console consoleScrolledComposite;
-	private Console dataDisplay;
+	private Chart dataDisplay;
 
 	private SolarTableComposite inputData;
 	private WindTableComposite windInputData;
@@ -74,11 +76,9 @@ public class PrimaryComposite extends Composite {
 				(int) (displayHeight * 0.65));
 
 		// Temporary Console For Displaying Data
-		dataDisplay = new Console(tabOutputs, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
-				ColorPalette.CUSTOM_BLACK);
+		dataDisplay = DataGraph.createChart(tabOutputs, ColorPalette.CUSTOM_WHITE);
+		dataDisplay.setBackground(ColorPalette.CUSTOM_WHITE);
 		dataDisplay.setBounds(tabOutputs.getBounds());
-		dataDisplay.clearConsole();
-		dataDisplay.addToConsole("Temporary Data Display Console", true);
 		
 		outputData = new OutputTableComposite(tabOutputs, SWT.BORDER | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
 				ColorPalette.CUSTOM_BLACK);

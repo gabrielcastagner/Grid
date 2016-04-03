@@ -25,4 +25,8 @@ public enum Month {
 				return m;
 		return null;
 	}
+	
+	public String getMonthName(){
+		return this.month;
+	}
 }
