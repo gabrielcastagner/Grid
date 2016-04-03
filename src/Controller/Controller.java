@@ -20,6 +20,7 @@ import UserInterface.PrimaryComposite;
 import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
+import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.SolarTableItem;
 import UserInterface.Elements.Table.WindTableItem;
 
@@ -29,7 +30,7 @@ public class Controller {
 	private Shell parentShell;
 	private Display display;
 	private PrimaryComposite primaryComposite;
-	private Table solarTable, windTable;
+	private Table solarTable, windTable, outputTable;
 	private Console console;
 	
 	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
@@ -52,6 +53,7 @@ public class Controller {
 			primaryComposite = view.getPrimaryComposite();
 			solarTable = primaryComposite.getSolarTable().getTable();
 			windTable = primaryComposite.getWindTable().getTable();
+			outputTable = primaryComposite.getOutputTable().getTable();
 			console = primaryComposite.getConsoleScrolledComposite();
 			
 		} catch (SecurityException | IllegalArgumentException e) {
@@ -85,7 +87,7 @@ public class Controller {
 					
 					SolarItemController c = new SolarItemController(
 							new SolarTableItem(solarTable, SWT.NULL), 
-							model, itemID);
+							model, itemID, new OutputTableItem(outputTable, SWT.NULL));
 					
 					c.updateViewToModelState();
 					//Keep reference to the controller
@@ -106,7 +108,7 @@ public class Controller {
 					
 					WindItemController c = new WindItemController(
 							new WindTableItem(windTable, SWT.NULL),
-							model, itemID);
+							model, itemID, new OutputTableItem(outputTable, SWT.NULL));
 					
 					c.updateViewToModelState();
 					//Keep reference to the controller

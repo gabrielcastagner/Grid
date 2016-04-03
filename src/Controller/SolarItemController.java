@@ -3,6 +3,7 @@ package Controller;
 import java.util.UUID;
 import org.eclipse.swt.widgets.Button;
 import PowerModels.SolarModel;
+import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.SolarTableItem;
 
 public class SolarItemController implements IPowerItemController{
@@ -10,12 +11,13 @@ public class SolarItemController implements IPowerItemController{
 	private final SolarTableItem item;
 	private final SolarModel model;
 	private final UUID uuid;
+	private final OutputTableItem output;
 	
-	public SolarItemController(SolarTableItem item, SolarModel model, UUID uuid){
+	public SolarItemController(SolarTableItem item, SolarModel model, UUID uuid, OutputTableItem output){
 		this.item = item;
 		this.model = model;
 		this.uuid = uuid;
-
+		this.output = output;
 	}
 	
 	private void v2mSetEfficiency(){
@@ -73,6 +75,6 @@ public class SolarItemController implements IPowerItemController{
 		m2vSetPowerLossCoeff();
 		
 		item.getTable().layout();
-		
+		output.getTable().layout();
 	}
 }

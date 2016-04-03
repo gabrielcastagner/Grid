@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.eclipse.swt.widgets.Button;
 
 import PowerModels.WindModel;
+import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.WindTableItem;
 
 public class WindItemController implements IPowerItemController{
@@ -12,11 +13,13 @@ public class WindItemController implements IPowerItemController{
 	private final WindTableItem item;
 	private final WindModel model;
 	private final UUID uuid;
+	private final OutputTableItem output;
 	
-	public WindItemController(WindTableItem item, WindModel model, UUID uuid){
+	public WindItemController(WindTableItem item, WindModel model, UUID uuid, OutputTableItem output){
 		this.item = item;
 		this.model = model;
 		this.uuid = uuid;
+		this.output = output;
 
 	}
 	
@@ -72,7 +75,7 @@ public class WindItemController implements IPowerItemController{
 		m2vSetAirDensity();
 		
 		item.getTable().layout();
-		
+		output.getTable().layout();
 	}
 	
 	
