@@ -9,7 +9,7 @@ import UserInterface.Elements.Table.OutputTableItem;
 import PowerModels.Graph.Location;
 import UserInterface.Elements.Table.WindTableItem;
 
-public class WindItemController implements IPowerItemController{
+public class WindItemController extends IPowerItemController{
 
 	private final WindTableItem item;
 	private final WindModel model;
@@ -123,7 +123,7 @@ public class WindItemController implements IPowerItemController{
 	}
 
 	@Override
-	public void updateViewToModelState() {
+	public void updateModelStateToView() {
 		m2vSetRadius();
 		m2vSetEfficiency();
 		m2vSetAirDensity();
@@ -143,6 +143,21 @@ public class WindItemController implements IPowerItemController{
 		m2vOutputCostPerUnit();
 		
 		output.getTable().layout();
+	}
+
+	@Override
+	public double returnPower() {
+		return model.calculatePower();
+	}
+
+	@Override
+	public int compareTo(IPowerItemController o) {
+		if(this.returnPower() < o.returnPower())
+			return -1;
+		else if(this.returnPower() == o.returnPower())
+			return 0;
+		else
+			return 1;
 	}
 	
 

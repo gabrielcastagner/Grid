@@ -1,6 +1,8 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,7 +41,7 @@ public class Controller {
 	
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
-	
+	private List<IPowerItemController> combined;
 
 	
 	public Controller(ApplicationView v) {
@@ -89,7 +91,7 @@ public class Controller {
 							new SolarTableItem(solarTable, SWT.NULL), 
 							model, itemID, new OutputTableItem(outputTable, SWT.NULL));
 					
-					c.updateViewToModelState();
+					c.updateModelStateToView();
 					//Keep reference to the controller
 					solarTableItems.put(itemID, c);
 					solarTableItems.get(itemID).getRemoveButton().addSelectionListener(new SelectionAdapter() {
@@ -111,7 +113,7 @@ public class Controller {
 							new WindTableItem(windTable, SWT.NULL),
 							model, itemID, new OutputTableItem(outputTable, SWT.NULL));
 					
-					c.updateViewToModelState();
+					c.updateModelStateToView();
 					//Keep reference to the controller
 					windTableItems.put(itemID, c);
 					
@@ -141,16 +143,22 @@ public class Controller {
 				if(!solarTableItems.isEmpty()){
 					for(UUID id: solarTableItems.keySet()){
 						solarTableItems.get(id).analyze();
-						solarTableItems.get(id).updateOutputTable();
 					}
+					
+					
 				}
 				
 				//Analyze Wind data
 				if(!windTableItems.isEmpty()){
 					for(UUID id: windTableItems.keySet()){
 						windTableItems.get(id).analyze();
-						windTableItems.get(id).updateOutputTable();;
 					}
+				}
+				
+				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()));
+				
+				for(IPowerItemController  i: combined){
+					i.updateOutputTable();
 				}
 				
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
@@ -240,6 +248,16 @@ public class Controller {
 			return false;
 		Matcher m = invalidInteger.matcher(s);
 		return !m.find();
+		
+	}
+	
+	public void sortTable(List<IPowerItemController> originalS, List<IPowerItemController> originalW){
+		
+		combined = originalS;
+		combined.addAll(originalW);		
+		
+		Mergesort.sort(combined);
+		
 		
 	}
 	

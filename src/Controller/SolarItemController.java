@@ -7,7 +7,7 @@ import PowerModels.Graph.Location;
 import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.SolarTableItem;
 
-public class SolarItemController implements IPowerItemController{
+public class SolarItemController extends IPowerItemController implements Comparable<IPowerItemController>{
 	
 	private final SolarTableItem item;
 	private final SolarModel model;
@@ -125,7 +125,7 @@ public class SolarItemController implements IPowerItemController{
 	}
 
 	@Override
-	public void updateViewToModelState() {
+	public void updateModelStateToView() {
 		m2vSetArea();
 		m2vSetEfficiency();
 		m2vSetPowerLossCoeff();
@@ -147,4 +147,20 @@ public class SolarItemController implements IPowerItemController{
 		
 		output.getTable().layout();
 	}
+	
+	@Override
+	public int compareTo(IPowerItemController o) {
+		if(this.returnPower() < o.returnPower())
+			return -1;
+		else if(this.returnPower() == o.returnPower())
+			return 0;
+		else
+			return 1;
+	}
+
+	@Override
+	public double returnPower() {
+		return model.getPower();
+	}
+
 }
