@@ -36,7 +36,7 @@ public class WindTableItem{
 		trashIcon = new Image(item.getDisplay(), trashIconData);
 		removeItemButton.setImage(trashIcon);
 
-		editor.setEditor(removeItemButton, item, 5);
+		editor.setEditor(removeItemButton, item, 7);
 	}
 	
 	//Behaviour
@@ -48,11 +48,11 @@ public class WindTableItem{
 	
 	//SETTERS
 	//TODO Align these to their proper columns
-	public void setEfficiency(String s){
+	public void setLongitude(String s){
 		item.setText(0, s);
 	}
-	
-	public void setArea(String s){
+
+	public void setLatitude(String s){
 		item.setText(1, s);
 	}
 	
@@ -64,25 +64,47 @@ public class WindTableItem{
 		item.setText(3, s);
 	}
 	
-	public void getSolarExposure(String s){
-		//item.setText(4, s);
+	
+	public void setEfficiency(String s){
+		item.setText(4, s);
+	}
+
+	public void setNumberOfTurbines(String s){
+		item.setText(5, s);
+	}
+	
+	public void setCostPerTurbine(String s){
+		item.setText(6, s);
 	}
 	
 	//GETTERS
-	public String getEfficiency(){
+	public String getLongitude(){
+		return item.getText(0);
+	}
+
+	public String getLatitude(){
 		return item.getText(1);
 	}
 	
-	public String getArea(){
+	public String getRadius(){
 		return item.getText(2);
 	}
 	
-	public String getRadius(){
+	public String getAirDensity(){
 		return item.getText(3);
 	}
 	
-	public String getAirDensity(){
+	
+	public String getEfficiency(){
 		return item.getText(4);
+	}
+
+	public String getNumberOfTurbines(){
+		return item.getText(5);
+	}
+	
+	public String getCostPerTurbine(){
+		return item.getText(6);
 	}
 	
 	
