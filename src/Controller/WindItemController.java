@@ -77,7 +77,7 @@ public class WindItemController extends IPowerItemController{
 	
 	//Output table
 	private void m2vOutputType(){
-		output.setType("Solar");
+		output.setType(model.getType());
 	}
 	
 	private void m2vOutputLatLong(){

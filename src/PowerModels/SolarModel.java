@@ -91,6 +91,10 @@ public class SolarModel implements IPowerGeneration{
 	public double getPower(){
 		return calculatePower();
 	}
+
+	public String getType() {
+		return "Solar";
+	}
 	
 	
 }

@@ -100,6 +100,10 @@ public class WindModel implements IPowerGeneration{
 		this.location = location;
 	}
 	
+	public String getType(){
+		return "Wind";
+	}
+	
 	
 	
 }

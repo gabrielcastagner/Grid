@@ -100,7 +100,6 @@ public class WindTableItem{
 	}
 
 	public String getNumberOfTurbines(){
-		System.out.println(item.getText(5));
 		return item.getText(5);
 	}
 	

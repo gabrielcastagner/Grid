@@ -76,7 +76,7 @@ public class SolarItemController extends IPowerItemController implements Compara
 	
 	//Output table
 	private void m2vOutputType(){
-		output.setType("Solar");
+		output.setType(model.getType());
 	}
 	
 	private void m2vOutputLatLong(){

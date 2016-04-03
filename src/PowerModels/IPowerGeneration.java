@@ -15,4 +15,5 @@ public interface IPowerGeneration {
 	
 	double timeToPayOff();
 	
+	String getType();
 }
