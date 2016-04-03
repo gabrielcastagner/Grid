@@ -5,11 +5,8 @@ import java.util.UUID;
 import org.eclipse.swt.widgets.Button;
 
 import PowerModels.WindModel;
-<<<<<<< HEAD
 import UserInterface.Elements.Table.OutputTableItem;
-=======
 import PowerModels.Graph.Location;
->>>>>>> refs/remotes/origin/master
 import UserInterface.Elements.Table.WindTableItem;
 
 public class WindItemController implements IPowerItemController{
