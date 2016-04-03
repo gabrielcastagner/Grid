@@ -1,5 +1,7 @@
 package PowerModels;
 
+import PowerModels.Graph.Location;
+
 /**
  * 
  * @author Gabriel Castagner
@@ -14,7 +16,9 @@ public class WindModel implements IPowerGeneration{
 	private double windSpd;
 	private double effCoeff;
 	private double radius;
-	
+	private double costPerUnit;
+	private int quantity;
+	private Location location;
 	
 	public WindModel(double airDensity, double windSpd, double effCoeff){
 		this.airDensity = airDensity;
@@ -63,6 +67,30 @@ public class WindModel implements IPowerGeneration{
 
 	public double getRadius() {
 		return radius;
+	}
+
+	public double getCostPerUnit() {
+		return costPerUnit;
+	}
+
+	public void setCostPerUnit(double costPerUnit) {
+		this.costPerUnit = costPerUnit;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	
