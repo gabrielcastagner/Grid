@@ -36,7 +36,7 @@ public class WindTableItem{
 		trashIcon = new Image(item.getDisplay(), trashIconData);
 		removeItemButton.setImage(trashIcon);
 
-		editor.setEditor(removeItemButton, item, 6);
+		editor.setEditor(removeItemButton, item, 7);
 	}
 	
 	//Behaviour
@@ -60,20 +60,21 @@ public class WindTableItem{
 		item.setText(2, s);
 	}
 	
-	public void setEfficiency(String s){
+	public void setAirDensity(String s){
 		item.setText(3, s);
 	}
-
-	public void setAirDensity(String s){
+	
+	
+	public void setEfficiency(String s){
 		item.setText(4, s);
 	}
-	
+
 	public void setNumberOfTurbines(String s){
-		item.setText(4, s);
+		item.setText(5, s);
 	}
 	
 	public void setCostPerTurbine(String s){
-		item.setText(5, s);
+		item.setText(6, s);
 	}
 	
 	//GETTERS
@@ -89,20 +90,21 @@ public class WindTableItem{
 		return item.getText(2);
 	}
 	
-	public String getEfficiency(){
+	public String getAirDensity(){
 		return item.getText(3);
 	}
-
-	public String getAirDensity(){
+	
+	
+	public String getEfficiency(){
 		return item.getText(4);
 	}
-	
+
 	public String getNumberOfTurbines(){
-		return item.getText(4);
+		return item.getText(5);
 	}
 	
 	public String getCostPerTurbine(){
-		return item.getText(5);
+		return item.getText(6);
 	}
 	
 	
