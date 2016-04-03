@@ -47,8 +47,7 @@ public class PrimaryComposite extends Composite {
 	private Combo[] comboBoxes;
 
 	private Composite currentSubComposite = new Composite(this, SWT.None);
-	private Composite[] subComposites = { new SolarSubComposite(currentSubComposite, SWT.None),
-			new WindSubComposite(currentSubComposite, SWT.None) };
+	private Composite[] subComposites;
 
 	final StackLayout layout = new StackLayout();
 
@@ -92,13 +91,6 @@ public class PrimaryComposite extends Composite {
 		graphicalTab.setText("Graph");
 		graphicalTab.setControl(dataDisplay);
 		
-		
-		
-		
-		
-		
-		
-		
 		tabTables = new TabFolder(this, SWT.NONE);
 		tabTables.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth / 2 - 2 * edgePaddingWidth,
 				(int) (displayHeight * 0.44));
@@ -118,12 +110,14 @@ public class PrimaryComposite extends Composite {
 		TabItem windInputTab = new TabItem(tabTables, SWT.NONE);
 		windInputTab.setText("Wind");
 		windInputTab.setControl(windInputData);
-
+		
+		
 		currentSubComposite.setLayout(layout);
 		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
 		// currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
-				displayWidth /4 - edgePaddingWidth, displayHeight / 4 - edgePaddingHeight - compBuffer);
+				2*displayWidth /7 , displayHeight / 4 - edgePaddingHeight - compBuffer);
+		setUpSubComps();
 
 		Label lblPType = new Label(this, SWT.NONE);
 		lblPType.setSize(163, 33);
@@ -168,9 +162,16 @@ public class PrimaryComposite extends Composite {
 			c.select(0);
 		consoleScrolledComposite.clearConsole();
 	}
-
+	
+	
+	// =====================Setting up the subComposites========= //
+	public void setUpSubComps(){
+		subComposites =  new Composite[] { new SolarSubComposite(currentSubComposite, SWT.None),
+				new WindSubComposite(currentSubComposite, SWT.None) };
+		
+	}
+	
 	// =====================Getters and Setter and Mcgeers======================
-	// //
 	public void setSubComposite() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
 		currentSubComposite.layout();

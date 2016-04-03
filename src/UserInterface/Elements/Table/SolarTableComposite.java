@@ -39,7 +39,7 @@ public class SolarTableComposite extends ScrolledComposite {
 		setExpandVertical(true);
 		setBackground(bg);
 		setForeground(fg);
-		inputTable = new Table(this, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL);
+		inputTable = new Table(this, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL );
 		inputTable.setLinesVisible(true);
 		inputTable.setHeaderVisible(true);
 		inputTable.setTouchEnabled(true);
