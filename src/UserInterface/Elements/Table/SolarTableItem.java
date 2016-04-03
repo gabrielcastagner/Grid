@@ -37,11 +37,7 @@ public class SolarTableItem{
 		trashIcon = new Image(item.getDisplay(), trashIconData);
 		removeItemButton.setImage(trashIcon);
 
-		editor.setEditor(removeItemButton, item, 6);
-		//input.setText(0, new Button(inputTable, SWT.NONE));
-		//setText(2, "Yes");
-		//setText(3, "No");
-		//setText(4, "A table item");
+		editor.setEditor(removeItemButton, item, 7);
 	}
 	
 	//Behaviour
@@ -54,8 +50,12 @@ public class SolarTableItem{
 	
 	//SETTERS
 	
-	public void setEfficiency(String s){
-		item.setText(4, s);
+	public void setLatitude(String s){
+		item.setText(0, s);
+	}
+
+	public void setLongitude(String s){
+		item.setText(1, s);
 	}
 	
 	public void setArea(String s){
@@ -66,25 +66,53 @@ public class SolarTableItem{
 		item.setText(3, s);
 	}
 	
+	public void setEfficiency(String s){
+		item.setText(4, s);
+	}
+	
+	public void setNumberOfPanels(String s){
+		item.setText(5, s);
+	}
+	
+	public void setCostPerUnit(String s){
+		item.setText(6, s);
+	}
+	
 	//GETTERS
-	public String getEfficiency(){
+	public String getLatitude(){
+		return item.getText(0);
+	}
+
+	public String getLongitude(){
 		return item.getText(1);
 	}
 	
 	public String getArea(){
 		return item.getText(2);
 	}
-	
+
 	public String getPowerLoss(){
+		return item.getText(3);
+	}
+	
+	public String getEfficiency(){
 		return item.getText(4);
 	}
 	
-	public Button getRemoveButton(){
-		return this.removeItemButton;
+	public String getNumberOfPanels(){
+		return item.getText(5);
 	}
 	
-	public Table getTable(){
-		return this.solarTable;
+	public String getCostPerUnit(){
+		return item.getText(6);
+	}
+
+	public Table getTable() {
+		return solarTable;
+	}
+
+	public Button getRemoveButton() {
+		return removeItemButton;
 	}
 
 }
