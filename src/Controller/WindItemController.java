@@ -37,7 +37,7 @@ public class WindItemController implements IPowerItemController{
 	}
 	
 	private void v2mSetNumberOfTurbines(){
-		model.setQuantity(Integer.parseInt(item.getNumberOfTurbines()));
+		model.setQuantity(Double.parseDouble(item.getNumberOfTurbines()));
 	}
 	
 	private void v2mSetCostPerUnit(){
@@ -75,6 +75,28 @@ public class WindItemController implements IPowerItemController{
 		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
 	}
 	
+	//Output table
+	private void m2vOutputType(){
+		output.setType("Solar");
+	}
+	
+	private void m2vOutputLatLong(){
+		output.setLat(Double.toString(model.getLocation().getLatitude()));
+		output.setLong(Double.toString(model.getLocation().getLongitude()));
+	}
+	
+	private void m2vOutputPower(){
+		output.setPowerOut(Double.toString(model.calculatePower()));
+	}
+	
+	private void m2vOutputQty(){
+		output.setNumberOf(Integer.toString(model.getQuantity()));
+	}
+	
+	private void m2vOutputCostPerUnit(){
+		output.setCostPer(Double.toString(model.getCostPerUnit()));
+	}
+	
 	@Override
 	public void analyze() {
 		model.calculatePower();	
@@ -110,9 +132,18 @@ public class WindItemController implements IPowerItemController{
 		m2vSetNumberOfPanels();
 		
 		item.getTable().layout();
-		output.getTable().layout();
 	}
 	
+	@Override
+	public void updateOutputTable(){
+		m2vOutputType();
+		m2vOutputLatLong();
+		m2vOutputPower();
+		m2vOutputQty();
+		m2vOutputCostPerUnit();
+		
+		output.getTable().layout();
+	}
 	
 
 }

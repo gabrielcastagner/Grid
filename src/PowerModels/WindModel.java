@@ -81,8 +81,8 @@ public class WindModel implements IPowerGeneration{
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuantity(double d) {
+		this.quantity = (int) d;
 	}
 
 	public Location getLocation() {

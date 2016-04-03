@@ -74,6 +74,27 @@ public class SolarItemController implements IPowerItemController{
 		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
 	}
 	
+	//Output table
+	private void m2vOutputType(){
+		output.setType("Solar");
+	}
+	
+	private void m2vOutputLatLong(){
+		output.setLat(Double.toString(model.getLocation().getLatitude()));
+		output.setLong(Double.toString(model.getLocation().getLongitude()));
+	}
+	
+	private void m2vOutputPower(){
+		output.setPowerOut(Double.toString(model.calculatePower()));
+	}
+	
+	private void m2vOutputQty(){
+		output.setNumberOf(Integer.toString(model.getNumberOfPanels()));
+	}
+	
+	private void m2vOutputCostPerUnit(){
+		output.setCostPer(Double.toString(model.getCostPerUnit()));
+	}
 	
 	//Functions controlling the model and View
 	@Override
@@ -100,6 +121,7 @@ public class SolarItemController implements IPowerItemController{
 		model.calculatePower();	
 		item.getTable().layout();
 		//item.getTable().pack();
+	
 	}
 
 	@Override
@@ -112,7 +134,17 @@ public class SolarItemController implements IPowerItemController{
 		m2vSetLocation();
 		
 		item.getTable().layout();
+
 	}
 	
-	
+	@Override
+	public void updateOutputTable(){
+		m2vOutputType();
+		m2vOutputLatLong();
+		m2vOutputPower();
+		m2vOutputQty();
+		m2vOutputCostPerUnit();
+		
+		output.getTable().layout();
+	}
 }

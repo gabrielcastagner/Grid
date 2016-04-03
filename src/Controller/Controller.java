@@ -138,13 +138,20 @@ public class Controller {
 					return;
 				}
 				
-				if(!solarTableItems.isEmpty())
-					for(UUID id: solarTableItems.keySet())
+				if(!solarTableItems.isEmpty()){
+					for(UUID id: solarTableItems.keySet()){
 						solarTableItems.get(id).analyze();
+						solarTableItems.get(id).updateOutputTable();
+					}
+				}
+				
 				//Analyze Wind data
-				if(!windTableItems.isEmpty())
-					for(UUID id: windTableItems.keySet())
+				if(!windTableItems.isEmpty()){
+					for(UUID id: windTableItems.keySet()){
 						windTableItems.get(id).analyze();
+						windTableItems.get(id).updateOutputTable();;
+					}
+				}
 				
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
 			}	

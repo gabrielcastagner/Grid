@@ -10,6 +10,7 @@ public interface IPowerItemController {
 	public UUID destroy();
 	public Button getRemoveButton();
 	public void updateViewToModelState();
+	public void updateOutputTable();
 }
 
 

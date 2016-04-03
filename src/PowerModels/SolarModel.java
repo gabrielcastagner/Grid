@@ -69,8 +69,8 @@ public class SolarModel implements IPowerGeneration{
 		return numberOfPanels;
 	}
 
-	public void setNumberOfPanels(int numberOfPanels) {
-		this.numberOfPanels = numberOfPanels;
+	public void setNumberOfPanels(double numberOfPanels) {
+		this.numberOfPanels = (int) numberOfPanels;
 	}
 
 	public Location getLocation() {
