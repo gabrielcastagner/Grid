@@ -188,7 +188,7 @@ public class Controller {
 		model.setPlCoeff(Double.parseDouble(sc.getPowerLossCoefficientText()));
 		model.setYield(Double.parseDouble(sc.getSolarPowerEfficienyText()));
 		model.setCostPerUnit(Double.parseDouble(sc.getCostText()));
-		model.setNumberOfPanels((int)Double.parseDouble(sc.getNumberText()));
+		model.setNumberOfPanels(Double.parseDouble(sc.getNumberText()));
 		model.setLocation(new Location(
 				Double.parseDouble(sc.getLatText()),
 				Double.parseDouble(sc.getLongText())));

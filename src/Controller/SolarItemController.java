@@ -35,7 +35,7 @@ public class SolarItemController implements IPowerItemController{
 	}
 	
 	private void v2mSetNumberOfPanels(){
-		model.setNumberOfPanels(Integer.parseInt(item.getNumberOfPanels()));
+		model.setNumberOfPanels(Double.parseDouble(item.getNumberOfPanels()));
 	}
 	
 	private void v2mSetCostPerUnit(){
