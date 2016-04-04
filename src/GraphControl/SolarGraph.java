@@ -10,36 +10,45 @@ import PowerModels.Graph.Location;
 import PowerModels.Graph.SolarDataNode;
 
 public class SolarGraph {
-	final static double topLat = 89,topLon =179,bottomLat = -90,bottomLon = -180;
+	final double topLat = 89,topLon =179,bottomLat = -90,bottomLon = -180;
 	private int V; 
-	private static int E;
-	private  static HashMap<Location, SolarDataNode> solar;
-	private static Set list = solar.keySet();
-	private static ArrayList<Integer>[] adj;
+	private int E;
+	private HashMap<Location, SolarDataNode> solar;
+	private Set<Location> locations;
+	private ArrayList<Integer>[] adj;
 	
-	public SolarGraph(int V){
-		this.V = V;
+	public SolarGraph(){
+		setupGraph();
+		this.V = locations.size();
 		this.E = 0;
 		for(int v = 0;v<V;v++){
 			adj[v] = new ArrayList<Integer>();
 		}
 	}
+	
+	public void setupGraph(){
+		solar = new HashMap<>();
+
+		//TODO remove reparse on merge leave for testing
+		DataParser.parse();
+		solar = DataParser.getSolarData();
+		locations = solar.keySet();
+		System.out.println(solar.size());
+		
+	}
+	
 	public int getNode(){
 		return V;
 	}
 	public int getEdge(){
 		return E;
 	}
-	private static void addEdge(int v,int w){
+	private void addEdge(int v,int w){
 		adj[v].add(w);
 		adj[w].add(v);
 		E++;
 	}
-	private static void setup(){
-		DataParser.parse();
-		solar = DataParser.getSolarData();
-		solar.keySet();
-	}
+
 	private boolean isEdgeTopLat(Location l){
 		 double lat = l.getLatitude();
 			if(lat == topLat) return true;
@@ -55,29 +64,28 @@ public class SolarGraph {
 			if(lon == bottomLon) return true;
 			return false;
 		}
-	private static void findAdjEdge(Location l){
+	private void findAdjEdge(Location l){
 			//iteration of adding edges based on the position
 		Location temp;
 		int j = l.hashCode();
 		Object[] solarList = solar.keySet().toArray();
-			for(int i = 0;i<list.size()-1;i++){
+			for(int i = 0;i<locations.size()-1;i++){
 				temp = (Location)solarList[i];
 				if(l.adjacent(temp)){
 					addEdge(solar.get(j).hashCode(),solar.get(i).hashCode());
 				}
 			}
 	}
-	public static void setEdges(){
+	public void setEdges(){
 		Object[] solarList = solar.keySet().toArray();
 		for(int i = 0;i<solar.size();i++){
 			findAdjEdge((Location)solarList[i]);
 		}
 	}
-	
-	public static void main(String [] args){
-		setup();
-		System.out.println(solar.size());
-		//setEdges();
-		//System.out.println(solar);
+
+	public static void main(String args[]){
+		System.out.println(1);
+		SolarGraph sg = new SolarGraph();
+		
 	}
 }
