@@ -3,7 +3,6 @@ package Controller;
 import java.util.UUID;
 
 import org.eclipse.swt.widgets.Button;
-
 import PowerModels.WindModel;
 import UserInterface.Elements.Table.OutputTableItem;
 import PowerModels.Graph.Location;
@@ -11,12 +10,12 @@ import UserInterface.Elements.Table.WindTableItem;
 
 public class WindItemController extends AbstractPowerItemController{
 
-	private final WindTableItem item;
-	private final WindModel model;
-	private final UUID uuid;
-	private OutputTableItem output;
+	private final WindTableItem item;				//Model's representation on main table
+	private final WindModel model;					//The model which it controls
+	private final UUID uuid;						//Key for controller for HashMap in Controller class
+	private OutputTableItem output;					//Model's representation on output table
 	
-	private boolean outputted = false;
+	private boolean outputted = false;				//Whether or not an output table item has been generated
 	
 	public WindItemController(WindTableItem item, WindModel model, UUID uuid){
 		this.item = item;
