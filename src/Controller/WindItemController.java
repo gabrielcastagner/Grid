@@ -150,6 +150,13 @@ public class WindItemController extends AbstractPowerItemController{
 	}
 	
 	/**
+	 * Updates output table with Power per Dollar
+	 */
+	private void m2vOutputPowerPerDollar(){
+		output.setPowerPerDollar(Double.toString(returnPowerPerDollar()));
+	}
+	
+	/**
 	 * Updates output table with respective data
 	 */
 	public void buildOutput(OutputTableItem output){
@@ -217,6 +224,7 @@ public class WindItemController extends AbstractPowerItemController{
 		m2vSetCostPerUnit();
 		m2vSetLocation();
 		m2vSetNumberOfPanels();
+		m2vOutputPowerPerDollar();
 		
 		item.getTable().layout();
 	}
@@ -231,6 +239,7 @@ public class WindItemController extends AbstractPowerItemController{
 		m2vOutputPower();
 		m2vOutputQty();
 		m2vOutputCostPerUnit();
+		m2vOutputPowerPerDollar();
 		
 		output.getTable().layout();
 		

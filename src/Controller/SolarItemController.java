@@ -124,6 +124,13 @@ public class SolarItemController extends AbstractPowerItemController implements 
 		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
 	}
 	
+	/**
+	 * Updates output table with Power per Dollar
+	 */
+	private void m2vOutputPowerPerDollar(){
+		output.setPowerPerDollar(Double.toString(returnPowerPerDollar()));
+	}
+	
 	//--------------------------Output table stuff--------------------------------//
 	/**
 	 * Generates a new row on the output table
@@ -248,6 +255,7 @@ public class SolarItemController extends AbstractPowerItemController implements 
 		m2vOutputPower();
 		m2vOutputQty();
 		m2vOutputCostPerUnit();
+		m2vOutputPowerPerDollar();
 		
 		output.getTable().layout();
 		
