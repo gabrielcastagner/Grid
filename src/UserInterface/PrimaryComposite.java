@@ -70,7 +70,7 @@ public class PrimaryComposite extends Composite {
 		// Console For interacting with user.
 		consoleScrolledComposite = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL,
 				ColorPalette.CUSTOM_WHITE, ColorPalette.CUSTOM_BLACK);
-		consoleScrolledComposite.setBounds(edgePaddingWidth, (int) (displayHeight * 0.75),
+		consoleScrolledComposite.setBounds(edgePaddingWidth, (int) (displayHeight * 0.775),
 				displayWidth - 2 * edgePaddingWidth, 150);
 
 		tabOutputs = new TabFolder(this, SWT.NONE);
@@ -116,10 +116,8 @@ public class PrimaryComposite extends Composite {
 		
 		
 		currentSubComposite.setLayout(layout);
-		// currentSubComposite.setBackground(ColorPalette.CUSTOM_BLACK);
-		// currentSubComposite.setForeground(ColorPalette.CUSTOM_BLACK);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
-				2*displayWidth /7 , displayHeight / 4 - edgePaddingHeight - compBuffer);
+				2*displayWidth /7 , displayHeight / 5);
 		setUpSubComps();
 
 		Label lblPType = new Label(this, SWT.NONE);
@@ -128,26 +126,18 @@ public class PrimaryComposite extends Composite {
 		lblPType.setText("Power Type:");
 		lblPType.setForeground(SWTResourceManager.getColor(52, 152, 219));
 		lblPType.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		// lblPType.setBackground(ColorPalette.CUSTOM_BLACK);
 		lblPType.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		buttonAdd = new Button(this, SWT.NONE);
 		buttonAdd.setBounds(displayWidth / 4 + 8 * compBuffer, displayHeight / 2 + edgePaddingWidth + 10,
 				displayWidth / 10, displayHeight / 30);
 		buttonAdd.setText("Add Power Source");
-		// buttonAdd.addListener(SWT.Selection, event -> {
-		// consoleScrolledComposite
-		// .addToConsole(powerOption[comboPowerOptions.getSelectionIndex()] + "
-		// Power Source has been added");
-		// });
 
 		buttonAnalyze = new Button(this, SWT.NONE);
 		buttonAnalyze.setBounds(displayWidth / 4 + 8 * compBuffer, displayHeight / 2 + 2 * edgePaddingWidth + 20,
 				displayWidth / 10, displayHeight / 30);
 		buttonAnalyze.setText("Analyze");
-		// buttonAnalyze.addListener(SWT.Selection, event -> {
-		// dataDisplay.addToConsole("Data Being Analyzed...");
-		// });
+
 
 		comboPowerOptions = new Combo(this, SWT.READ_ONLY);
 		comboPowerOptions.setItems(powerOption);
