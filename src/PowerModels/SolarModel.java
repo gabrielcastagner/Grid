@@ -25,8 +25,7 @@ public class SolarModel implements IPowerGeneration{
 	}
 	
 	public double calculatePower() {
-		//return area * yield * avgExposure * plCoeff;
-		return numberOfPanels;
+		return area * yield * avgExposure * plCoeff;
 	}
 
 	public double timeToPayOff() {

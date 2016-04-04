@@ -158,10 +158,12 @@ public class Controller {
 				
 				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()));
 				
+				//updates output table one item at a time
 				for(IPowerItemController  i: combined){
-					if(!i.outputted()){
-						i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
-					}
+					if(i.outputted())
+						i.destroyOutput();				//in case the item placement moves up or down
+					
+					i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
 					i.updateOutputTable();
 				}
 				
@@ -255,13 +257,17 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Takes in lists of table items, merges them, then sorts them
+	 * @param originalS List of solar items
+	 * @param originalW List of wind items
+	 */
 	public void sortTable(List<IPowerItemController> originalS, List<IPowerItemController> originalW){
 		
 		combined = originalS;
 		combined.addAll(originalW);		
 		
-		Mergesort.sort(combined, 1);
-		
+		Mergesort.sort(combined, 0);
 		
 	}
 	

@@ -33,8 +33,7 @@ public class WindModel implements IPowerGeneration{
 	}
 
 	public double calculatePower(){
-		//return .5*airDensity*(radius * radius * Math.PI)*(Math.pow(windSpd, 3))*effCoeff;
-		return quantity;
+		return .5*airDensity*(radius * radius * Math.PI)*(Math.pow(windSpd, 3))*effCoeff;
 	}
 
 	public double timeToPayOff() {

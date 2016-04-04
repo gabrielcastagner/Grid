@@ -7,6 +7,11 @@ public class Mergesort {
 
 	private static IPowerItemController[] aux;
 	
+	/**
+	 * Sorts items using merge sort
+	 * @param list list of controllers with attached items to sort
+	 * @param select 0 to sort by total power, 1 to sort by total power/total cost
+	 */
 	public static void sort(List<IPowerItemController> list, int select){
 		
 		aux = new IPowerItemController[list.size()];
@@ -14,6 +19,13 @@ public class Mergesort {
 		sort(list, 0, list.size()-1, select);
 	}
 
+	/**
+	 * Uses top down merge sort
+	 * @param a list to sort
+	 * @param i starting index
+	 * @param k ending index
+	 * @param select 0 for total power, 1 for total power/total cost
+	 */
 	private static void sort(List<IPowerItemController> a, int i, int k, int select) {
 
 		if(k <= i)
@@ -48,12 +60,24 @@ public class Mergesort {
 		}
 	}
 
+	/**
+	 * Compares total power output
+	 * @param iPowerItemController
+	 * @param iPowerItemController2
+	 * @return True if first item is less than second
+	 */
 	private static boolean less(IPowerItemController iPowerItemController, IPowerItemController iPowerItemController2) {
 		
 		return iPowerItemController.compareTo(iPowerItemController2) < 0;
 
 	}
 	
+	/**
+	 * Compares total power output over total cost
+	 * @param iPowerItemController
+	 * @param iPowerItemController2
+	 * @return True if first item is less than second
+	 */
 	private static boolean lessPerDollar(IPowerItemController iPowerItemController, IPowerItemController iPowerItemController2) {
 		
 		return iPowerItemController.comparePerDollar(iPowerItemController2) < 0;

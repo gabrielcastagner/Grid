@@ -76,7 +76,7 @@ public class WindItemController extends IPowerItemController{
 		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
 	}
 	
-	//Output table
+	//*****************Output table stuff*****************************************//
 	private void m2vOutputType(){
 		output.setType(model.getType());
 	}
@@ -102,6 +102,10 @@ public class WindItemController extends IPowerItemController{
 		this.output = output;
 	}
 	
+	/**
+	 * Returns whether or not an output has been made for item, to avoid duplication
+	 * @return true if it's been outputted, false if it hasn't
+	 */
 	public boolean outputted(){
 		return outputted;
 	}
@@ -126,12 +130,22 @@ public class WindItemController extends IPowerItemController{
 		this.output.destroy();
 		return this.uuid;
 	}
+	
+	/**
+	 * Removes from output table
+	 */
+	public void destroyOutput(){
+		this.output.destroy();
+	}
 
 	@Override
 	public Button getRemoveButton() {
 		return item.getRemoveButton();
 	}
 
+	/**
+	 * Updates first table with data inputted by user
+	 */
 	@Override
 	public void updateModelStateToView() {
 		m2vSetRadius();
@@ -144,6 +158,9 @@ public class WindItemController extends IPowerItemController{
 		item.getTable().layout();
 	}
 	
+	/**
+	 * Updates output table with relevant data
+	 */
 	@Override
 	public void updateOutputTable(){
 		m2vOutputType();
@@ -158,12 +175,21 @@ public class WindItemController extends IPowerItemController{
 		
 	}
 
+	/**
+	 * Compares total power output with another item (greatest to least)
+	 * @param o item to compare against
+	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 */
 	@Override
 	public double returnPower() {
 		return model.calculatePower();
 	}
 
-	@Override
+	/**
+	 * Compares total power output over total cost with another item (greatest to least)
+	 * @param o item to compare against
+	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 */
 	public double returnPowerPerDollar() {
 		return model.getPower()/(model.getCostPerUnit()*model.getQuantity());
 	}

@@ -75,7 +75,7 @@ public class SolarItemController extends IPowerItemController implements Compara
 		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
 	}
 	
-	//Output table
+	//*****************Output table stuff*****************************************//
 	public void buildOutput(OutputTableItem output){
 		this.output = output;
 	}
@@ -101,6 +101,10 @@ public class SolarItemController extends IPowerItemController implements Compara
 		output.setCostPer(Double.toString(model.getCostPerUnit()));
 	}
 	
+	/**
+	 * Returns whether or not an output has been made for item, to avoid duplication
+	 * @return true if it's been outputted, false if it hasn't
+	 */
 	public boolean outputted(){
 		return outputted;
 	}
@@ -113,6 +117,9 @@ public class SolarItemController extends IPowerItemController implements Compara
 		return this.uuid;
 	}
 	
+	/**
+	 * Removes from output table
+	 */
 	public void destroyOutput(){
 		this.output.destroy();
 	}
@@ -138,6 +145,9 @@ public class SolarItemController extends IPowerItemController implements Compara
 	
 	}
 
+	/**
+	 * Updates first table with data inputted by user
+	 */
 	@Override
 	public void updateModelStateToView() {
 		m2vSetArea();
@@ -150,6 +160,9 @@ public class SolarItemController extends IPowerItemController implements Compara
 		item.getTable().layout();
 	}
 	
+	/**
+	 * Updates output table with relevant data
+	 */
 	@Override
 	public void updateOutputTable(){
 		
@@ -164,6 +177,11 @@ public class SolarItemController extends IPowerItemController implements Compara
 		outputted = true;
 	}
 	
+	/**
+	 * Compares total power output with another item (greatest to least)
+	 * @param o item to compare against
+	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 */
 	@Override
 	public int compareTo(IPowerItemController o) {
 		if(this.returnPower() < o.returnPower())
@@ -174,6 +192,11 @@ public class SolarItemController extends IPowerItemController implements Compara
 			return -1;
 	}
 	
+	/**
+	 * Compares total power output over total cost with another item (greatest to least)
+	 * @param o item to compare against
+	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 */
 	public int comparePerDollar(IPowerItemController o){
 		if(this.returnPowerPerDollar() < o.returnPowerPerDollar())
 			return 1;
