@@ -161,11 +161,21 @@ public class WindItemController extends IPowerItemController{
 	@Override
 	public int compareTo(IPowerItemController o) {
 		if(this.returnPower() < o.returnPower())
-			return -1;
+			return 1;
 		else if(this.returnPower() == o.returnPower())
 			return 0;
 		else
+			return -1;
+	}
+
+	@Override
+	public int comparePerDollar(IPowerItemController o) {
+		if(this.returnPowerPerDollar() < o.returnPowerPerDollar())
 			return 1;
+		else if(this.returnPower() == o.returnPower())
+			return 0;
+		else
+			return -1;
 	}
 
 

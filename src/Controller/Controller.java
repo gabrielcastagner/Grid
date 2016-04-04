@@ -257,7 +257,7 @@ public class Controller {
 		combined = originalS;
 		combined.addAll(originalW);		
 		
-		Mergesort.sort(combined);
+		Mergesort.sort(combined, 1);
 		
 		
 	}

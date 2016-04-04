@@ -15,6 +15,9 @@ public abstract class IPowerItemController implements Comparable<IPowerItemContr
 	public abstract void updateOutputTable();
 	public abstract void buildOutput(OutputTableItem output);
 	
+	public abstract int compareTo(IPowerItemController o);
+	public abstract int comparePerDollar(IPowerItemController o);
+	
 	public abstract double returnPower();
 	public abstract double returnPowerPerDollar();
 }
