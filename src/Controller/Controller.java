@@ -46,7 +46,7 @@ public class Controller {
 	//Data Holders
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
-	private List<IPowerItemController> combined;
+	private List<AbstractPowerItemController> combined;
 
 	
 	
@@ -167,10 +167,11 @@ public class Controller {
 					}
 				}
 				
-				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()), 1);
+				sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()), 
+						new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
 				
 				//updates output table one item at a time
-				for(IPowerItemController  i: combined){
+				for(AbstractPowerItemController  i: combined){
 					if(i.outputted())
 						i.destroyOutput();				//in case the item placement moves up or down
 					
@@ -203,7 +204,7 @@ public class Controller {
 				matchesDoubleCharSequence(sc.getLatText())&&
 				matchesDoubleCharSequence(sc.getLongText())&&
 				matchesDoubleCharSequence(sc.getNumberText()))){
-			//TODO other inputs
+
 			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
 		}
@@ -293,7 +294,7 @@ public class Controller {
 	 * @param originalW List of wind items
 	 * @param select 0 for total power, 1 for total power/total cost
 	 */
-	public void sortTable(List<IPowerItemController> originalS, List<IPowerItemController> originalW, int select){
+	public void sortTable(List<AbstractPowerItemController> originalS, List<AbstractPowerItemController> originalW, int select){
 		
 		combined = originalS;
 		combined.addAll(originalW);		

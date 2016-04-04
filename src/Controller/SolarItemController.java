@@ -7,7 +7,7 @@ import PowerModels.Graph.Location;
 import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.SolarTableItem;
 
-public class SolarItemController extends IPowerItemController implements Comparable<IPowerItemController>{
+public class SolarItemController extends AbstractPowerItemController implements Comparable<AbstractPowerItemController>{
 	
 	private final SolarTableItem item;
 	private final SolarModel model;
@@ -183,7 +183,7 @@ public class SolarItemController extends IPowerItemController implements Compara
 	 * @return 1 for lesser than, 0 for equal, -1 for greater than
 	 */
 	@Override
-	public int compareTo(IPowerItemController o) {
+	public int compareTo(AbstractPowerItemController o) {
 		if(this.returnPower() < o.returnPower())
 			return 1;
 		else if(this.returnPower() == o.returnPower())
@@ -197,7 +197,7 @@ public class SolarItemController extends IPowerItemController implements Compara
 	 * @param o item to compare against
 	 * @return 1 for lesser than, 0 for equal, -1 for greater than
 	 */
-	public int comparePerDollar(IPowerItemController o){
+	public int comparePerDollar(AbstractPowerItemController o){
 		if(this.returnPowerPerDollar() < o.returnPowerPerDollar())
 			return 1;
 		else if(this.returnPower() == o.returnPower())

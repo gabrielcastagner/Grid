@@ -1,20 +1,19 @@
 package Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Mergesort {
 
-	private static IPowerItemController[] aux;
+	private static AbstractPowerItemController[] aux;
 	
 	/**
 	 * Sorts items using merge sort
 	 * @param list list of controllers with attached items to sort
 	 * @param select 0 to sort by total power, 1 to sort by total power/total cost
 	 */
-	public static void sort(List<IPowerItemController> list, int select){
+	public static void sort(List<AbstractPowerItemController> list, int select){
 		
-		aux = new IPowerItemController[list.size()];
+		aux = new AbstractPowerItemController[list.size()];
 		
 		sort(list, 0, list.size()-1, select);
 	}
@@ -26,7 +25,7 @@ public class Mergesort {
 	 * @param k ending index
 	 * @param select 0 for total power, 1 for total power/total cost
 	 */
-	private static void sort(List<IPowerItemController> a, int i, int k, int select) {
+	private static void sort(List<AbstractPowerItemController> a, int i, int k, int select) {
 
 		if(k <= i)
 			return;
@@ -38,7 +37,7 @@ public class Mergesort {
 		merge(a, i, j, k, select);
 	}
 
-	private static void merge(List<IPowerItemController> a, int low, int mid, int hi, int select) {
+	private static void merge(List<AbstractPowerItemController> a, int low, int mid, int hi, int select) {
 		
 		int i = low, j = mid+1;
 		
@@ -66,7 +65,7 @@ public class Mergesort {
 	 * @param iPowerItemController2
 	 * @return True if first item is less than second
 	 */
-	private static boolean less(IPowerItemController iPowerItemController, IPowerItemController iPowerItemController2) {
+	private static boolean less(AbstractPowerItemController iPowerItemController, AbstractPowerItemController iPowerItemController2) {
 		
 		return iPowerItemController.compareTo(iPowerItemController2) < 0;
 
@@ -78,7 +77,7 @@ public class Mergesort {
 	 * @param iPowerItemController2
 	 * @return True if first item is less than second
 	 */
-	private static boolean lessPerDollar(IPowerItemController iPowerItemController, IPowerItemController iPowerItemController2) {
+	private static boolean lessPerDollar(AbstractPowerItemController iPowerItemController, AbstractPowerItemController iPowerItemController2) {
 		
 		return iPowerItemController.comparePerDollar(iPowerItemController2) < 0;
 

@@ -2,23 +2,15 @@ package UserInterface;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import Constants.FilePaths;
-
 public class TableComposite extends ScrolledComposite {
 	
 	private Table inputTable;
-	private TableItem input;
 	private String[] columnHeaders = { "Type", "Radius", "Area", "Power Loss", "Exposure", "Efficiency", "" };
 
 	public TableComposite(Composite arg0, int arg1, Color bg, Color fg) {

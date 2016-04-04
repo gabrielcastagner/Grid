@@ -1,15 +1,10 @@
 package UserInterface.Elements.Graph;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.wb.swt.SWTResourceManager;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Button;
 import UserInterface.Elements.ColorPalette;
 
 import org.swtchart.*;

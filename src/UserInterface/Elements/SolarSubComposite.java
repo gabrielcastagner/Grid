@@ -2,7 +2,6 @@
 package UserInterface.Elements;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -19,7 +18,6 @@ public class SolarSubComposite extends Composite {
 	private Text latText;
 
 	private Text[] textBoxes;
-	private RowLayout layout = new RowLayout();
 	private int lblLength, lblHeight;
 	private int xbound, ybound, padding;
 
