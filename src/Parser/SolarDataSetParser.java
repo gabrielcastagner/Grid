@@ -7,15 +7,17 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Constants.FilePaths;
 import PowerModels.Graph.Location;
 import PowerModels.Graph.SolarDataNode;
-
+/**
+ * Static parser for solar data, NOT TO BE INSTANTIATED 
+ *
+ */
 public class SolarDataSetParser {
 	private final static Pattern SOLAR_INTENSITY_PATTERN = Pattern
 			.compile("([-0-9\\.]+)\\s([-0-9\\.]+)\\s((?:(?:[-0-9\\.]+)\\s?){13})\\s*$");
-
-	private final static String solarIntensityDataPath = "data\\windSpeed.txt";
-	
+	//Data container
 	private static HashMap<Location, SolarDataNode> data;
 	
 	/**
@@ -25,7 +27,7 @@ public class SolarDataSetParser {
 	protected static HashMap<Location, SolarDataNode> parseSolarDataSet(){
 		data = new HashMap<>();
 		try {
-			byte[] temp = Files.readAllBytes(Paths.get(solarIntensityDataPath));
+			byte[] temp = Files.readAllBytes(Paths.get(FilePaths.SOLAR_INTENSITY_DATA_PATH));
 			String s = new String(temp, "UTF-8");
 			String[] fileContents = s.split("\n");
 			

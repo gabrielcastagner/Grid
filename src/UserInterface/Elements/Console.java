@@ -13,10 +13,20 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
+/**
+ * Dynamic Console Composite
+ */
 public class Console extends ScrolledComposite {
 	// Tables
 	private Table consoleMessageTable;
 
+	/**
+	 * Create3 a console Composite
+	 * @param arg0 #ScrolledComposite
+	 * @param arg1 #ScrolledComposite
+	 * @param bg Consoles background color
+	 * @param fg Consoles foreground color
+	 */
 	public Console(Composite arg0, int arg1, Color bg, Color fg) {
 		super(arg0, arg1);
 		setExpandHorizontal(true);

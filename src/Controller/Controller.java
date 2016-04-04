@@ -24,8 +24,11 @@ import UserInterface.Elements.WindSubComposite;
 import UserInterface.Elements.Table.SolarTableItem;
 import UserInterface.Elements.Table.WindTableItem;
 
+/**
+ * Controller for the program. Links Model elements to View elements
+ */
 public class Controller {
-
+	//View Variables
 	private ApplicationView view;
 	private Shell parentShell;
 	private Display display;
@@ -33,18 +36,22 @@ public class Controller {
 	private Table solarTable, windTable;
 	private Console console;
 	
+	//Regex's used for error handling 
 	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
 	private static final Pattern invalidInteger = Pattern.compile("[^0-9]+");
 	
+	//Data Holders
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
 	
 	
-	
+	/**
+	 * Creates a controller instance with no models initially
+	 * @param v ApplicationView to be linked to the controller
+	 */
 	public Controller(ApplicationView v) {
 		view = v;
 		view.open();
-		// initViewEventHandeling();
 
 		try {
 			//Link View to Controller Elements
@@ -71,6 +78,9 @@ public class Controller {
 		console.addToConsole("Program Loaded.", false);	
 	}
 
+	/**
+	 * Sets up controls for the user to interact with the program
+	 */
 	private void initController() {
 		primaryComposite.getButtonAdd().addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -123,6 +133,7 @@ public class Controller {
 					
 					console.addToConsole("New Wind Turbine Model Added.", false);
 				}
+				//Add new conditional for any new power generation scheme
 			}
 		});
 		
@@ -130,12 +141,12 @@ public class Controller {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				console.addToConsole("Analyzing Input Data...", false);
-				//Analyze Solar data
+				//Check to see if inputs exist
 				if(solarTableItems.isEmpty() && windTableItems.isEmpty()){
 					console.addToConsole("Error: No inputs specified", true);
 					return;
 				}
-				
+				//Analyze Solar data
 				if(!solarTableItems.isEmpty())
 					for(UUID id: solarTableItems.keySet())
 						solarTableItems.get(id).analyze();
@@ -156,8 +167,12 @@ public class Controller {
 		});	
 	}
 	
+	/**
+	 * Sets up a solar model instance based on the user inputs
+	 */
 	public boolean inputsToSolarModel(SolarModel model){
 		SolarSubComposite sc = primaryComposite.getSolarSubComposite();
+		//Check values against proper formats
 		if(!(	matchesDoubleCharSequence(sc.getAreaText()) &&
 				matchesDoubleCharSequence(sc.getPowerLossCoefficientText()) &&
 				matchesDoubleCharSequence(sc.getSolarPowerEfficienyText())&&
@@ -175,6 +190,7 @@ public class Controller {
 			return false;
 		}
 		
+		//No errors thus construct the instance
 		model.setArea(Double.parseDouble(sc.getAreaText()));
 		model.setPlCoeff(Double.parseDouble(sc.getPowerLossCoefficientText()));
 		model.setYield(Double.parseDouble(sc.getSolarPowerEfficienyText()));
@@ -186,9 +202,12 @@ public class Controller {
 		return true;
 	}
 	
+	/**
+	 * Sets up a wind model instance based on the user inputs
+	 */
 	private boolean inputsToWindModel(WindModel model) {
 		WindSubComposite wc = primaryComposite.getWindSubComposite();
-		
+		//Error Check
 		if(!(	matchesDoubleCharSequence(wc.getAirDensityText()) &&
 				matchesDoubleCharSequence(wc.getBladeRadiusText()) &&
 				matchesDoubleCharSequence(wc.getEfficiencyText())&&
@@ -205,6 +224,7 @@ public class Controller {
 			return false;
 		}
 
+		//Construct the model
 		model.setAirDensity(Double.parseDouble(wc.getAirDensityText()));
 		model.setRadius(Double.parseDouble(wc.getBladeRadiusText()));
 		model.setEffCoeff(Double.parseDouble(wc.getEfficiencyText()));
@@ -216,6 +236,11 @@ public class Controller {
 		return true;
 	}
 	
+	/**
+	 * Matches a string to see if it represents a double
+	 * @param s String to be matched
+	 * @return true if it matches a double else return false
+	 */
 	public boolean matchesDoubleCharSequence(String s){
 		s = s.trim();
 		if(s.isEmpty())
@@ -225,6 +250,11 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Matches a string to see if it represents an int
+	 * @param s String to be matched
+	 * @return true if it matches an int else return false
+	 */
 	public boolean matchesIntegerCharSequence(String s){
 		s = s.trim();
 		if(s.isEmpty())

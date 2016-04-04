@@ -17,14 +17,20 @@ import org.swtchart.ISeries.SeriesType;
 
 import PowerModels.Graph.Month;
 
+/**
+ * Adds a chart to a composite, plotting versus month Note it will take up the
+ * entire composite
+ */
 public class DataGraph {
 
 	private static Chart chart;
 	private static int nextLineColorPtr, nextNodeColorPtr, seriesID;
 	private static Color[] plotPalette = ColorPalette.plotPalette;
 
+	// Temporary and arbitrary series to initially plot so user sees a nice plot
 	private static final double[] ySeries = { 0.0, 0.38, 0.71, 0.92, 0.6, 0.92, 0.71, 0.38, 0.0, 0.38, 0.71, 0.92,
 			1.0 };
+	// Centers Nodes for each month
 	private static final double[] xSeries = { 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 12.5 };
 
 	/**
@@ -70,8 +76,8 @@ public class DataGraph {
 		IAxisTick yTick = chart.getAxisSet().getYAxis(0).getTick();
 		yTick.setForeground(ColorPalette.CUSTOM_BLACK);
 		yTick.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		
-		//Legend
+
+		// Legend
 		chart.getLegend().setFont(SWTResourceManager.getFont("Segoe UI", 8, SWT.NORMAL));
 		// set category
 		chart.getAxisSet().getXAxis(0).enableCategory(true);
@@ -86,6 +92,11 @@ public class DataGraph {
 		return chart;
 	}
 
+	/**
+	 * Add a series to the chart, note truncated values past 13 inputs
+	 * 
+	 * @param yValues
+	 */
 	public static void addSeries(double[] yValues) {
 		double[] yPlotable = new double[13];
 		for (int i = 0; i < yPlotable.length; i++)
@@ -108,19 +119,21 @@ public class DataGraph {
 
 	/**
 	 * Adds yValues to the Graph
-	 * @param yValues - Double Array of size 13 to be plotted.
-	 * @param ID - UNIQUE string representation of the plotted data!
+	 * 
+	 * @param yValues
+	 *            - Double Array of size 13 to be plotted.
+	 * @param ID
+	 *            - UNIQUE string representation of the plotted data!
 	 */
 	public static void addSeries(double[] yValues, String ID) {
 		double[] yPlotable = new double[13];
 		for (int i = 0; i < yPlotable.length; i++)
 			yPlotable[i] = yValues[i];
-		
+
 		// Get a line color
 		LineNodeColorPair p = getNewSeriesColors();
 		// create scatter series
-		ILineSeries plottedSeries = (ILineSeries) chart.getSeriesSet().createSeries(SeriesType.LINE,
-				ID);
+		ILineSeries plottedSeries = (ILineSeries) chart.getSeriesSet().createSeries(SeriesType.LINE, ID);
 		plottedSeries.setSymbolColor(p.getNodeColor());
 		plottedSeries.setLineColor(p.getLineColor());
 		plottedSeries.setLineStyle(LineStyle.SOLID);
@@ -130,8 +143,7 @@ public class DataGraph {
 		// adjust the axis range
 		chart.getAxisSet().adjustRange();
 	}
-	
-	
+
 	/**
 	 * @return Node and Line color pairing from ColorPalette.plotPalette
 	 */

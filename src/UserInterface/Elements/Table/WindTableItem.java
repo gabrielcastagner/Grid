@@ -13,13 +13,24 @@ import org.eclipse.swt.widgets.TableItem;
 
 import Constants.FilePaths;
 
-public class WindTableItem{
+/**
+ * WindTableItem instance
+ */
+public class WindTableItem {
 
 	private TableEditor editor;
 	private Button removeItemButton;
 	private Table table;
 	private TableItem item;
-	
+
+	/**
+	 * Wind table item instance
+	 * 
+	 * @param table
+	 *            table this will belong to
+	 * @param SWTargs
+	 *            SWT arguments for the table item, Default pass SWT.NONE
+	 */
 	public WindTableItem(Table table, int SWTargs) {
 		item = new TableItem(table, SWTargs);
 		this.table = table;
@@ -38,83 +49,129 @@ public class WindTableItem{
 
 		editor.setEditor(removeItemButton, item, 7);
 	}
-	
-	//Behaviour
-	public void destroy(){
+
+	// Behaviour
+	/**
+	 * Frees all memory for this item and removes it from the table
+	 */
+	public void destroy() {
 		removeItemButton.dispose();
 		editor.dispose();
 		item.dispose();
 	}
-	
-	//SETTERS
-	//TODO Align these to their proper columns
-	public void setLongitude(String s){
+
+	// SETTERS
+	/**
+	 * @param s set Longitude to s on the view
+	 */
+	public void setLongitude(String s) {
 		item.setText(0, s);
 	}
-
-	public void setLatitude(String s){
+	
+	/**
+	 * @param s set Latitude to s on the view
+	 */
+	public void setLatitude(String s) {
 		item.setText(1, s);
 	}
-	
-	public void setRadius(String s){
+
+	/**
+	 * @param s set the blade radius to s on the view
+	 */
+	public void setRadius(String s) {
 		item.setText(2, s);
 	}
-	
-	public void setAirDensity(String s){
+
+	/**
+	 * @param s set Air density to s on the view
+	 */
+	public void setAirDensity(String s) {
 		item.setText(3, s);
 	}
-	
-	
-	public void setEfficiency(String s){
+
+	/**
+	 * @param s set efficiency to s on the view
+	 */
+	public void setEfficiency(String s) {
 		item.setText(4, s);
 	}
 
-	public void setNumberOfTurbines(String s){
+	/**
+	 * @param s set number of turbines to s on the view
+	 */
+	public void setNumberOfTurbines(String s) {
 		item.setText(5, s);
 	}
-	
-	public void setCostPerTurbine(String s){
+
+	/**
+	 * @param s set cost of a turbine to s on the view
+	 */
+	public void setCostPerTurbine(String s) {
 		item.setText(6, s);
 	}
-	
-	//GETTERS
-	public String getLongitude(){
+
+	// GETTERS
+	/**
+	 * @return items longitude
+	 */
+	public String getLongitude() {
 		return item.getText(0);
 	}
 
-	public String getLatitude(){
+	/**
+	 * @return items latitude
+	 */
+	public String getLatitude() {
 		return item.getText(1);
 	}
-	
-	public String getRadius(){
+
+	/**
+	 * @return items blade radius
+	 */
+	public String getRadius() {
 		return item.getText(2);
 	}
-	
-	public String getAirDensity(){
+
+	/**
+	 * @return items air density
+	 */
+	public String getAirDensity() {
 		return item.getText(3);
 	}
-	
-	
-	public String getEfficiency(){
+
+	/**
+	 * @return items efficiency
+	 */
+	public String getEfficiency() {
 		return item.getText(4);
 	}
 
-	public String getNumberOfTurbines(){
+	/**
+	 * @return items number of turbines
+	 */
+	public String getNumberOfTurbines() {
 		return item.getText(5);
 	}
-	
-	public String getCostPerTurbine(){
+
+	/**
+	 * @return items cost per turbine
+	 */
+	public String getCostPerTurbine() {
 		return item.getText(6);
 	}
-	
-	
-	public Button getRemoveButton(){
+
+	/**
+	 * @return button to remove item
+	 */
+	public Button getRemoveButton() {
 		return this.removeItemButton;
 	}
 
+	/**
+	 * @return Table the item belongs to
+	 */
 	public Table getTable() {
 		return this.table;
 	}
-	
-	
+
 }

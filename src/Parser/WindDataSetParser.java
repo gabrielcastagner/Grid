@@ -1,20 +1,26 @@
 package Parser;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Constants.FilePaths;
 import PowerModels.Graph.Location;
 import PowerModels.Graph.WindDataNode;
+import UserInterface.Elements.Table.SolarTableComposite;
 
+/**
+ * Static parser for Wind data NOT TO BE INSTANTIATED
+ */
 public class WindDataSetParser {
 	private final static Pattern WIND_SPEED_PATTERN = Pattern
 			.compile("([-0-9\\.]+)\\s([-0-9\\.]+)\\s((?:(?:[-0-9\\.]+)\\s?){13})\\s*$");
 
-	private final static String windSpeedDataPath = "data\\windSpeed.txt";
+
 	
 	private static HashMap<Location, WindDataNode> data;
 	
@@ -25,7 +31,7 @@ public class WindDataSetParser {
 	protected static HashMap<Location, WindDataNode> parseWindDataSet(){
 		data = new HashMap<>();
 		try {
-			byte[] temp = Files.readAllBytes(Paths.get(windSpeedDataPath));
+			byte[] temp = Files.readAllBytes(Paths.get(FilePaths.WIND_SPEED_DATA_PATH));
 			String s = new String(temp, "UTF-8");
 			String[] fileContents = s.split("\n");
 
@@ -40,7 +46,7 @@ public class WindDataSetParser {
 					Matcher m = WIND_SPEED_PATTERN.matcher(line);
 					//Find grouped pairs, push them to the graph
 					if (m.find()) {
-						data.put(new Location(m.group(1),  m.group(2)), 
+						data.put(new Location(m.group(1), m.group(2)), 
 								new WindDataNode(m.group(3).split("\\s"))
 								);
 					}
