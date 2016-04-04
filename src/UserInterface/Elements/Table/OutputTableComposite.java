@@ -20,7 +20,8 @@ public class OutputTableComposite extends ScrolledComposite {
 
 		super(arg0, arg1);
 		int columnwidth = ((arg0.getBounds().width) / (columnHeaders.length));
-
+		
+		
 		setExpandHorizontal(true);
 		setExpandVertical(true);
 		setBackground(bg);
