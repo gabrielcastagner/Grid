@@ -19,7 +19,7 @@ public class SolarSubComposite extends Composite {
 
 	private Text[] textBoxes;
 	private int lblLength, lblHeight;
-	private int xbound, ybound, padding;
+	private int xbound, ybound, xpadding, ypadding;
 
 	public SolarSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
@@ -28,7 +28,8 @@ public class SolarSubComposite extends Composite {
 		ybound = arg0.getBounds().height;
 		lblHeight = ybound / 7;
 		lblLength = 3 * xbound / 8;
-		padding = xbound / 100;
+		xpadding = xbound / 100;
+		ypadding = ybound /20;
 
 		addElementsToComposite();
 		setBackground(null);
@@ -43,43 +44,43 @@ public class SolarSubComposite extends Composite {
 		Label lblAreaText = new Label(this, SWT.NONE);
 		lblAreaText.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblAreaText.setBounds(0, 0, lblLength, lblHeight);
-		lblAreaText.setText("Panel Area:");
+		lblAreaText.setText("Panel Area (m^2):");
 		lblAreaText.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblPowerloss = new Label(this, SWT.NONE);
 		lblPowerloss.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblPowerloss.setBounds(0, (lblHeight + padding), lblLength, lblHeight);
+		lblPowerloss.setBounds(0, (lblHeight + ypadding), lblLength, lblHeight);
 		lblPowerloss.setText("Powerloss Coefficient:");
 		lblPowerloss.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblPowerEfficiency = new Label(this, SWT.NONE);
 		lblPowerEfficiency.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblPowerEfficiency.setBounds(0, 2 * (lblHeight + padding), lblLength, lblHeight);
+		lblPowerEfficiency.setBounds(0, 2 * (lblHeight + ypadding), lblLength, lblHeight);
 		lblPowerEfficiency.setText("Panel Efficiency:");
 		lblPowerEfficiency.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblNumber = new Label(this, SWT.NONE);
 		lblNumber.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblNumber.setBounds(0, 3 * (lblHeight + padding), lblLength, lblHeight);
+		lblNumber.setBounds(0, 3 * (lblHeight + ypadding), lblLength, lblHeight);
 		lblNumber.setText("Quantity #:");
 		lblNumber.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		// Right 3
 		Label lblCost = new Label(this, SWT.NONE);
 		lblCost.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblCost.setBounds(3 * lblLength / 2 + padding, 0, 5 * lblLength / 9, lblHeight);
+		lblCost.setBounds(3 * lblLength / 2 + xpadding, 0, 5 * lblLength / 9, lblHeight);
 		lblCost.setText("Cost/Unit:");
 		lblCost.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblLong = new Label(this, SWT.NONE);
 		lblLong.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblLong.setBounds(3 * lblLength / 2 + padding, lblHeight + padding, 5 * lblLength / 9, lblHeight);
+		lblLong.setBounds(3 * lblLength / 2 + xpadding, lblHeight + ypadding, 5 * lblLength / 9, lblHeight);
 		lblLong.setText("Longitude:");
 		lblLong.setForeground(ColorPalette.CUSTOM_BLACK);
 
 		Label lblLat = new Label(this, SWT.NONE);
 		lblLat.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblLat.setBounds(3 * lblLength / 2 + padding, 2 * lblHeight + 2 * padding, 5 * lblLength / 9, lblHeight);
+		lblLat.setBounds(3 * lblLength / 2 + xpadding, 2 * lblHeight + 2 * ypadding, 5 * lblLength / 9, lblHeight);
 		lblLat.setText("Latitude:");
 		lblLat.setForeground(ColorPalette.CUSTOM_BLACK);
 
@@ -90,29 +91,29 @@ public class SolarSubComposite extends Composite {
 
 		powerLossCoefficientText = new Text(this, SWT.BORDER);
 		powerLossCoefficientText.setBackground(ColorPalette.CUSTOM_WHITE);
-		powerLossCoefficientText.setBounds(lblLength, (lblHeight + padding), lblLength / 2, lblHeight);
+		powerLossCoefficientText.setBounds(lblLength, (lblHeight + ypadding), lblLength / 2, lblHeight);
 
 		solarPowerEfficienyText = new Text(this, SWT.BORDER);
 		solarPowerEfficienyText.setBackground(ColorPalette.CUSTOM_WHITE);
-		solarPowerEfficienyText.setBounds(lblLength, 2 * (lblHeight + padding), lblLength / 2, lblHeight);
+		solarPowerEfficienyText.setBounds(lblLength, 2 * (lblHeight + ypadding), lblLength / 2, lblHeight);
 
 		numberText = new Text(this, SWT.BORDER);
 		numberText.setBackground(ColorPalette.CUSTOM_WHITE);
-		numberText.setBounds(lblLength, 3 * (lblHeight + padding), lblLength / 2, lblHeight);
+		numberText.setBounds(lblLength, 3 * (lblHeight + ypadding), lblLength / 2, lblHeight);
 
 		// Right 3
 		costText = new Text(this, SWT.BORDER);
 		costText.setBackground(ColorPalette.CUSTOM_WHITE);
-		costText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, 0, lblLength / 2, lblHeight);
+		costText.setBounds(5 * lblLength / 9 + lblLength / 2 + xpadding + lblLength, 0, lblLength / 2, lblHeight);
 
 		longText = new Text(this, SWT.BORDER);
 		longText.setBackground(ColorPalette.CUSTOM_WHITE);
-		longText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, (lblHeight + padding),
+		longText.setBounds(5 * lblLength / 9 + lblLength / 2 + xpadding + lblLength, (lblHeight + ypadding),
 				lblLength / 2, lblHeight);
 
 		latText = new Text(this, SWT.BORDER);
 		latText.setBackground(ColorPalette.CUSTOM_WHITE);
-		latText.setBounds(5 * lblLength / 9 + lblLength / 2 + padding + lblLength, 2 * (lblHeight + padding),
+		latText.setBounds(5 * lblLength / 9 + lblLength / 2 + xpadding + lblLength, 2 * (lblHeight + ypadding),
 				lblLength / 2, lblHeight);
 
 		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, numberText, costText,

@@ -10,8 +10,13 @@ import org.eclipse.swt.widgets.TableItem;
 
 public class OutputTableComposite extends ScrolledComposite {
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/mainView
 	private Table inputTable;
-	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit" };
+	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "Quantity", "Cost Per Unit",
+			"Power/Cost" };
 	// private
 
 	public OutputTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
@@ -32,6 +37,8 @@ public class OutputTableComposite extends ScrolledComposite {
 		inputTable.setBackground(bg);
 		inputTable.setForeground(fg);
 
+		
+		
 		for (int i = 0; i < columnHeaders.length; i++) {
 			TableColumn column = new TableColumn(inputTable, SWT.NONE);
 			column.setResizable(false);
