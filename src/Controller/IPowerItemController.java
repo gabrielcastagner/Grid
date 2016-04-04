@@ -4,12 +4,24 @@ import java.util.UUID;
 
 import org.eclipse.swt.widgets.Button;
 
-public interface IPowerItemController {
+import UserInterface.Elements.Table.OutputTableItem;
+
+public abstract class IPowerItemController implements Comparable<IPowerItemController>{
 	
-	public void analyze();
-	public UUID destroy();
-	public Button getRemoveButton();
-	public void updateViewToModelState();
+	public abstract void analyze();
+	public abstract UUID destroy();
+	public abstract void destroyOutput();
+	public abstract boolean outputted();
+	public abstract Button getRemoveButton();
+	public abstract void updateModelStateToView();
+	public abstract void updateOutputTable();
+	public abstract void buildOutput(OutputTableItem output);
+	
+	public abstract int compareTo(IPowerItemController o);
+	public abstract int comparePerDollar(IPowerItemController o);
+	
+	public abstract double returnPower();
+	public abstract double returnPowerPerDollar();
 }
 
 

@@ -1,6 +1,8 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +23,7 @@ import UserInterface.PrimaryComposite;
 import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
+import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.SolarTableItem;
 import UserInterface.Elements.Table.WindTableItem;
 
@@ -33,7 +36,7 @@ public class Controller {
 	private Shell parentShell;
 	private Display display;
 	private PrimaryComposite primaryComposite;
-	private Table solarTable, windTable;
+	private Table solarTable, windTable, outputTable;
 	private Console console;
 	
 	//Regex's used for error handling 
@@ -43,6 +46,8 @@ public class Controller {
 	//Data Holders
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
+	private List<IPowerItemController> combined;
+
 	
 	
 	/**
@@ -60,6 +65,7 @@ public class Controller {
 			primaryComposite = view.getPrimaryComposite();
 			solarTable = primaryComposite.getSolarTable().getTable();
 			windTable = primaryComposite.getWindTable().getTable();
+			outputTable = primaryComposite.getOutputTable().getTable();
 			console = primaryComposite.getConsoleScrolledComposite();
 			
 		} catch (SecurityException | IllegalArgumentException e) {
@@ -97,7 +103,7 @@ public class Controller {
 							new SolarTableItem(solarTable, SWT.NULL), 
 							model, itemID);
 					
-					c.updateViewToModelState();
+					c.updateModelStateToView();
 					//Keep reference to the controller
 					solarTableItems.put(itemID, c);
 					solarTableItems.get(itemID).getRemoveButton().addSelectionListener(new SelectionAdapter() {
@@ -105,6 +111,7 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
+							combined.remove(itemID);
 						}
 					});
 					console.addToConsole("New Solar Panel Model Added.", false);
@@ -119,7 +126,7 @@ public class Controller {
 							new WindTableItem(windTable, SWT.NULL),
 							model, itemID);
 					
-					c.updateViewToModelState();
+					c.updateModelStateToView();
 					//Keep reference to the controller
 					windTableItems.put(itemID, c);
 					
@@ -147,13 +154,29 @@ public class Controller {
 					return;
 				}
 				//Analyze Solar data
-				if(!solarTableItems.isEmpty())
-					for(UUID id: solarTableItems.keySet())
+				if(!solarTableItems.isEmpty()){
+					for(UUID id: solarTableItems.keySet()){
 						solarTableItems.get(id).analyze();
+					}
+				}
+				
 				//Analyze Wind data
-				if(!windTableItems.isEmpty())
-					for(UUID id: windTableItems.keySet())
+				if(!windTableItems.isEmpty()){
+					for(UUID id: windTableItems.keySet()){
 						windTableItems.get(id).analyze();
+					}
+				}
+				
+				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()), 1);
+				
+				//updates output table one item at a time
+				for(IPowerItemController  i: combined){
+					if(i.outputted())
+						i.destroyOutput();				//in case the item placement moves up or down
+					
+					i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
+					i.updateOutputTable();
+				}
 				
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
 			}	
@@ -195,7 +218,7 @@ public class Controller {
 		model.setPlCoeff(Double.parseDouble(sc.getPowerLossCoefficientText()));
 		model.setYield(Double.parseDouble(sc.getSolarPowerEfficienyText()));
 		model.setCostPerUnit(Double.parseDouble(sc.getCostText()));
-		model.setNumberOfPanels((int)Double.parseDouble(sc.getNumberText()));
+		model.setNumberOfPanels(Double.parseDouble(sc.getNumberText()));
 		model.setLocation(new Location(
 				Double.parseDouble(sc.getLatText()),
 				Double.parseDouble(sc.getLongText())));
@@ -261,6 +284,21 @@ public class Controller {
 			return false;
 		Matcher m = invalidInteger.matcher(s);
 		return !m.find();
+		
+	}
+	
+	/**
+	 * Takes in lists of table items, merges them, then sorts them based on selection int
+	 * @param originalS List of solar items
+	 * @param originalW List of wind items
+	 * @param select 0 for total power, 1 for total power/total cost
+	 */
+	public void sortTable(List<IPowerItemController> originalS, List<IPowerItemController> originalW, int select){
+		
+		combined = originalS;
+		combined.addAll(originalW);		
+		
+		Mergesort.sort(combined, select);
 		
 	}
 	

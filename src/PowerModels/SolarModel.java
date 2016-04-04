@@ -20,7 +20,6 @@ public class SolarModel implements IPowerGeneration{
 	private int numberOfPanels;		//# of panels
 	private Location location;		//Location of the Panel array
 	
-	
 	public SolarModel(){
 		this.numberOfPanels = 1;
 	}
@@ -69,8 +68,8 @@ public class SolarModel implements IPowerGeneration{
 		return numberOfPanels;
 	}
 
-	public void setNumberOfPanels(int numberOfPanels) {
-		this.numberOfPanels = numberOfPanels;
+	public void setNumberOfPanels(double numberOfPanels) {
+		this.numberOfPanels = (int) numberOfPanels;
 	}
 
 	public Location getLocation() {
@@ -87,6 +86,14 @@ public class SolarModel implements IPowerGeneration{
 
 	public void setCostPerUnit(double costPerUnit) {
 		this.costPerUnit = costPerUnit;
+	}
+	
+	public double getPower(){
+		return calculatePower();
+	}
+
+	public String getType() {
+		return "Solar";
 	}
 	
 	

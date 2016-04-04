@@ -18,12 +18,15 @@ public class WindModel implements IPowerGeneration{
 	private double radius;
 	private double costPerUnit;
 	private int quantity;
+	private double power;
 	private Location location;
 	
 	public WindModel(double airDensity, double windSpd, double effCoeff){
 		this.airDensity = airDensity;
 		this.windSpd = windSpd;
 		this.effCoeff = effCoeff;
+		this.power = calculatePower();
+		
 	}
 	
 	public WindModel() {
@@ -39,6 +42,10 @@ public class WindModel implements IPowerGeneration{
 
 	public double getAirDensity() {
 		return airDensity;
+	}
+	
+	public double getPower(){
+		return power;
 	}
 
 	public void setAirDensity(double airDensity) {
@@ -81,8 +88,8 @@ public class WindModel implements IPowerGeneration{
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuantity(double d) {
+		this.quantity = (int) d;
 	}
 
 	public Location getLocation() {
@@ -91,6 +98,10 @@ public class WindModel implements IPowerGeneration{
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	public String getType(){
+		return "Wind";
 	}
 	
 	
