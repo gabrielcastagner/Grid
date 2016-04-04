@@ -25,79 +25,134 @@ public class WindItemController extends IPowerItemController{
 
 	}
 	
+	/**
+	 * Gets input from user for the model
+	 */
 	private void v2mSetEfficiency(){
 		model.setEffCoeff(Double.valueOf(item.getEfficiency()));
 	}
 	
+	/**
+	 * Gets input from user for the model
+	 */
 	private void v2mSetRadius(){
 		model.setRadius(Double.parseDouble(item.getRadius()));
 	}
 	
+	/**
+	 * Gets input from user for the model
+	 */
 	private void v2mSetAirDensity(){
 		model.setAirDensity(Double.parseDouble(item.getAirDensity()));
 	}
 	
+	/**
+	 * Gets input from user for the model
+	 */
 	private void v2mSetNumberOfTurbines(){
 		model.setQuantity(Double.parseDouble(item.getNumberOfTurbines()));
 	}
 	
+	/**
+	 * Gets input from user for the model
+	 */
 	private void v2mSetCostPerUnit(){
 		model.setCostPerUnit(Double.parseDouble(item.getCostPerTurbine()));
 	}
 	
+	/**
+	 * Gets input from user for the model
+	 */
 	private void v2mSetLocation(){
 		model.setLocation(new Location(
 				Math.round(Double.parseDouble(item.getLatitude())),
 				Math.round(Double.parseDouble(item.getLongitude()))));
 	}
 	
+	//----------------------------------Model to View-------------------------------------------//	
+	/**
+	 * Updates main table with respective data
+	 */
 	private void m2vSetEfficiency(){
 		item.setEfficiency(Double.toString(model.getEffCoeff()));
 	}
 	
+	/**
+	 * Updates main table with respective data
+	 */
 	private void m2vSetAirDensity(){
 		item.setAirDensity(Double.toString(model.getAirDensity()));
 	}
 	
+	/**
+	 * Updates main table with respective data
+	 */
 	private void m2vSetRadius(){
 		item.setRadius(Double.toString(model.getRadius()));
 	}
 	
+	/**
+	 * Updates main table with respective data
+	 */
 	private void m2vSetNumberOfPanels(){
 		item.setNumberOfTurbines(Double.toString(model.getQuantity()));
 	}
 	
+	/**
+	 * Updates main table with respective data
+	 */
 	private void m2vSetCostPerUnit(){
 		item.setCostPerTurbine(Double.toString(model.getCostPerUnit()));
 	}
 	
+	/**
+	 * Updates main table with respective data
+	 */
 	private void m2vSetLocation(){
 		item.setLatitude(Double.toString(model.getLocation().getLatitude()));
 		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
 	}
 	
-	//*****************Output table stuff*****************************************//
+	//-----------------------------------Output table stuff------------------------------------//
+	/**
+	 * Updates output table with respective data
+	 */
 	private void m2vOutputType(){
 		output.setType(model.getType());
 	}
 	
+	/**
+	 * Updates output table with respective data
+	 */
 	private void m2vOutputLatLong(){
 		output.setLat(Double.toString(model.getLocation().getLatitude()));
 		output.setLong(Double.toString(model.getLocation().getLongitude()));
 	}
 	
+	/**
+	 * Updates output table with respective data
+	 */
 	private void m2vOutputPower(){
 		output.setPowerOut(Double.toString(model.calculatePower()));
 	}
 	
+	/**
+	 * Updates output table with respective data
+	 */
 	private void m2vOutputQty(){
 		output.setNumberOf(Integer.toString(model.getQuantity()));
 	}
 	
+	/**
+	 * Updates output table with respective data
+	 */
 	private void m2vOutputCostPerUnit(){
 		output.setCostPer(Double.toString(model.getCostPerUnit()));
 	}
 	
+	/**
+	 * Updates output table with respective data
+	 */
 	public void buildOutput(OutputTableItem output){
 		this.output = output;
 	}
@@ -109,7 +164,11 @@ public class WindItemController extends IPowerItemController{
 	public boolean outputted(){
 		return outputted;
 	}
-	
+
+	//-------------------------Functions controlling the model and View------------------------//
+	/**
+	 * Calls methods to record data inputted by user into model
+	 */
 	@Override
 	public void analyze() {
 		model.calculatePower();	
@@ -124,6 +183,10 @@ public class WindItemController extends IPowerItemController{
 		item.getTable().pack();
 	}
 
+	/**
+	 * Removes item from tables
+	 * @return returns hashmap key so it can be removed
+	 */
 	@Override
 	public UUID destroy() {
 		this.item.destroy();
@@ -194,6 +257,11 @@ public class WindItemController extends IPowerItemController{
 		return model.getPower()/(model.getCostPerUnit()*model.getQuantity());
 	}
 	
+	/**
+	 * Compares total power output with another item (greatest to least)
+	 * @param o item to compare against
+	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 */
 	@Override
 	public int compareTo(IPowerItemController o) {
 		if(this.returnPower() < o.returnPower())
@@ -204,6 +272,11 @@ public class WindItemController extends IPowerItemController{
 			return -1;
 	}
 
+	/**
+	 * Compares total power output over total cost with another item (greatest to least)
+	 * @param o item to compare against
+	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 */
 	@Override
 	public int comparePerDollar(IPowerItemController o) {
 		if(this.returnPowerPerDollar() < o.returnPowerPerDollar())
