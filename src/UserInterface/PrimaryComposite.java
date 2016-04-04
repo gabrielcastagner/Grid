@@ -24,8 +24,8 @@ public class PrimaryComposite extends Composite {
 
 	// Things used for relative screen sizing.
 	private int displayWidth, displayHeight;
-	private final int edgePaddingWidth = 40;
-	private final int edgePaddingHeight = 70;
+	private final int edgePaddingWidth;
+	private final int edgePaddingHeight;
 	private final int compBuffer = 20;
 
 	private Button buttonAdd;
@@ -59,6 +59,9 @@ public class PrimaryComposite extends Composite {
 		setLayout(null);
 		displayHeight = arg0.getBounds().height;
 		displayWidth = arg0.getBounds().width;
+		edgePaddingWidth = displayWidth/50;
+		edgePaddingHeight = displayHeight/20;
+		
 		setBounds(0, 0, displayWidth, displayHeight);
 		setElementsToComposite();
 	}
