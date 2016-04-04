@@ -156,7 +156,7 @@ public class Controller {
 					}
 				}
 				
-				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()));
+				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()), 1);
 				
 				//updates output table one item at a time
 				for(IPowerItemController  i: combined){
@@ -258,16 +258,17 @@ public class Controller {
 	}
 	
 	/**
-	 * Takes in lists of table items, merges them, then sorts them
+	 * Takes in lists of table items, merges them, then sorts them based on selection int
 	 * @param originalS List of solar items
 	 * @param originalW List of wind items
+	 * @param select 0 for total power, 1 for total power/total cost
 	 */
-	public void sortTable(List<IPowerItemController> originalS, List<IPowerItemController> originalW){
+	public void sortTable(List<IPowerItemController> originalS, List<IPowerItemController> originalW, int select){
 		
 		combined = originalS;
 		combined.addAll(originalW);		
 		
-		Mergesort.sort(combined, 0);
+		Mergesort.sort(combined, select);
 		
 	}
 	
