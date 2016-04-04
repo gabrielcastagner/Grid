@@ -13,28 +13,28 @@ public class SolarGraph {
 	final double topLat = 89,topLon =179,bottomLat = -90,bottomLon = -180;
 	private int V; 
 	private int E;
+	//private HashMap<> solarlist;
 	private HashMap<Location, SolarDataNode> solar;
 	private Set<Location> locations;
-	private ArrayList<Integer>[] adj;
+	private HashMap<Location ,ArrayList<Location>> adj;
 	
 	public SolarGraph(){
 		setupGraph();
 		this.V = locations.size();
 		this.E = 0;
-		for(int v = 0;v<V;v++){
-			adj[v] = new ArrayList<Integer>();
-		}
+		setEdges();
 	}
 	
 	public void setupGraph(){
 		solar = new HashMap<>();
-
+		adj = new HashMap<>();
 		//TODO remove reparse on merge leave for testing
 		DataParser.parse();
 		solar = DataParser.getSolarData();
 		locations = solar.keySet();
-		System.out.println(solar.size());
-		
+		//Set up HashMap
+		for(Location l : locations)
+			adj.put(l, new ArrayList<>());	
 	}
 	
 	public int getNode(){
@@ -43,49 +43,36 @@ public class SolarGraph {
 	public int getEdge(){
 		return E;
 	}
-	private void addEdge(int v,int w){
-		adj[v].add(w);
-		adj[w].add(v);
+	private void addEdge(Location l1,Location l2 ){
+		if(adj.get(l1).contains(l2))
+			return;
+		adj.get(l1).add(l2);
 		E++;
 	}
 
-	private boolean isEdgeTopLat(Location l){
-		 double lat = l.getLatitude();
-			if(lat == topLat) return true;
-			return false;
-		}
-	private boolean isEdgeBottomLat(Location l){
-		 double lat = l.getLatitude();
-			if(lat == bottomLat) return true;
-			return false;
-		}
-	private boolean isEdgeBottomLon(Location l){
-		 double lon = l.getLongitude();
-			if(lon == bottomLon) return true;
-			return false;
-		}
 	private void findAdjEdge(Location l){
 			//iteration of adding edges based on the position
-		Location temp;
-		int j = l.hashCode();
-		Object[] solarList = solar.keySet().toArray();
-			for(int i = 0;i<locations.size()-1;i++){
-				temp = (Location)solarList[i];
+
+			for(Location temp : locations){
 				if(l.adjacent(temp)){
-					addEdge(solar.get(j).hashCode(),solar.get(i).hashCode());
+					//System.out.println(l.toString() + "     " + temp.toString() );
+					addEdge(l, temp);
 				}
 			}
 	}
+	/**
+	 * Set all adjacent edges for every node in the Graph
+	 */
 	public void setEdges(){
-		Object[] solarList = solar.keySet().toArray();
-		for(int i = 0;i<solar.size();i++){
-			findAdjEdge((Location)solarList[i]);
+		for(Location location: locations){
+			findAdjEdge(location);
 		}
 	}
 
 	public static void main(String args[]){
-		System.out.println(1);
+		System.out.println("Start");
 		SolarGraph sg = new SolarGraph();
+		System.out.println("Stop");
 		
 	}
 }

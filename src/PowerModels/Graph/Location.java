@@ -38,6 +38,12 @@ public class Location {
 		return longitude;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "Lat: " + this.latitude + " Long: " + this.longitude;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		//True iff the lat and long values are identical
@@ -57,8 +63,7 @@ public class Location {
 		//True iff the node has a long or lat value +1 or -1 from desired node
 		if(obj instanceof Location){
 			Location o = (Location) obj;
-			if(o.getLatitude() == this.getLatitude() +1 || o.getLongitude() == this.getLongitude()+1 ||
-					o.getLatitude() == this.getLatitude() -1 || o.getLongitude() == this.getLongitude()-1){
+			if(Math.abs(o.getLatitude() - this.getLatitude()) <= 1 && Math.abs(o.getLongitude() - this.getLongitude()) <= 1 ){
 				return true;
 			}
 		}
