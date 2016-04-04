@@ -29,7 +29,6 @@ public class PrimaryComposite extends Composite {
 	private final int compBuffer = 20;
 
 	private Button buttonAdd;
-	private Button buttonRemove;
 	private Button buttonAnalyze;
 	private Console consoleScrolledComposite;
 	private Chart dataDisplay;
@@ -51,6 +50,14 @@ public class PrimaryComposite extends Composite {
 
 	final StackLayout layout = new StackLayout();
 
+	/**
+	 * Primary Composite Constructor for the gui.
+	 * 
+	 * @param arg0
+	 *            parent Composite
+	 * @param arg1
+	 *            style.
+	 */
 	public PrimaryComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
 		// setBackground(ColorPalette.CUSTOM_BLACK);
@@ -59,13 +66,16 @@ public class PrimaryComposite extends Composite {
 		setLayout(null);
 		displayHeight = arg0.getBounds().height;
 		displayWidth = arg0.getBounds().width;
-		edgePaddingWidth = displayWidth/50;
-		edgePaddingHeight = displayHeight/20;
-		
+		edgePaddingWidth = displayWidth / 50;
+		edgePaddingHeight = displayHeight / 20;
+
 		setBounds(0, 0, displayWidth, displayHeight);
 		setElementsToComposite();
 	}
 
+	/**
+	 * Adds the elements to this component of the view.
+	 */
 	private void setElementsToComposite() {
 		// Console For interacting with user.
 		consoleScrolledComposite = new Console(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL,
@@ -81,19 +91,19 @@ public class PrimaryComposite extends Composite {
 		dataDisplay = DataGraph.createChart(tabOutputs, ColorPalette.CUSTOM_WHITE);
 		dataDisplay.setBackground(ColorPalette.CUSTOM_WHITE);
 		dataDisplay.setBounds(tabOutputs.getBounds());
-		
+
 		outputData = new OutputTableComposite(tabOutputs, SWT.BORDER | SWT.V_SCROLL, ColorPalette.CUSTOM_WHITE,
 				ColorPalette.CUSTOM_BLACK);
 		outputData.setBounds(tabOutputs.getBounds());
-		
+
 		TabItem tableOutTab = new TabItem(tabOutputs, SWT.NONE);
 		tableOutTab.setText("Output Table");
 		tableOutTab.setControl(outputData);
-		
+
 		TabItem graphicalTab = new TabItem(tabOutputs, SWT.NONE);
 		graphicalTab.setText("Graph");
 		graphicalTab.setControl(dataDisplay);
-		
+
 		tabTables = new TabFolder(this, SWT.NONE);
 		tabTables.setBounds(edgePaddingWidth, edgePaddingHeight, displayWidth / 2 - 2 * edgePaddingWidth,
 				(int) (displayHeight * 0.44));
@@ -113,11 +123,10 @@ public class PrimaryComposite extends Composite {
 		TabItem windInputTab = new TabItem(tabTables, SWT.NONE);
 		windInputTab.setText("Wind");
 		windInputTab.setControl(windInputData);
-		
-		
+
 		currentSubComposite.setLayout(layout);
 		currentSubComposite.setBounds(edgePaddingWidth, displayHeight / 2 + edgePaddingHeight + compBuffer,
-				2*displayWidth /7 , displayHeight / 5);
+				2 * displayWidth / 7, displayHeight / 5);
 		setUpSubComps();
 
 		Label lblPType = new Label(this, SWT.NONE);
@@ -138,7 +147,6 @@ public class PrimaryComposite extends Composite {
 				displayWidth / 10, displayHeight / 30);
 		buttonAnalyze.setText("Analyze");
 
-
 		comboPowerOptions = new Combo(this, SWT.READ_ONLY);
 		comboPowerOptions.setItems(powerOption);
 		comboPowerOptions.setBounds(edgePaddingWidth + 163, (int) (0.53 * displayHeight), 94, 30);
@@ -150,66 +158,93 @@ public class PrimaryComposite extends Composite {
 	}
 
 	// =====================Behavioral Code====================== //
+	/**
+	 * Resets the composite, setting the combo box to the first element in it.
+	 */
 	public void refreshView() {
 		for (Combo c : comboBoxes)
 			c.select(0);
 		consoleScrolledComposite.clearConsole();
 	}
-	
-	
+
 	// =====================Setting up the subComposites========= //
-	public void setUpSubComps(){
-		subComposites =  new Composite[] { new SolarSubComposite(currentSubComposite, SWT.None),
+	/**
+	 * Creates the sub composites.
+	 */
+	public void setUpSubComps() {
+		subComposites = new Composite[] { new SolarSubComposite(currentSubComposite, SWT.None),
 				new WindSubComposite(currentSubComposite, SWT.None) };
-		
+
 	}
-	
+
 	// =====================Getters and Setter and Mcgeers======================
+	/**
+	 * Changes the sub composite.
+	 */
 	public void setSubComposite() {
 		layout.topControl = subComposites[comboPowerOptions.getSelectionIndex()];
 		currentSubComposite.layout();
 	}
 
-	public Button getButtonRemove() {
-		return buttonRemove;
-	}
-
-	public void setButtonRemove(Button buttonRemove) {
-		this.buttonRemove = buttonRemove;
-	}
-
+	/**
+	 * @return Gets the button to add
+	 */
 	public Button getButtonAdd() {
 		return buttonAdd;
 	}
 
+	/**
+	 * @return Gets the button to analyze
+	 */
 	public Button getButtonAnalyze() {
 		return buttonAnalyze;
 	}
 
+	/**
+	 * @return Gets the combo box.
+	 */
 	public Combo getComboPowerOptions() {
 		return comboPowerOptions;
 	}
 
+	/**
+	 * @return Gets the table for solar inputs.
+	 */
 	public SolarTableComposite getSolarTable() {
 		return this.inputData;
 	}
 
+	/**
+	 * @return Gets the table for outputs.
+	 */
 	public OutputTableComposite getOutputTable() {
 		return this.outputData;
 	}
 
-	public WindTableComposite getWindTable(){
+	/**
+	 * @return Gets the table for wind outputs
+	 */
+	public WindTableComposite getWindTable() {
 		return this.windInputData;
 	}
-	
+
+	/**
+	 * @return the console used for interacting with user.
+	 */
 	public Console getConsoleScrolledComposite() {
 		return consoleScrolledComposite;
 	}
 
+	/**
+	 * @return Gets the wind sub composite
+	 */
 	public WindSubComposite getWindSubComposite() {
 		return (WindSubComposite) subComposites[1];
 	}
 
+	/**
+	 * @return Gets the Solar sub composite
+	 */
 	public SolarSubComposite getSolarSubComposite() {
 		return (SolarSubComposite) subComposites[0];
 	}

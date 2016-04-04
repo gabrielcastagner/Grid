@@ -21,6 +21,13 @@ public class WindSubComposite extends Composite {
 	private int xbound, ybound, xpadding, ypadding;
 	private int lblLength, lblHeight;
 
+	/**
+	 * 
+	 * @param arg0
+	 *            higher level composite which this composite belongs to.
+	 * @param arg1
+	 *            style for the composite.
+	 */
 	public WindSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
 
@@ -29,9 +36,8 @@ public class WindSubComposite extends Composite {
 		lblHeight = ybound / 7;
 		lblLength = 3 * xbound / 8;
 		xpadding = xbound / 100;
-		ypadding = ybound/20;
-		
-		
+		ypadding = ybound / 20;
+
 		setElementsToComposite();
 		setBackground(null);
 		setBackgroundMode(SWT.INHERIT_FORCE);
@@ -39,6 +45,9 @@ public class WindSubComposite extends Composite {
 		setLayout(null);
 	}
 
+	/**
+	 * Sets the elements for the composite.
+	 */
 	private void setElementsToComposite() {
 
 		Label lblRadius = new Label(this, SWT.NONE);
@@ -119,38 +128,68 @@ public class WindSubComposite extends Composite {
 
 	}
 
+	/**
+	 * Refreshes/ clears the text boxes in this composite.
+	 */
 	public void refreshView() {
 		for (Text c : textBoxes)
 			c.setText("");
 	}
 
 	// =================== Getters =========================================//
+
+	/**
+	 * 
+	 * @return Returns Text of the Blade radius input.
+	 */
 	public String getBladeRadiusText() {
 		return bladeRadiusText.getText();
 	}
 
+	/**
+	 * 
+	 * @return Returns the text in the airDensity text box.
+	 */
 	public String getAirDensityText() {
 		return airDensityText.getText();
 	}
 
+	/**
+	 * 
+	 * @return Gets the efficiency of the wind mills from it's text box.
+	 */
 	public String getEfficiencyText() {
 		return efficiencyText.getText();
 	}
 
+	/**
+	 * 
+	 * @return Gets the number of power generators built.
+	 */
 	public String getNumberText() {
 		return numberText.getText();
 	}
 
+	/**
+	 * @return Gets the cost for the power generator.
+	 */
 	public String getCostText() {
 		return costText.getText();
 
 	}
 
+	/**
+	 * 
+	 * @return Gets longitude from text box.
+	 */
 	public String getLongText() {
 		return longText.getText();
 
 	}
 
+	/**
+	 * @return Gets the latitude from its text box.
+	 */
 	public String getLatText() {
 		return latText.getText();
 
