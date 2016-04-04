@@ -14,6 +14,8 @@ public class SolarItemController extends IPowerItemController implements Compara
 	private final UUID uuid;
 	private OutputTableItem output;
 	
+	private boolean outputted = false;
+	
 	public SolarItemController(SolarTableItem item, SolarModel model, UUID uuid){
 		this.item = item;
 		this.model = model;
@@ -99,11 +101,20 @@ public class SolarItemController extends IPowerItemController implements Compara
 		output.setCostPer(Double.toString(model.getCostPerUnit()));
 	}
 	
+	public boolean outputted(){
+		return outputted;
+	}
+	
 	//Functions controlling the model and View
 	@Override
 	public UUID destroy(){
 		this.item.destroy();
+		this.output.destroy();
 		return this.uuid;
+	}
+	
+	public void destroyOutput(){
+		this.output.destroy();
 	}
 	
 	//Pass the button to the main controller
@@ -137,11 +148,11 @@ public class SolarItemController extends IPowerItemController implements Compara
 		m2vSetLocation();
 		
 		item.getTable().layout();
-
 	}
 	
 	@Override
 	public void updateOutputTable(){
+		
 		m2vOutputType();
 		m2vOutputLatLong();
 		m2vOutputPower();
@@ -149,6 +160,8 @@ public class SolarItemController extends IPowerItemController implements Compara
 		m2vOutputCostPerUnit();
 		
 		output.getTable().layout();
+		
+		outputted = true;
 	}
 	
 	@Override

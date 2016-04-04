@@ -48,6 +48,12 @@ public class OutputTableItem{
 		item.setText(5, s);
 	}
 	
+	//Behaviour
+	public void destroy(){
+		item.dispose();
+		outputTable.pack();
+	}
+	
 	//"Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit"
 	//GETTERS
 	public String getType(){

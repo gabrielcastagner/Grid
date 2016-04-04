@@ -10,6 +10,7 @@ public abstract class IPowerItemController implements Comparable<IPowerItemContr
 	
 	public abstract void analyze();
 	public abstract UUID destroy();
+	public abstract boolean outputted();
 	public abstract Button getRemoveButton();
 	public abstract void updateModelStateToView();
 	public abstract void updateOutputTable();

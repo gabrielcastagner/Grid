@@ -16,6 +16,8 @@ public class WindItemController extends IPowerItemController{
 	private final UUID uuid;
 	private OutputTableItem output;
 	
+	private boolean outputted = false;
+	
 	public WindItemController(WindTableItem item, WindModel model, UUID uuid){
 		this.item = item;
 		this.model = model;
@@ -100,6 +102,10 @@ public class WindItemController extends IPowerItemController{
 		this.output = output;
 	}
 	
+	public boolean outputted(){
+		return outputted;
+	}
+	
 	@Override
 	public void analyze() {
 		model.calculatePower();	
@@ -117,6 +123,7 @@ public class WindItemController extends IPowerItemController{
 	@Override
 	public UUID destroy() {
 		this.item.destroy();
+		this.output.destroy();
 		return this.uuid;
 	}
 
@@ -146,6 +153,9 @@ public class WindItemController extends IPowerItemController{
 		m2vOutputCostPerUnit();
 		
 		output.getTable().layout();
+		
+		outputted = true;
+		
 	}
 
 	@Override

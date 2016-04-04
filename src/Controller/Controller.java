@@ -99,6 +99,7 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
+							combined.remove(itemID);
 						}
 					});
 					console.addToConsole("New Solar Panel Model Added.", false);
@@ -158,7 +159,9 @@ public class Controller {
 				sortTable(new ArrayList(solarTableItems.values()), new ArrayList(windTableItems.values()));
 				
 				for(IPowerItemController  i: combined){
-					i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
+					if(!i.outputted()){
+						i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
+					}
 					i.updateOutputTable();
 				}
 				
