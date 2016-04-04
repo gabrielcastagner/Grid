@@ -184,7 +184,8 @@ public class SolarItemController extends AbstractPowerItemController implements 
 	@Override
 	public UUID destroy(){
 		this.item.destroy();
-		this.output.destroy();
+		if(outputted)
+			this.output.destroy();
 		return this.uuid;
 	}
 	

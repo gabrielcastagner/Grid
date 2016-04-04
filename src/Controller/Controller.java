@@ -46,7 +46,7 @@ public class Controller {
 	//Data Holders
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
-	private List<AbstractPowerItemController> combined;
+	private List<AbstractPowerItemController> combined = new ArrayList<AbstractPowerItemController>();
 
 	
 	
@@ -111,7 +111,8 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
-							combined.remove(itemID);
+							if(combined.contains(itemID))
+								combined.remove(itemID);
 						}
 					});
 					console.addToConsole("New Solar Panel Model Added.", false);
@@ -135,6 +136,8 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							windTableItems.remove(itemID);
+							if(combined.contains(itemID))
+								combined.remove(itemID);
 						};
 					});
 					
