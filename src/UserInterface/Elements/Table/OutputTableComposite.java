@@ -13,15 +13,15 @@ public class OutputTableComposite extends ScrolledComposite {
 	private final String TRASH_ICON_PATH = "/trash.png";
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit",  "Power/Cost" };
+	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit",
+			"Power/Cost" };
 	// private
 
 	public OutputTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
 
 		super(arg0, arg1);
 		int columnwidth = ((arg0.getBounds().width) / (columnHeaders.length));
-		
-		
+
 		setExpandHorizontal(true);
 		setExpandVertical(true);
 		setBackground(bg);
@@ -35,6 +35,8 @@ public class OutputTableComposite extends ScrolledComposite {
 		inputTable.setBackground(bg);
 		inputTable.setForeground(fg);
 
+		
+		
 		for (int i = 0; i < columnHeaders.length; i++) {
 			TableColumn column = new TableColumn(inputTable, SWT.NONE);
 			column.setResizable(false);
