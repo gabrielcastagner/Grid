@@ -48,11 +48,21 @@ public class ApplicationView {
 	 * @wbp.parser.entryPoint
 	 */
 	public void open() {
+		
+		InputStream iconInputStream = SolarTableComposite.class.getResourceAsStream(FilePaths.GRID_ICON_PATH);
+
+
+		
 		display = Display.getDefault();
 		ColorPalette.setDisplay(display);
 		createMainContents();
 		parentShell.open();
 		parentShell.layout();
+		
+		Image gridIcon = new Image(parentShell.getDisplay(), iconInputStream);
+		
+		parentShell.setImage(gridIcon);
+		
 	}
 
 	/**
