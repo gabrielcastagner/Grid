@@ -3,6 +3,7 @@ package Controller;
 import java.util.UUID;
 import org.eclipse.swt.widgets.Button;
 import PowerModels.SolarModel;
+import PowerModels.Graph.Location;
 import UserInterface.Elements.Table.SolarTableItem;
 
 public class SolarItemController implements IPowerItemController{
@@ -18,6 +19,7 @@ public class SolarItemController implements IPowerItemController{
 
 	}
 	
+	//View to Model link
 	private void v2mSetEfficiency(){
 		model.setYield(Double.valueOf(item.getEfficiency()));
 	}
@@ -30,6 +32,21 @@ public class SolarItemController implements IPowerItemController{
 		model.setArea(Double.parseDouble(item.getArea()));
 	}
 	
+	private void v2mSetNumberOfPanels(){
+		model.setNumberOfPanels(Integer.parseInt(item.getNumberOfPanels()));
+	}
+	
+	private void v2mSetCostPerUnit(){
+		model.setCostPerUnit(Double.parseDouble(item.getCostPerUnit()));
+	}
+	
+	private void v2mSetLocation(){
+		model.setLocation(new Location(
+				Math.round(Double.parseDouble(item.getLatitude())),
+				Math.round(Double.parseDouble(item.getLongitude()))));
+	}
+	
+	//Model to View link
 	private void m2vSetEfficiency(){
 		item.setEfficiency(Double.toString(model.getYield()));
 	}
@@ -42,6 +59,21 @@ public class SolarItemController implements IPowerItemController{
 		item.setArea(Double.toString(model.getArea()));
 	}
 
+	private void m2vSetNumberOfPanels(){
+		item.setNumberOfPanels(Double.toString(model.getNumberOfPanels()));
+	}
+	
+	private void m2vSetCostPerUnit(){
+		item.setCostPerUnit(Double.toString(model.getCostPerUnit()));
+	}
+	
+	private void m2vSetLocation(){
+		item.setLatitude(Double.toString(model.getLocation().getLatitude()));
+		item.setLongitude(Double.toString(model.getLocation().getLongitude()));
+	}
+	
+	
+	//Functions controlling the model and View
 	@Override
 	public UUID destroy(){
 		this.item.destroy();
@@ -59,9 +91,11 @@ public class SolarItemController implements IPowerItemController{
 		v2mSetArea();
 		v2mSetEfficiency();
 		v2mSetPowerLossCoeff();
+		v2mSetNumberOfPanels();
+		v2mSetCostPerUnit();
+		v2mSetLocation();
 		
 		model.calculatePower();	
-		
 		item.getTable().layout();
 		//item.getTable().pack();
 	}
@@ -71,6 +105,9 @@ public class SolarItemController implements IPowerItemController{
 		m2vSetArea();
 		m2vSetEfficiency();
 		m2vSetPowerLossCoeff();
+		m2vSetNumberOfPanels();
+		m2vSetCostPerUnit();
+		m2vSetLocation();
 		
 		item.getTable().layout();
 		

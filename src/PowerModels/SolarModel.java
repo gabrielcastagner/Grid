@@ -1,5 +1,7 @@
 package PowerModels;
 
+import PowerModels.Graph.Location;
+
 /**
  * 
  * @author Gabriel Castagner
@@ -14,17 +16,13 @@ public class SolarModel implements IPowerGeneration{
 	private double avgExposure;		//Average Solar Exposure in w/m^2
 	private double plCoeff;			//PowerLoss Coefficient
 	private double area;			//Single panel area
-	private int numberOfPanels;		//Single panel area
+	private double costPerUnit;		//Cost of a Panel
+	private int numberOfPanels;		//# of panels
+	private Location location;		//Location of the Panel array
 	
 	
 	public SolarModel(){
 		this.numberOfPanels = 1;
-	}
-	
-	public SolarModel(double yield, double avgExposure, double plCoeff){
-		this.yield = yield;
-		this.avgExposure = avgExposure;
-		this.plCoeff = plCoeff;
 	}
 	
 	public double calculatePower() {
@@ -73,6 +71,22 @@ public class SolarModel implements IPowerGeneration{
 
 	public void setNumberOfPanels(int numberOfPanels) {
 		this.numberOfPanels = numberOfPanels;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public double getCostPerUnit() {
+		return costPerUnit;
+	}
+
+	public void setCostPerUnit(double costPerUnit) {
+		this.costPerUnit = costPerUnit;
 	}
 	
 	
