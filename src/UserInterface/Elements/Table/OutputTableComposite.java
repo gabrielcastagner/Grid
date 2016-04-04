@@ -13,7 +13,7 @@ public class OutputTableComposite extends ScrolledComposite {
 	private final String TRASH_ICON_PATH = "/trash.png";
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit" };
+	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit",  "Power/Cost" };
 	// private
 
 	public OutputTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
