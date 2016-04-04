@@ -1,5 +1,7 @@
 package PowerModels;
 
+import PowerModels.Graph.Location;
+
 /**
  * 
  * @author Gabriel Castagner
@@ -10,17 +12,19 @@ package PowerModels;
  */
 public class SolarModel implements IPowerGeneration{
 
-	private double yield;
-	private double avgExposure;
-	private double plCoeff;
+	private double yield;			//% yield for power conversion
+	private double avgExposure;		//Average Solar Exposure in w/m^2
+	private double plCoeff;			//PowerLoss Coefficient
+	private double area;			//Single panel area
+	private double costPerUnit;		//Cost of a Panel
+	private int numberOfPanels;		//# of panels
+	private Location location;		//Location of the Panel array
 	
-	public SolarModel(double yield, double avgExposure, double plCoeff){
-		this.yield = yield;
-		this.avgExposure = avgExposure;
-		this.plCoeff = plCoeff;
+	public SolarModel(){
+		this.numberOfPanels = 1;
 	}
 	
-	public double calculatePower(double area) {
+	public double calculatePower() {
 		return area * yield * avgExposure * plCoeff;
 	}
 
@@ -52,4 +56,45 @@ public class SolarModel implements IPowerGeneration{
 		this.plCoeff = plCoeff;
 	}
 
+	public double getArea() {
+		return area;
+	}
+
+	public void setArea(double area) {
+		this.area = area;
+	}
+
+	public int getNumberOfPanels() {
+		return numberOfPanels;
+	}
+
+	public void setNumberOfPanels(double numberOfPanels) {
+		this.numberOfPanels = (int) numberOfPanels;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public double getCostPerUnit() {
+		return costPerUnit;
+	}
+
+	public void setCostPerUnit(double costPerUnit) {
+		this.costPerUnit = costPerUnit;
+	}
+	
+	public double getPower(){
+		return calculatePower();
+	}
+
+	public String getType() {
+		return "Solar";
+	}
+	
+	
 }

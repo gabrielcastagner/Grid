@@ -1,9 +1,11 @@
 package UserInterface;
 
+import java.io.InputStream;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -13,22 +15,27 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import Constants.FilePaths;
+import UserInterface.Elements.ColorPalette;
+import UserInterface.Elements.Table.SolarTableComposite;
+
+/**
+ * View instance for program
+ * Top level UI
+ */
 public class ApplicationView {
 	// ================View Variables needed by Controller=================//
 	// Main Display
 	private Shell parentShell;
 	private Display display;
+	private int shellWidth, shellHeight;
+	private Image backgroundMountains;
 
 	// Composites
 	private final static StackLayout layout = new StackLayout();
-	private static Composite primaryComposite;
+	private static PrimaryComposite primaryComposite;
 
 	// Menu Bar
-	private MenuItem menuFileItemNew;
-	private MenuItem menuFileItemOpen;
-	private MenuItem menuFileItemSave;
-	private MenuItem menuFileItemSaveAs;
-
 	private MenuItem menuHelpItemProgramHelp;
 	private MenuItem menuHelpItemGeneralHelp;
 
@@ -41,22 +48,45 @@ public class ApplicationView {
 	 * @wbp.parser.entryPoint
 	 */
 	public void open() {
+		
+		InputStream iconInputStream = SolarTableComposite.class.getResourceAsStream(FilePaths.GRID_ICON_PATH);
+
+
+		
 		display = Display.getDefault();
 		ColorPalette.setDisplay(display);
 		createMainContents();
 		parentShell.open();
 		parentShell.layout();
+		
+		Image gridIcon = new Image(parentShell.getDisplay(), iconInputStream);
+		
+		parentShell.setImage(gridIcon);
+		
 	}
 
 	/**
 	 * Create contents of the window.
 	 */
 	protected void createMainContents() {
-		parentShell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN);
+		parentShell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.MAX);
 		parentShell.setToolTipText("");
-		parentShell.setSize(1080, 720);
+		//parentShell.setSize(1080, 720);
+		
+		InputStream backgroundInputSteam = SolarTableComposite.class.getResourceAsStream(FilePaths.BACKGROUND_PATH);
+		
+		Image bgIcon = new Image(getDisplay(), backgroundInputSteam);
+		ImageData bgIconData = bgIcon.getImageData();
+		bgIconData = bgIconData.scaledTo(this.getDisplay().getBounds().width, this.getDisplay().getBounds().height);
+		
+		backgroundMountains = new Image(display, bgIconData);
+		
+		shellWidth = display.getClientArea().width;
+		shellHeight = display.getClientArea().height;
+		parentShell.setLocation(0,0);
+		parentShell.setSize(shellWidth, shellHeight);
+		parentShell.setMaximized(true);
 		parentShell.setText("-Grid-");
-		parentShell.setBackground(ColorPalette.CUSTOM_BLACK);
 		parentShell.setLayout(null);
 		Menu menu = new Menu(parentShell, SWT.BAR);
 		parentShell.setMenuBar(menu);
@@ -64,29 +94,11 @@ public class ApplicationView {
 		final Composite parent = new Composite(parentShell, SWT.NONE);
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		parent.setLayout(layout);
+		parent.setBackgroundImage(backgroundMountains);
 
 		primaryComposite = new PrimaryComposite(parentShell, SWT.NONE);
-
-		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
-		mntmFile.setText("File");
-
-		Menu menu_file = new Menu(mntmFile);
-		mntmFile.setMenu(menu_file);
-
-		menuFileItemNew = new MenuItem(menu_file, SWT.NONE);
-		menuFileItemNew.setText("New");
-
-		menuFileItemOpen = new MenuItem(menu_file, SWT.NONE);
-		menuFileItemOpen.setText("Open File...");
-
-		MenuItem menuFileLineSpeorator1 = new MenuItem(menu_file, SWT.SEPARATOR);
-		menuFileLineSpeorator1.setText("menu.file.separator");
-
-		menuFileItemSave = new MenuItem(menu_file, SWT.NONE);
-		menuFileItemSave.setText("Save");
-
-		menuFileItemSaveAs = new MenuItem(menu_file, SWT.NONE);
-		menuFileItemSaveAs.setText("Save As...");
+		primaryComposite.setBackgroundImage(backgroundMountains);
+		primaryComposite.setBackgroundMode(SWT.INHERIT_FORCE);
 
 		MenuItem mntmHelp = new MenuItem(menu, SWT.CASCADE);
 		mntmHelp.setText("Help");
@@ -134,47 +146,60 @@ public class ApplicationView {
 	// ========================GETTERS===========================//
 
 	// =====Getters for objects required outside the scope of this class===== //
+	/**
+	 * @return the Display window
+	 */
 	public Display getDisplay() {
 		return display;
 	}
 
+	/**
+	 * @return the views parent shell
+	 */
 	public Shell getParentShell() {
 		return parentShell;
 	}
 
-	public MenuItem getMenuFileItemNew() {
-		return menuFileItemNew;
-	}
-
-	public MenuItem getMenuFileItemOpen() {
-		return menuFileItemOpen;
-	}
-
-	public MenuItem getMenuFileItemSave() {
-		return menuFileItemSave;
-	}
-
-	public MenuItem getMenuFileItemSaveAs() {
-		return menuFileItemSaveAs;
-	}
-
+	/**
+	 * @return Program help option in the menu bar under help
+	 */
 	public MenuItem getMenuHelpItemProgramHelp() {
 		return menuHelpItemProgramHelp;
 	}
 
+	/**
+	 * @return General help option in the menu bar under help
+	 */
 	public MenuItem getMenuHelpItemGeneralHelp() {
 		return menuHelpItemGeneralHelp;
 	}
 
+	/**
+	 * @return Primary composite for parent shell
+	 */
+	public PrimaryComposite getPrimaryComposite(){
+		return primaryComposite;
+	}
+	
+	/**
+	 * @return Modular composite selector
+	 */
 	public enum SelectComposite {
 		PRIMARY_COMPOSITE(primaryComposite);
 
 		private Composite c;
 
+		/**
+		 * Composite instance to select
+		 * @param composite instance of Composite
+		 */
 		private SelectComposite(Composite composite) {
 			c = composite;
 		}
 
+		/**
+		 * Select top level composite
+		 */
 		public void setCurrent() {
 			layout.topControl = c;
 		}

@@ -1,5 +1,8 @@
 package PowerModels.Graph;
 
+/**
+ * Location ADT comprised of a latitude and longitude point
+ */
 public class Location {
 	private final double latitude, longitude;
 

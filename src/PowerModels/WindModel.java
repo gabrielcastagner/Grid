@@ -1,5 +1,7 @@
 package PowerModels;
 
+import PowerModels.Graph.Location;
+
 /**
  * 
  * @author Gabriel Castagner
@@ -13,14 +15,24 @@ public class WindModel implements IPowerGeneration{
 	private double airDensity;
 	private double windSpd;
 	private double effCoeff;
+	private double radius;
+	private double costPerUnit;
+	private int quantity;
+	private double power;
+	private Location location;
 	
 	public WindModel(double airDensity, double windSpd, double effCoeff){
 		this.airDensity = airDensity;
 		this.windSpd = windSpd;
 		this.effCoeff = effCoeff;
+		this.power = calculatePower();
+		
 	}
 	
-	public double calculatePower(double radius){
+	public WindModel() {
+	}
+
+	public double calculatePower(){
 		return .5*airDensity*(radius * radius * Math.PI)*(Math.pow(windSpd, 3))*effCoeff;
 	}
 
@@ -30,6 +42,10 @@ public class WindModel implements IPowerGeneration{
 
 	public double getAirDensity() {
 		return airDensity;
+	}
+	
+	public double getPower(){
+		return power;
 	}
 
 	public void setAirDensity(double airDensity) {
@@ -51,6 +67,43 @@ public class WindModel implements IPowerGeneration{
 	public void setEffCoeff(double effCoeff) {
 		this.effCoeff = effCoeff;
 	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public double getCostPerUnit() {
+		return costPerUnit;
+	}
+
+	public void setCostPerUnit(double costPerUnit) {
+		this.costPerUnit = costPerUnit;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double d) {
+		this.quantity = (int) d;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	public String getType(){
+		return "Wind";
+	}
+	
 	
 	
 }

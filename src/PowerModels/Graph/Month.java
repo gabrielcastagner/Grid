@@ -18,11 +18,23 @@ public enum Month {
 		this.month = month;
 	}
 
+	/**
+	 * Name of the month abbreviated
+	 * @param month month name
+	 * @return Month instance with name month
+	 */
 	public Month getMonth(String month) {
 		//Return corresponding month based on initial characters
 		for (Month m : values())
 			if (m.month.equalsIgnoreCase(month) || m.month.equalsIgnoreCase(month.substring(0, 3)))
 				return m;
 		return null;
+	}
+	
+	/**
+	 * @return Month instance abbreviation 
+	 */
+	public String getMonthName(){
+		return this.month;
 	}
 }

@@ -1,15 +1,10 @@
-package UserInterface;
-
-import java.lang.reflect.Field;
+package UserInterface.Elements;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 
 /**
  * Class to hold Colors for the program. Do not instantiate, only reference.
- * 
- * @author riley_000
- *
  */
 public class ColorPalette {
 
@@ -25,6 +20,10 @@ public class ColorPalette {
 	public final static Color CUSTOM_RED 	= new Color(display, 0xE7, 0x4C, 0x3C);
 	
 	private static Color[] palette = { CUSTOM_BLACK, CUSTOM_BLUE, CUSTOM_WHITE, CUSTOM_GREEN, CUSTOM_ORANGE,
+			CUSTOM_PURPLE, CUSTOM_RED, CUSTOM_YELLOW };
+	
+	//Specifically used for Graph points, excludes white
+	public static Color[] plotPalette = { CUSTOM_BLACK, CUSTOM_BLUE, CUSTOM_GREEN, CUSTOM_ORANGE,
 			CUSTOM_PURPLE, CUSTOM_RED, CUSTOM_YELLOW };
 
 	/**
