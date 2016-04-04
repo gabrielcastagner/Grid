@@ -1,7 +1,6 @@
 package Parser;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import java.util.regex.Pattern;
 import Constants.FilePaths;
 import PowerModels.Graph.Location;
 import PowerModels.Graph.WindDataNode;
-import UserInterface.Elements.Table.SolarTableComposite;
 
 /**
  * Static parser for Wind data NOT TO BE INSTANTIATED

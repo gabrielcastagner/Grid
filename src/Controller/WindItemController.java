@@ -9,7 +9,7 @@ import UserInterface.Elements.Table.OutputTableItem;
 import PowerModels.Graph.Location;
 import UserInterface.Elements.Table.WindTableItem;
 
-public class WindItemController extends IPowerItemController{
+public class WindItemController extends AbstractPowerItemController{
 
 	private final WindTableItem item;
 	private final WindModel model;
@@ -263,7 +263,7 @@ public class WindItemController extends IPowerItemController{
 	 * @return 1 for lesser than, 0 for equal, -1 for greater than
 	 */
 	@Override
-	public int compareTo(IPowerItemController o) {
+	public int compareTo(AbstractPowerItemController o) {
 		if(this.returnPower() < o.returnPower())
 			return 1;
 		else if(this.returnPower() == o.returnPower())
@@ -278,7 +278,7 @@ public class WindItemController extends IPowerItemController{
 	 * @return 1 for lesser than, 0 for equal, -1 for greater than
 	 */
 	@Override
-	public int comparePerDollar(IPowerItemController o) {
+	public int comparePerDollar(AbstractPowerItemController o) {
 		if(this.returnPowerPerDollar() < o.returnPowerPerDollar())
 			return 1;
 		else if(this.returnPower() == o.returnPower())
