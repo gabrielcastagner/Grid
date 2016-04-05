@@ -168,5 +168,9 @@ public class DataGraph {
 			chart.getSeriesSet().deleteSeries(s.getId());
 		}
 	}
+	
+	public static void removePlot(String ID){
+		chart.getSeriesSet().deleteSeries(ID);
+	}
 
 }

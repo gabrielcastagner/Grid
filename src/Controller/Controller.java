@@ -53,6 +53,7 @@ public class Controller {
 
 	//Data Holders
 	private static ArrayList<SolarDataNode> solarNodes;
+	private static HashMap<UUID, String> solarNames;
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
 	private List<AbstractPowerItemController> combined;
@@ -85,6 +86,7 @@ public class Controller {
 		windTableItems = new HashMap<>();
 		graph = new DataGraph();
 		combined = new ArrayList<AbstractPowerItemController>();
+		solarNames = new HashMap<>();
 
 		//Link Input actions to Elements
 		initController();
@@ -123,7 +125,9 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
+							updateGraph();
 							if (combined.contains(itemID)) {
+								graph.removePlot(solarNames.get(itemID));
 								combined.remove(itemID);
 								updateGraph();
 							}
@@ -148,7 +152,10 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							windTableItems.remove(itemID);
+							updateGraph();
 							if (combined.contains(itemID)) {
+								
+								graph.removePlot(solarNames.get(itemID));
 								combined.remove(itemID);
 								updateGraph();
 							}
@@ -197,9 +204,9 @@ public class Controller {
 
 					//Graphing stuff
 
-					updateGraph();
-
 				}
+				
+				updateGraph();
 
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
 			}
@@ -240,8 +247,9 @@ public class Controller {
 
 				i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
 				yValues[12] = i.returnPower();
-
 				graph.addSeries(yValues, i.getDisplayID());
+				
+				solarNames.put(i.getID(), i.getDisplayID());
 			}
 		}
 	}
