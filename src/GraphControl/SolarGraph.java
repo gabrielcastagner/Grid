@@ -165,7 +165,10 @@ public class SolarGraph {
 	public static void main(String args[]) {
 		System.out.println("Start");
 		SolarGraph sg = new SolarGraph();
+		System.out.println("parsed");
+		System.out.println(sg.BFS(new Location(-50, 30), 50000).toString());
 		System.out.println("Stop");
+
 	}
 
 }
