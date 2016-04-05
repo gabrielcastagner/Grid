@@ -73,11 +73,11 @@ public class SolarGraph {
 		while (!queue.isEmpty()) {
 			Location current = queue.remove(0);
 			visited.add(current);
-			for (Location temp : surroundingEdges(current)) {
+			for (Location temp : adj.get(current)) {
 				//for loop doing all the 8 surrounding edges
 				//include this in the forloop as an iteration, ask Gabe
 				if (l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude()) > d
-						&& visited.contains(temp)) {
+						|| visited.contains(temp)) {
 					//do nothing
 				} else if (l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude()) <= d
 						&& !visited.contains(temp)) {
@@ -162,11 +162,20 @@ public class SolarGraph {
 		return printlist;
 	}
 
+	
+	
+	
+	
+	public Location getALoc(){
+		
+		return adj.keySet().iterator().next();
+	}
+	
 	public static void main(String args[]) {
 		System.out.println("Start");
 		SolarGraph sg = new SolarGraph();
 		System.out.println("parsed");
-		System.out.println(sg.BFS(new Location(-50, 30), 50000).toString());
+		System.out.println(sg.BFS(sg.getALoc(), 500).toString());
 		System.out.println("Stop");
 
 	}
