@@ -9,10 +9,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 public class WindTableComposite extends ScrolledComposite {
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/heads/mainView
 
 	private Table inputTable;
 	private String[] columnHeaders = { "Longitude", "Latitude", "Blade (m) ","Air Density", "Efficiency", "Quantity",

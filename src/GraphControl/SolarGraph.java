@@ -80,19 +80,26 @@ public class SolarGraph {
 		ArrayList<Location> queue = new ArrayList<Location>();
 		ArrayList<Location> visited = new ArrayList<Location>();
 		
-		queue.add(l);
-		
+		queue.add(l);												//first iteration
+		printlist.add(l);
+		visited.add(l);
 		while(!queue.isEmpty()){
 			Location current = queue.remove(0);
 			visited.add(current);
-			
-			
-			
-			
+			//for loop doing all the 8 surrounding edges
+			Location temp = current;//include this in the forloop as an iteration, ask Gabe
+			if(l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude())> d
+					&& visited.contains(temp)){
+				//do nothing
+			}else if(l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude())<= d
+					&& !visited.contains(temp)){
+				queue.add(temp);
+				visited.add(temp);
+				printlist.add(temp);
+			}else{
+				//do nothing
+			}
 		}
-		
-		
-		
 		return printlist;
 	}
 	
