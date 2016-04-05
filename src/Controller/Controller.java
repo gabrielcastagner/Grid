@@ -194,6 +194,8 @@ public class Controller {
 				sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()),
 						new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
 				
+				setOutputTable();
+				
 				updateGraph();
 				
 				setOutputTable();
