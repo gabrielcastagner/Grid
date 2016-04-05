@@ -3,7 +3,7 @@ package PowerModels.Graph;
 /**
  * Location ADT comprised of a latitude and longitude point
  */
-public class Location {
+public class Location implements Comparable {
 	private final double latitude, longitude;
 
 	/**
@@ -100,5 +100,26 @@ public class Location {
 		double c = 2 * Math.asin(Math.sqrt(a));
 		double distance = R * c;
 		return distance;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if (o instanceof Location) {
+			Location l = (Location) o;
+			if (this.getLatitude() > l.getLatitude())
+				return 1;
+			else if (this.getLatitude() < l.getLatitude())
+				return -1;
+			else {
+				if (this.getLongitude() == l.getLongitude())
+					return 0;
+				else if (this.getLongitude() > l.getLongitude())
+					return 1;
+				else
+					return -1;
+			}
+
+		}
+		return 1;
 	}
 }
