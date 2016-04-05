@@ -13,7 +13,7 @@ public class SolarDataNode {
 	 * Creates a SolarDataNode instance
 	 * 
 	 * @param group
-	 *            Formatted String array of numbers for Wind Speed Averages
+	 *            Formatted String array of numbers for Solar exposure Averages
 	 *            "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Ann"
 	 */
 	public SolarDataNode(String[] data) {
@@ -28,12 +28,12 @@ public class SolarDataNode {
 	/**
 	 * @return a HashMap of Months to average solar intensity in w/m^2
 	 */
-	public HashMap<Month, Double> getAnnualWindSpeedAvg() {
+	public HashMap<Month, Double> getAnnualSolarIntensityAvg() {
 		return this.avgSolarIntensityData;
 	}
 
 	/**
-	 * Gets a single Average solar Intesnity from the node
+	 * Gets a single Average solar Intensity from the node
 	 * 
 	 * @param m
 	 *            -Month of desired parse
@@ -42,4 +42,7 @@ public class SolarDataNode {
 	public Double getMonthlyAverageSolarIntensity(Month m) {
 		return this.avgSolarIntensityData.get(m);
 	}
+	/**
+	 * @return the position of where the object is in the has map
+	 */
 }

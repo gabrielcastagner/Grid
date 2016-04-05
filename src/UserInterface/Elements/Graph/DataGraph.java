@@ -1,16 +1,18 @@
 package UserInterface.Elements.Graph;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.wb.swt.SWTResourceManager;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import UserInterface.Elements.ColorPalette;
-
-import org.swtchart.*;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.swtchart.Chart;
+import org.swtchart.IAxisTick;
+import org.swtchart.ILineSeries;
+import org.swtchart.ISeries;
 import org.swtchart.ISeries.SeriesType;
+import org.swtchart.LineStyle;
 
 import PowerModels.Graph.Month;
+import UserInterface.Elements.ColorPalette;
 
 /**
  * Adds a chart to a composite, plotting versus month Note it will take up the
@@ -167,6 +169,22 @@ public class DataGraph {
 		for (ISeries s : chart.getSeriesSet().getSeries()) {
 			chart.getSeriesSet().deleteSeries(s.getId());
 		}
+	}
+
+	public static void replotCurrentData() {
+		chart.getAxisSet().adjustRange();
+		chart.updateLayout();
+		chart.update();
+
+		chart.suspendUpdate(true);
+		chart.suspendUpdate(false);
+	}
+
+	public static void removePlot(String ID) {
+		chart.getSeriesSet().deleteSeries(ID);
+		System.out.println(ID);
+		chart.getPlotArea().redraw();
+		chart.getPlotArea().update();
 	}
 
 }
