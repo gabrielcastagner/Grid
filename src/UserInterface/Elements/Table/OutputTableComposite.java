@@ -13,7 +13,7 @@ public class OutputTableComposite extends ScrolledComposite {
 
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "Quantity", "Cost Per Unit",
+	private String[] columnHeaders = {"ID", "Type", "Longitude", "Latitude", "Power Output", "Quantity", "Cost Per Unit",
 			"Power/Cost" };
 
 	/**

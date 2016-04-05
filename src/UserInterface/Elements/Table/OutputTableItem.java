@@ -20,6 +20,11 @@ public class OutputTableItem {
 	}
 
 	// SETTERS
+	
+	public void setID(String s){
+		item.setText(0, s);
+	}
+	
 	/**
 	 * Set the type
 	 * 
@@ -27,7 +32,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setType(String s) {
-		item.setText(0, s);
+		item.setText(1, s);
 	}
 
 	/**
@@ -37,7 +42,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setLong(String s) {
-		item.setText(1, s);
+		item.setText(2, s);
 	}
 
 	/**
@@ -47,7 +52,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setLat(String s) {
-		item.setText(2, s);
+		item.setText(3, s);
 	}
 
 	/**
@@ -57,7 +62,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setPowerOut(String s) {
-		item.setText(3, s);
+		item.setText(4, s);
 	}
 
 	/**
@@ -67,7 +72,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setNumberOf(String s) {
-		item.setText(4, s);
+		item.setText(5, s);
 	}
 
 	/**
@@ -77,7 +82,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setCostPer(String s) {
-		item.setText(5, s);
+		item.setText(6, s);
 	}
 
 	/**
@@ -87,7 +92,7 @@ public class OutputTableItem {
 	 *            content
 	 */
 	public void setPowerPerDollar(String s) {
-		item.setText(6, s);
+		item.setText(7, s);
 	}
 
 	// Behaviour
@@ -101,53 +106,57 @@ public class OutputTableItem {
 
 	// "Type", "Longitude", "Latitude", "Power Output", "#", "Cost Per Unit"
 	// GETTERS
+	public String getID(){
+		return item.getText(0);
+	}
+	
 	/**
 	 * @return Gets Type
 	 */
 	public String getType() {
-		return item.getText(0);
-	}
-
-	/**
-	 * @return Gets Type
-	 */
-	public String getLong() {
 		return item.getText(1);
 	}
 
 	/**
 	 * @return Gets Type
 	 */
-	public String getLat() {
+	public String getLong() {
 		return item.getText(2);
 	}
 
 	/**
 	 * @return Gets Type
 	 */
-	public String getPowerOut() {
+	public String getLat() {
 		return item.getText(3);
 	}
 
 	/**
 	 * @return Gets Type
 	 */
-	public String getNumberOf() {
+	public String getPowerOut() {
 		return item.getText(4);
 	}
 
 	/**
 	 * @return Gets Type
 	 */
-	public String getCostPer() {
+	public String getNumberOf() {
 		return item.getText(5);
+	}
+
+	/**
+	 * @return Gets Type
+	 */
+	public String getCostPer() {
+		return item.getText(6);
 	}
 
 	/**
 	 * @return Gets Cost/unit
 	 */
 	public String getPowerPerDollar() {
-		return item.getText(6);
+		return item.getText(7);
 	}
 
 	/**
