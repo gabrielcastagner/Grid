@@ -86,7 +86,7 @@ public class OutputTableItem {
 	 * @param s
 	 *            content
 	 */
-	public void setCostToPOwer(String s) {
+	public void setPowerPerDollar(String s) {
 		item.setText(6, s);
 	}
 
