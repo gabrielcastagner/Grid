@@ -125,12 +125,7 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
-							updateGraph();
-							if (combined.contains(itemID)) {
-								graph.removePlot(solarNames.get(itemID));
-								combined.remove(itemID);
-								updateGraph();
-							}
+
 						}
 					});
 					console.addToConsole("New Solar Panel Model Added.", false);
@@ -153,12 +148,12 @@ public class Controller {
 							c.destroy();
 							windTableItems.remove(itemID);
 							updateGraph();
-							if (combined.contains(itemID)) {
-								
-								graph.removePlot(solarNames.get(itemID));
-								combined.remove(itemID);
-								updateGraph();
+							if (combined.contains(c)) {
+								DataGraph.removePlot(c.getDisplayID());
+								combined.remove(c);
 							}
+							updateGraph();
+							setOutputTable();
 						};
 					});
 
@@ -194,18 +189,8 @@ public class Controller {
 				sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()),
 						new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
 
-				//updates output table one item at a time
-				for (AbstractPowerItemController i : combined) {
-					if (i.outputted())
-						i.destroyOutput(); //in case the item placement moves up or down
+				setOutputTable();
 
-					i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
-					i.updateOutputTable();
-
-					//Graphing stuff
-
-				}
-				
 				updateGraph();
 
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
@@ -218,6 +203,20 @@ public class Controller {
 				primaryComposite.setSubComposite();
 			}
 		});
+	}
+
+	private void setOutputTable() {
+		//updates output table one item at a time
+		for (AbstractPowerItemController i : combined) {
+			if (i.outputted())
+				i.destroyOutput(); //in case the item placement moves up or down
+
+			i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
+			i.updateOutputTable();
+
+			//Graphing stuff
+
+		}
 	}
 
 	private void updateGraph() {
@@ -248,10 +247,11 @@ public class Controller {
 				i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
 				yValues[12] = i.returnPower();
 				graph.addSeries(yValues, i.getDisplayID());
-				
+
 				solarNames.put(i.getID(), i.getDisplayID());
 			}
 		}
+		graph.replotCurrentData();
 	}
 
 	/**
