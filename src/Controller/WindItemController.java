@@ -24,6 +24,17 @@ public class WindItemController extends AbstractPowerItemController{
 
 	}
 	
+	public String returnType(){
+		return model.getType();
+	}
+	
+	public Location getLocation(){
+		return model.getLocation();
+	}
+	
+	public void setMonthlyVar(double v){
+		model.setWindSpd(v);
+	}
 	/**
 	 * Gets input from user for the model
 	 */
