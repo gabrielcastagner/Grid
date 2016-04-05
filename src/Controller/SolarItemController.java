@@ -27,13 +27,11 @@ public class SolarItemController extends AbstractPowerItemController
 		this.displayID = "S" + AbstractPowerItemController.modelNumber++;
 	}
 
-	public String returnType() {
-	
-	public UUID getID(){
+	public UUID getID() {
 		return uuid;
 	}
-	
-	public String returnType(){
+
+	public String returnType() {
 		return model.getType();
 	}
 
