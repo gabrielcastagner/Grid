@@ -182,7 +182,6 @@ public class DataGraph {
 
 	public static void removePlot(String ID) {
 		chart.getSeriesSet().deleteSeries(ID);
-		System.out.println(ID);
 		chart.getPlotArea().redraw();
 		chart.getPlotArea().update();
 	}

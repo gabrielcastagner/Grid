@@ -125,8 +125,6 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
-							updateGraph();
-							updateGraph();
 							if (combined.contains(c)) {
 								DataGraph.removePlot(c.getDisplayID());
 								combined.remove(c);
@@ -155,7 +153,6 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							windTableItems.remove(itemID);
-							updateGraph();
 							if (combined.contains(c)) {
 								DataGraph.removePlot(c.getDisplayID());
 								combined.remove(c);
@@ -221,8 +218,6 @@ public class Controller {
 
 			i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
 			i.updateOutputTable();
-
-			//Graphing stuff
 
 		}
 	}
