@@ -146,7 +146,7 @@ public class OutputTableItem {
 	/**
 	 * @return Gets Cost/unit
 	 */
-	public String getCostUnit() {
+	public String getPowerPerDollar() {
 		return item.getText(6);
 	}
 
