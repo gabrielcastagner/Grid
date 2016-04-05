@@ -244,7 +244,6 @@ public class Controller {
 				i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
 				yValues[12] = i.returnPower();
 				
-				//yValues.put(i.getID(), item);
 				
 				graph.addSeries(yValues, "String");
 			}
