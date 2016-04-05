@@ -35,7 +35,7 @@ public class WindTableComposite extends ScrolledComposite {
 		setBackground(bg);
 		setForeground(fg);
 		inputTable = new Table(this,
-				SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL);
+				SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.NO_SCROLL);
 		inputTable.setLinesVisible(true);
 		inputTable.setHeaderVisible(true);
 		inputTable.setTouchEnabled(true);
