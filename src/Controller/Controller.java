@@ -197,6 +197,8 @@ public class Controller {
 				setOutputTable();
 
 				updateGraph();
+				
+				setOutputTable();
 
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
 			}
