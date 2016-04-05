@@ -191,8 +191,7 @@ public class Controller {
 					}
 				}
 
-				sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()),
-						new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
+				
 				
 				setOutputTable();
 				
@@ -213,6 +212,10 @@ public class Controller {
 	}
 
 	private void setOutputTable() {
+		
+		sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()),
+				new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
+		
 		//updates output table one item at a time
 		for (AbstractPowerItemController i : combined) {
 			if (i.outputted())
