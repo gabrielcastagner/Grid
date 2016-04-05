@@ -240,16 +240,8 @@ public class Controller {
 
 				i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
 				yValues[12] = i.returnPower();
-<<<<<<< HEAD
-				
-				
-				graph.addSeries(yValues, "String");
-=======
-
-				//yValues.put(i.getID(), item);
 
 				graph.addSeries(yValues, i.getDisplayID());
->>>>>>> branch 'OutputTable-Simon' of https://github.com/mcgeer/Grid.git
 			}
 		}
 	}
