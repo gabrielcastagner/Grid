@@ -9,7 +9,7 @@ import UserInterface.Elements.Table.OutputTableItem;
 
 public abstract class AbstractPowerItemController implements Comparable<AbstractPowerItemController> {
 
-	public static int modelNumber;
+	public static int modelNumber = 1000;
 
 	public abstract void analyze();
 
@@ -26,8 +26,13 @@ public abstract class AbstractPowerItemController implements Comparable<Abstract
 	public abstract void updateOutputTable();
 
 	public abstract void buildOutput(OutputTableItem output);
+
+	public abstract String getDisplayID();
+
 	public abstract String returnType();
+
 	public abstract Location getLocation();
+
 	public abstract void setMonthlyVar(double v);
 
 	public abstract int compareTo(AbstractPowerItemController o);

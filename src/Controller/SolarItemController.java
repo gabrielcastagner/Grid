@@ -16,6 +16,7 @@ public class SolarItemController extends AbstractPowerItemController
 	private final SolarModel model; //The model which it controls
 	private final UUID uuid; //Key for controller for HashMap in Controller class
 	private OutputTableItem output; //Model's representation on output table
+	private final String displayID;
 
 	private boolean outputted = false; //Whether or not an output table item has been generated
 
@@ -23,20 +24,25 @@ public class SolarItemController extends AbstractPowerItemController
 		this.item = item;
 		this.model = model;
 		this.uuid = uuid;
+		this.displayID = "S" + AbstractPowerItemController.modelNumber++;
 	}
 
-	public String returnType(){
+	public String returnType() {
 		return model.getType();
 	}
-	
-	public Location getLocation(){
+
+	public String getDisplayID() {
+		return this.displayID;
+	}
+
+	public Location getLocation() {
 		return model.getLocation();
 	}
-	
-	public void setMonthlyVar(double v){
+
+	public void setMonthlyVar(double v) {
 		model.setAvgExposure(v);
 	}
-	
+
 	/**
 	 * Returns total power calculated in model
 	 */
@@ -150,7 +156,7 @@ public class SolarItemController extends AbstractPowerItemController
 	 * Generates a new row on the output table
 	 */
 	public void buildOutput(OutputTableItem output) {
-		//output.set
+		output.setID(displayID);
 		this.output = output;
 	}
 
