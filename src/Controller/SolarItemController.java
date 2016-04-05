@@ -25,6 +25,18 @@ public class SolarItemController extends AbstractPowerItemController
 		this.uuid = uuid;
 	}
 
+	public String returnType(){
+		return model.getType();
+	}
+	
+	public Location getLocation(){
+		return model.getLocation();
+	}
+	
+	public void setMonthlyVar(double v){
+		model.setAvgExposure(v);
+	}
+	
 	/**
 	 * Returns total power calculated in model
 	 */

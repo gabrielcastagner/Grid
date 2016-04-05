@@ -14,15 +14,19 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
+import GraphControl.SolarGraph;
 import Parser.DataParser;
 import PowerModels.SolarModel;
 import PowerModels.WindModel;
 import PowerModels.Graph.Location;
+import PowerModels.Graph.Month;
+import PowerModels.Graph.SolarDataNode;
 import UserInterface.ApplicationView;
 import UserInterface.PrimaryComposite;
 import UserInterface.Elements.Console;
 import UserInterface.Elements.SolarSubComposite;
 import UserInterface.Elements.WindSubComposite;
+import UserInterface.Elements.Graph.DataGraph;
 import UserInterface.Elements.Table.OutputTableItem;
 import UserInterface.Elements.Table.SolarTableItem;
 import UserInterface.Elements.Table.WindTableItem;
@@ -39,11 +43,16 @@ public class Controller {
 	private Table solarTable, windTable, outputTable;
 	private Console console;
 	
+	private SolarGraph solarPoints;
+
+	private DataGraph graph;
+	
 	//Regex's used for error handling 
 	private static final Pattern invalidDouble = Pattern.compile("[^0-9\\.]+");
 	private static final Pattern invalidInteger = Pattern.compile("[^0-9]+");
 	
 	//Data Holders
+	private static ArrayList<SolarDataNode> solarNodes;
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
 	private List<AbstractPowerItemController> combined = new ArrayList<AbstractPowerItemController>();
@@ -74,6 +83,8 @@ public class Controller {
 		//Init data structures
 		solarTableItems = new HashMap<>();
 		windTableItems = new HashMap<>();
+		graph = new DataGraph();
+		
 		
 		//Link Input actions to Elements
 		initController();
@@ -82,6 +93,8 @@ public class Controller {
 		//TODO Generate Graph Here
 		DataParser.parse();
 		console.addToConsole("Program Loaded.", false);	
+		
+		solarPoints = new SolarGraph();
 	}
 
 	/**
@@ -173,6 +186,8 @@ public class Controller {
 				sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()), 
 						new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
 				
+				double[] yValues;
+				
 				//updates output table one item at a time
 				for(AbstractPowerItemController  i: combined){
 					if(i.outputted())
@@ -180,6 +195,33 @@ public class Controller {
 					
 					i.buildOutput(new OutputTableItem(outputTable, SWT.NULL));
 					i.updateOutputTable();
+					
+					//Graphing stuff
+					
+					if(i.returnType().equals("Solar")){
+						yValues  = new double[13];
+						int counter = 0;
+						double avg = 0;
+						solarNodes = solarPoints.getInterferenceZone(i.getLocation());
+						
+						for(Month m: Month.values()){
+							
+							for(SolarDataNode s: solarNodes){
+								avg += s.getMonthlyAverageSolarIntensity(m);
+							}
+							avg /=12;
+							
+							i.setMonthlyVar(avg);
+							
+							yValues[counter++] =  i.returnPower();
+						}
+						
+						i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
+						yValues[12] = i.returnPower();
+						
+						graph.addSeries(yValues);
+					}
+					
 				}
 				
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);

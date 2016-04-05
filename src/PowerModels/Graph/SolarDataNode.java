@@ -33,7 +33,7 @@ public class SolarDataNode {
 	}
 
 	/**
-	 * Gets a single Average solar Intesnity from the node
+	 * Gets a single Average solar Intensity from the node
 	 * 
 	 * @param m
 	 *            -Month of desired parse

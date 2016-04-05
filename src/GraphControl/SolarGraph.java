@@ -30,8 +30,7 @@ public class SolarGraph {
 	public void setupGraph() {
 		solar = new HashMap<>();
 		adj = new HashMap<>();
-		//TODO remove reparse on merge leave for testing
-		DataParser.parse();
+		
 		solar = DataParser.getSolarData();
 
 		locations = new Location[solar.keySet().size()];
@@ -56,10 +55,6 @@ public class SolarGraph {
 		}
 
 		return printlist;
-	}
-
-	public void buildGraph() {
-
 	}
 
 	public ArrayList<Location> BFS(Location l, double d) {
@@ -96,7 +91,7 @@ public class SolarGraph {
 	//	public TernarryFunction<Integer, Location> down = (ts) -> { int x = ts[0]; int y = ts[1]; return (x != 0) ? locations[y - 1] : locations[y + 359];};
 	//	public TernarryFunction<Integer, Location> right = (ts) -> { int w = ts[0]; int x = ts[1]; int y = ts[2]; return (w != 179) ? locations[y + 359] : locations[x];};
 
-	public ArrayList<Location> surroundingEdges(Location l) {
+	private ArrayList<Location> surroundingEdges(Location l) {
 		int lat = (int) l.getLatitude() + 90;
 		int lon = (int) l.getLongitude() + 180;
 		int currentPosition = (lat) * 360 + (lon);
@@ -163,7 +158,23 @@ public class SolarGraph {
 	}
 
 	
-	
+	private Location getSourceLocation(Location l) {
+		for (Location loc : solar.keySet())
+			if (loc.equals(l))
+				return loc;
+		return null;
+	}
+
+	public ArrayList<SolarDataNode> getInterferenceZone(Location l) {
+		l = getSourceLocation(l);
+		ArrayList<SolarDataNode> retval = new ArrayList<>();
+		retval.add(solar.get(l));
+		for (Location loc : BFS(l, 200)) {
+			retval.add(solar.get(loc));
+		}
+
+		return retval;
+	}
 	
 	
 	public Location getALoc(){
