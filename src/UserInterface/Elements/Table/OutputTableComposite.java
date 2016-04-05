@@ -11,7 +11,10 @@ import org.eclipse.swt.widgets.TableItem;
 public class OutputTableComposite extends ScrolledComposite {
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/Graph-Gabe
 	private Table inputTable;
 	private String[] columnHeaders = { "Type", "Longitude", "Latitude", "Power Output", "Quantity", "Cost Per Unit",
 			"Power/Cost" };

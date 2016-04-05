@@ -42,4 +42,7 @@ public class SolarDataNode {
 	public Double getMonthlyAverageSolarIntensity(Month m) {
 		return this.avgSolarIntensityData.get(m);
 	}
+	/**
+	 * @return the position of where the object is in the has map
+	 */
 }
