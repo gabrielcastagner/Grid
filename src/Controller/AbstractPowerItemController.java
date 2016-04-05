@@ -11,6 +11,7 @@ public abstract class AbstractPowerItemController implements Comparable<Abstract
 	
 	public abstract void analyze();
 	public abstract UUID destroy();
+	public abstract UUID getID();
 	public abstract void destroyOutput();
 	public abstract boolean outputted();
 	public abstract Button getRemoveButton();

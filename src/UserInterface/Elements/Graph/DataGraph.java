@@ -163,7 +163,7 @@ public class DataGraph {
 		nextLineColorPtr = 0;
 		nextNodeColorPtr = 0;
 		seriesID = 0;
-
+		
 		for (ISeries s : chart.getSeriesSet().getSeries()) {
 			chart.getSeriesSet().deleteSeries(s.getId());
 		}

@@ -55,7 +55,7 @@ public class Controller {
 	private static ArrayList<SolarDataNode> solarNodes;
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
-	private List<AbstractPowerItemController> combined = new ArrayList<AbstractPowerItemController>();
+	private List<AbstractPowerItemController> combined;
 
 	
 	
@@ -84,7 +84,7 @@ public class Controller {
 		solarTableItems = new HashMap<>();
 		windTableItems = new HashMap<>();
 		graph = new DataGraph();
-		
+		combined = new ArrayList<AbstractPowerItemController>();
 		
 		//Link Input actions to Elements
 		initController();
@@ -124,8 +124,10 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
-							if(combined.contains(itemID))
+							if(combined.contains(itemID)){
 								combined.remove(itemID);
+								updateGraph();
+							}
 						}
 					});
 					console.addToConsole("New Solar Panel Model Added.", false);
@@ -149,8 +151,10 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							windTableItems.remove(itemID);
-							if(combined.contains(itemID))
+							if(combined.contains(itemID)){
 								combined.remove(itemID);
+								updateGraph();
+							}
 						};
 					});
 					
@@ -186,8 +190,6 @@ public class Controller {
 				sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()), 
 						new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
 				
-				double[] yValues;
-				
 				//updates output table one item at a time
 				for(AbstractPowerItemController  i: combined){
 					if(i.outputted())
@@ -198,29 +200,7 @@ public class Controller {
 					
 					//Graphing stuff
 					
-					if(i.returnType().equals("Solar")){
-						yValues  = new double[13];
-						int counter = 0;
-						double avg = 0;
-						solarNodes = solarPoints.getInterferenceZone(i.getLocation());
-						
-						for(Month m: Month.values()){
-							
-							for(SolarDataNode s: solarNodes){
-								avg += s.getMonthlyAverageSolarIntensity(m);
-							}
-							avg /=12;
-							
-							i.setMonthlyVar(avg);
-							
-							yValues[counter++] =  i.returnPower();
-						}
-						
-						i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
-						yValues[12] = i.returnPower();
-						
-						graph.addSeries(yValues);
-					}
+					updateGraph();
 					
 				}
 				
@@ -234,6 +214,41 @@ public class Controller {
 			primaryComposite.setSubComposite();
 			}
 		});	
+	}
+	
+	private void updateGraph(){
+		graph.refreshPlot();
+		
+		double[] yValues = new double[13];
+		
+		for(AbstractPowerItemController  i: combined){
+			
+			if(i.returnType().equals("Solar")){
+	
+				int counter = 0;
+				double avg = 0;
+				solarNodes = solarPoints.getInterferenceZone(i.getLocation());
+				
+				for(Month m: Month.values()){
+					
+					for(SolarDataNode s: solarNodes){
+						avg += s.getMonthlyAverageSolarIntensity(m);
+					}
+					avg /=12;
+					
+					i.setMonthlyVar(avg);
+					
+					yValues[counter++] =  i.returnPower();
+				}
+				
+				i.setMonthlyVar(solarNodes.get(0).getMonthlyAverageSolarIntensity(Month.ANN));
+				yValues[12] = i.returnPower();
+				
+				//yValues.put(i.getID(), item);
+				
+				graph.addSeries(yValues, "String");
+			}
+		}
 	}
 	
 	/**

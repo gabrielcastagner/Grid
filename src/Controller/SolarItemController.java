@@ -22,6 +22,10 @@ public class SolarItemController extends AbstractPowerItemController implements 
 		this.uuid = uuid;
 	}
 	
+	public UUID getID(){
+		return uuid;
+	}
+	
 	public String returnType(){
 		return model.getType();
 	}

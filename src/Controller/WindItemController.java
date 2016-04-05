@@ -24,6 +24,10 @@ public class WindItemController extends AbstractPowerItemController{
 
 	}
 	
+	public UUID getID(){
+		return uuid;
+	}
+	
 	public String returnType(){
 		return model.getType();
 	}
