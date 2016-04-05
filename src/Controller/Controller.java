@@ -125,6 +125,14 @@ public class Controller {
 						public void widgetSelected(SelectionEvent arg0) {
 							c.destroy();
 							solarTableItems.remove(itemID);
+							updateGraph();
+							updateGraph();
+							if (combined.contains(c)) {
+								DataGraph.removePlot(c.getDisplayID());
+								combined.remove(c);
+							}
+							updateGraph();
+							setOutputTable();
 
 						}
 					});
