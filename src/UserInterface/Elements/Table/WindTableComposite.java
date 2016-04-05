@@ -11,10 +11,20 @@ import org.eclipse.swt.widgets.TableItem;
 public class WindTableComposite extends ScrolledComposite {
 
 	private Table inputTable;
-	private String[] columnHeaders = { "Longitude", "Latitude", "Blade (m) ","Air Density", "Efficiency", "Quantity",
+	private String[] columnHeaders = { "Longitude", "Latitude", "Blade (m) ", "Air Density", "Efficiency", "Quantity",
 			"Cost Per Unit($)", "" };
-	// private
 
+	/**
+	 * 
+	 * @param arg0
+	 *            parent composite.
+	 * @param arg1
+	 *            Style choices
+	 * @param bg
+	 *            background color
+	 * @param fg
+	 *            Foreground Color
+	 */
 	public WindTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
 
 		super(arg0, arg1);
@@ -44,22 +54,39 @@ public class WindTableComposite extends ScrolledComposite {
 
 	}
 
+	/**
+	 * @return adds a wind table item.
+	 */
 	public WindTableItem addNewItemtoTableSolar() {
 		WindTableItem w = new WindTableItem(inputTable, SWT.NULL);
 		pack();
 		return w;
 	}
 
+	/**
+	 * @param rowNumber
+	 *            row number of the item
+	 */
 	public void removeItem(int rowNumber) {
 		inputTable.remove(rowNumber);
 		inputTable.pack();
 	}
 
 	// ======================= Getters =====================================//
+	/**
+	 * @return get table
+	 */
 	public Table getTable() {
 		return inputTable;
 	}
 
+	/**
+	 * gets a table item
+	 * 
+	 * @param itemNumber
+	 *            item number in table
+	 * @return item in table
+	 */
 	public TableItem getTableItem(int itemNumber) {
 		return inputTable.getItem(itemNumber);
 	}

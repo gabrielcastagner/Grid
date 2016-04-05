@@ -15,6 +15,17 @@ public class SolarTableComposite extends ScrolledComposite {
 			"Cost Per Unit($)", "" };
 	// private
 
+	/**
+	 * 
+	 * @param arg0
+	 *            parent constructor
+	 * @param arg1
+	 *            composite styles
+	 * @param bg
+	 *            background colors
+	 * @param fg
+	 *            Foreground colors
+	 */
 	public SolarTableComposite(Composite arg0, int arg1, Color bg, Color fg) {
 
 		super(arg0, arg1);
@@ -24,7 +35,8 @@ public class SolarTableComposite extends ScrolledComposite {
 		setExpandVertical(true);
 		setBackground(bg);
 		setForeground(fg);
-		inputTable = new Table(this, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL );
+		inputTable = new Table(this,
+				SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK | SWT.V_SCROLL | SWT.NO_SCROLL);
 		inputTable.setLinesVisible(true);
 		inputTable.setHeaderVisible(true);
 		inputTable.setTouchEnabled(true);
@@ -42,26 +54,45 @@ public class SolarTableComposite extends ScrolledComposite {
 
 	}
 
+	/**
+	 * adds table item.
+	 * 
+	 * @return Solartableitem
+	 */
 	public SolarTableItem addNewItemtoTableSolar() {
 		SolarTableItem w = new SolarTableItem(inputTable, SWT.NULL);
 		pack();
 		return w;
 	}
 
+	/**
+	 * removes item
+	 * 
+	 * @param rowNumber
+	 *            item number
+	 */
 	public void removeItem(int rowNumber) {
 		inputTable.remove(rowNumber);
 		inputTable.pack();
 	}
 
 	// ======================= Getters =====================================//
+	/**
+	 * Gets the table
+	 * 
+	 * @return input table
+	 */
 	public Table getTable() {
 		return inputTable;
 	}
 
+	/**
+	 * gets a table item
+	 * 
+	 * @param itemNumber
+	 * @return table item
+	 */
 	public TableItem getTableItem(int itemNumber) {
 		return inputTable.getItem(itemNumber);
 	}
-
-	// ==============================Destroy Function========================//
-
 }

@@ -21,6 +21,12 @@ public class SolarSubComposite extends Composite {
 	private int lblLength, lblHeight;
 	private int xbound, ybound, xpadding, ypadding;
 
+	/**
+	 * 
+	 * @param arg0
+	 *            Higher level composite to which this sub composite belongs.
+	 * @param arg1
+	 */
 	public SolarSubComposite(Composite arg0, int arg1) {
 		super(arg0, arg1);
 
@@ -29,7 +35,7 @@ public class SolarSubComposite extends Composite {
 		lblHeight = ybound / 7;
 		lblLength = 3 * xbound / 8;
 		xpadding = xbound / 100;
-		ypadding = ybound /20;
+		ypadding = ybound / 20;
 
 		addElementsToComposite();
 		setBackground(null);
@@ -39,6 +45,9 @@ public class SolarSubComposite extends Composite {
 		setLayout(null);
 	}
 
+	/**
+	 * Adds elements to the subcomposite.
+	 */
 	private void addElementsToComposite() {
 
 		Label lblAreaText = new Label(this, SWT.NONE);
@@ -119,39 +128,62 @@ public class SolarSubComposite extends Composite {
 		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, numberText, costText,
 				longText, latText };
 	}
-
+	/**
+	 * Clears the text boxes.
+	 */
 	public void refreshView() {
 		for (Text c : textBoxes)
 			c.setText("");
 	}
 
 	// =====================Getters for text Boxes Code====================== //
+	/**
+	 * @return Get the Area from text box.
+	 */
 	public String getAreaText() {
 		return areaText.getText();
 	}
-
+	
+	/**
+	 * @return Get the POwer Loss Coefficient from text box.
+	 */
 	public String getPowerLossCoefficientText() {
 		return powerLossCoefficientText.getText();
 	}
-
+	
+	/**
+	 * @return Get the Panel Efficiency from text box.
+	 */
 	public String getSolarPowerEfficienyText() {
 		return solarPowerEfficienyText.getText();
 	}
-
+	
+	/**
+	 * @return Get the Quantity from text box.
+	 */
 	public String getNumberText() {
 		return numberText.getText();
 	}
-
+	
+	/**
+	 * @return Get the Cost from text box.
+	 */
 	public String getCostText() {
 		return costText.getText();
 
 	}
-
+	
+	/**
+	 * @return Get the Area from text box.
+	 */
 	public String getLongText() {
 		return longText.getText();
 
 	}
-
+	
+	/**
+	 * @return Get the Area from text box.
+	 */
 	public String getLatText() {
 		return latText.getText();
 
