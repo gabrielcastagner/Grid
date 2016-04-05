@@ -66,11 +66,20 @@ public class SolarGraph {
 		ArrayList<Location> printlist = new ArrayList<Location>();
 		ArrayList<Location> queue = new ArrayList<Location>();
 		ArrayList<Location> visited = new ArrayList<Location>();
+<<<<<<< HEAD
 
 		queue.add(l);
 		while (!queue.isEmpty()) {
+=======
+		
+		queue.add(l);												//first iteration
+		printlist.add(l);
+		visited.add(l);
+		while(!queue.isEmpty()){
+>>>>>>> refs/remotes/origin/Graph-Gabe
 			Location current = queue.remove(0);
 			visited.add(current);
+<<<<<<< HEAD
 			for (Location temp : surroundingEdges(current)) {
 				if (l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude()) > d
 						&& !visited.contains(temp)) {
@@ -80,9 +89,26 @@ public class SolarGraph {
 					visited.add(temp);
 					printlist.add(temp);
 				}
+=======
+			//for loop doing all the 8 surrounding edges
+			Location temp = current;//include this in the forloop as an iteration, ask Gabe
+			if(l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude())> d
+					&& visited.contains(temp)){
+				//do nothing
+			}else if(l.Haversine(l.getLatitude(), l.getLongitude(), temp.getLatitude(), temp.getLongitude())<= d
+					&& !visited.contains(temp)){
+				queue.add(temp);
+				visited.add(temp);
+				printlist.add(temp);
+			}else{
+				//do nothing
+>>>>>>> refs/remotes/origin/Graph-Gabe
 			}
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/Graph-Gabe
 		return printlist;
 	}
 	//public TernarryFunction<Integer, Location> up = (ts) -> { int x = ts[0]; int y = ts[1]; return (x != 359) ? locations[y + 1] : locations[y - 359];};

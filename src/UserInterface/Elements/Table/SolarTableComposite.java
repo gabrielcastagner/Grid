@@ -9,7 +9,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 public class SolarTableComposite extends ScrolledComposite {
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/Graph-Gabe
 
 	private Table inputTable;
 	private String[] columnHeaders = { "Longitude", "Latitude", "Area(m^2)", "Power Loss", "Efficiency", "Quantity",
