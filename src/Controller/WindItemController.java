@@ -150,6 +150,13 @@ public class WindItemController extends AbstractPowerItemController{
 	}
 	
 	/**
+	 * Updates output table with Power per Dollar
+	 */
+	private void m2vOutputPowerPerDollar(){
+		output.setPowerPerDollar(Double.toString(returnPowerPerDollar()));
+	}
+	
+	/**
 	 * Updates output table with respective data
 	 */
 	public void buildOutput(OutputTableItem output){
@@ -231,6 +238,7 @@ public class WindItemController extends AbstractPowerItemController{
 		m2vOutputPower();
 		m2vOutputQty();
 		m2vOutputCostPerUnit();
+		m2vOutputPowerPerDollar();
 		
 		output.getTable().layout();
 		
@@ -249,9 +257,7 @@ public class WindItemController extends AbstractPowerItemController{
 	}
 
 	/**
-	 * Compares total power output over total cost with another item (greatest to least)
-	 * @param o item to compare against
-	 * @return 1 for lesser than, 0 for equal, -1 for greater than
+	 * Returns total power divided by total cost
 	 */
 	public double returnPowerPerDollar() {
 		return model.getPower()/(model.getCostPerUnit()*model.getQuantity());
