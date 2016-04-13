@@ -320,9 +320,8 @@ public class WindItemController extends AbstractPowerItemController {
 			return -1;
 	}
 
-	@Override
 	public UUID getID() {
-		return this.getID();
+		return uuid;
 	}
 
 }

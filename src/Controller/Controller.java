@@ -92,6 +92,7 @@ public class Controller {
 		graph = new DataGraph();
 		combined = new ArrayList<AbstractPowerItemController>();
 		solarNames = new HashMap<>();
+		windNames = new HashMap<>();
 
 		//Link Input actions to Elements
 		initController();
@@ -235,12 +236,13 @@ public class Controller {
 	private void updateGraph() {
 		graph.refreshPlot();
 
-		double[] yValues = new double[13];
+		double[] yValues;
 
 		for (AbstractPowerItemController i : combined) {
 
 			if (i.returnType().equals("Solar")) {
 
+				yValues = new double[13];
 				int counter = 0;
 				double avg = 0;
 				solarNodes = solarPoints.getInterferenceZone(i.getLocation());
@@ -264,7 +266,7 @@ public class Controller {
 
 				solarNames.put(i.getID(), i.getDisplayID());
 			}else if(i.returnType().equals("Wind")){
-				
+				yValues = new double[13];
 				int counter = 0;
 				double avg = 0;
 				windNodes = windPoints.getInterferenceZone(i.getLocation());
@@ -286,6 +288,7 @@ public class Controller {
 				yValues[12] = i.returnPower();
 				graph.addSeries(yValues, i.getDisplayID());
 				
+				windNames.put(i.getID(), i.getDisplayID());
 			}
 		}
 		graph.replotCurrentData();
