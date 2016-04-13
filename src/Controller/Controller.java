@@ -15,12 +15,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
 import GraphControl.SolarGraph;
+import GraphControl.WindGraph;
 import Parser.DataParser;
 import PowerModels.SolarModel;
 import PowerModels.WindModel;
 import PowerModels.Graph.Location;
 import PowerModels.Graph.Month;
 import PowerModels.Graph.SolarDataNode;
+import PowerModels.Graph.WindDataNode;
 import UserInterface.ApplicationView;
 import UserInterface.PrimaryComposite;
 import UserInterface.Elements.Console;
@@ -44,6 +46,7 @@ public class Controller {
 	private Console console;
 
 	private SolarGraph solarPoints;
+	private WindGraph windPoints;
 
 	private DataGraph graph;
 
@@ -53,7 +56,9 @@ public class Controller {
 
 	//Data Holders
 	private static ArrayList<SolarDataNode> solarNodes;
+	private static ArrayList<WindDataNode> windNodes;
 	private static HashMap<UUID, String> solarNames;
+	private static HashMap<UUID, String> windNames;
 	private static HashMap<UUID, SolarItemController> solarTableItems;
 	private static HashMap<UUID, WindItemController> windTableItems;
 	private List<AbstractPowerItemController> combined;
@@ -92,11 +97,11 @@ public class Controller {
 		initController();
 
 		console.addToConsole("Gathering Assets and Loading the Program...", false);
-		//TODO Generate Graph Here
 		DataParser.parse();
 		console.addToConsole("Program Loaded.", false);
 
 		solarPoints = new SolarGraph();
+		windPoints = new WindGraph();
 	}
 
 	/**
@@ -239,6 +244,7 @@ public class Controller {
 				int counter = 0;
 				double avg = 0;
 				solarNodes = solarPoints.getInterferenceZone(i.getLocation());
+				
 
 				for (Month m : Month.values()) {
 
@@ -257,6 +263,29 @@ public class Controller {
 				graph.addSeries(yValues, i.getDisplayID());
 
 				solarNames.put(i.getID(), i.getDisplayID());
+			}else if(i.returnType().equals("Wind")){
+				
+				int counter = 0;
+				double avg = 0;
+				windNodes = windPoints.getInterferenceZone(i.getLocation());
+				
+
+				for (Month m : Month.values()) {
+
+					for (WindDataNode w : windNodes) {
+						avg += w.getMonthlyAverageWindSpeed(m);
+					}
+					avg /= 12;
+
+					i.setMonthlyVar(avg);
+
+					yValues[counter++] = i.returnPower();
+				}
+
+				i.setMonthlyVar(windNodes.get(0).getMonthlyAverageWindSpeed(Month.ANN));
+				yValues[12] = i.returnPower();
+				graph.addSeries(yValues, i.getDisplayID());
+				
 			}
 		}
 		graph.replotCurrentData();
