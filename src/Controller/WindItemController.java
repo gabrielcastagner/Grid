@@ -282,7 +282,7 @@ public class WindItemController extends AbstractPowerItemController {
 	 * Returns total power divided by total cost
 	 */
 	public double returnPowerPerDollar() {
-		return model.getPower() / (model.getCostPerUnit() * model.getQuantity());
+		return model.calculatePower() / (model.getCostPerUnit() * model.getQuantity());
 	}
 
 	/**
@@ -320,9 +320,8 @@ public class WindItemController extends AbstractPowerItemController {
 			return -1;
 	}
 
-	@Override
 	public UUID getID() {
-		return this.getID();
+		return uuid;
 	}
 
 }
