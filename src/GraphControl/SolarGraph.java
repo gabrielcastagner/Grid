@@ -160,13 +160,11 @@ public class SolarGraph {
 				return loc;
 			else if (loc.getLatitude() == -85 && loc.getLongitude() == 174)
 				System.out.println("Call Jove");
-		System.out.println("NOT FOUND");
 		return null;
 	}
 
 	public ArrayList<SolarDataNode> getInterferenceZone(Location l) {
 		l = getSourceLocation(l);
-		System.out.println(l.toString());
 		ArrayList<SolarDataNode> retval = new ArrayList<>();
 		retval.add(solar.get(l));
 		for (Location loc : BFS(l, 200)) {

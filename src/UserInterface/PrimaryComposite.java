@@ -154,7 +154,6 @@ public class PrimaryComposite extends Composite {
 		setSubComposite();
 		comboPowerOptions.setBackground(ColorPalette.CUSTOM_WHITE);
 
-		comboBoxes = new Combo[] { comboPowerOptions };
 	}
 
 	// =====================Behavioral Code====================== //
