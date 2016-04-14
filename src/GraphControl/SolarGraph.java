@@ -158,8 +158,6 @@ public class SolarGraph {
 		for (Location loc : solar.keySet())
 			if (loc.equals(l))
 				return loc;
-			else if (loc.getLatitude() == -85 && loc.getLongitude() == 174)
-				System.out.println("Call Jove");
 		return null;
 	}
 
