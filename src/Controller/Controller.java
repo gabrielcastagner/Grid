@@ -198,12 +198,10 @@ public class Controller {
 					}
 				}
 
-				
-				
 				setOutputTable();
-				
+
 				updateGraph();
-				
+
 				setOutputTable();
 
 				console.addToConsole("Data Inputs Analyzed, All Outputs in the Righthand Table", false);
@@ -219,10 +217,10 @@ public class Controller {
 	}
 
 	private void setOutputTable() {
-		
+
 		sortTable(new ArrayList<AbstractPowerItemController>(solarTableItems.values()),
 				new ArrayList<AbstractPowerItemController>(windTableItems.values()), 1);
-		
+
 		//updates output table one item at a time
 		for (AbstractPowerItemController i : combined) {
 			if (i.outputted())
@@ -247,7 +245,6 @@ public class Controller {
 				int counter = 0;
 				double avg = 0;
 				solarNodes = solarPoints.getInterferenceZone(i.getLocation());
-				
 
 				for (Month m : Month.values()) {
 
@@ -266,12 +263,11 @@ public class Controller {
 				graph.addSeries(yValues, i.getDisplayID());
 
 				solarNames.put(i.getID(), i.getDisplayID());
-			}else if(i.returnType().equals("Wind")){
+			} else if (i.returnType().equals("Wind")) {
 				yValues = new double[13];
 				int counter = 0;
 				double avg = 0;
 				windNodes = windPoints.getInterferenceZone(i.getLocation());
-				
 
 				for (Month m : Month.values()) {
 
@@ -288,7 +284,7 @@ public class Controller {
 				i.setMonthlyVar(windNodes.get(0).getMonthlyAverageWindSpeed(Month.ANN));
 				yValues[12] = i.returnPower();
 				graph.addSeries(yValues, i.getDisplayID());
-				
+
 				windNames.put(i.getID(), i.getDisplayID());
 			}
 		}
@@ -316,13 +312,13 @@ public class Controller {
 			return false;
 		}
 
-		if (!(Double.parseDouble(sc.getLongText()) >= -175 && Double.parseDouble(sc.getLongText()) <= 174)) {
-			console.addToConsole("Longitude must be in the domain of [-175,174]", true);
+		if (!(Double.parseDouble(sc.getLongText()) >= -179 && Double.parseDouble(sc.getLongText()) <= 179)) {
+			console.addToConsole("Longitude must be in the domain of [-180,179]", true);
 			return false;
 		}
 
-		if (!(Double.parseDouble(sc.getLatText()) >= -85 && Double.parseDouble(sc.getLatText()) <= 84)) {
-			console.addToConsole("Longitude must be in the domain of [-85,84]", true);
+		if (!(Double.parseDouble(sc.getLatText()) >= -90 && Double.parseDouble(sc.getLatText()) <= 89)) {
+			console.addToConsole("Longitude must be in the domain of [-90,89]", true);
 			return false;
 		}
 
