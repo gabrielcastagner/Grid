@@ -56,9 +56,17 @@ public class Location implements Comparable {
 		// True iff the lat and long values are identical
 		if (obj instanceof Location) {
 			Location o = (Location) obj;
-			if (o.getLatitude() == this.getLatitude() && o.getLongitude() == this.getLongitude())
+			if (Double.compare(o.getLatitude(), this.getLatitude()) == 0
+					&& Double.compare(o.getLongitude(), this.getLongitude()) == 0)
 				return true;
 		}
+		return false;
+	}
+
+	public boolean equals(Location l) {
+		// True iff the lat and long values are identical
+		if (l.getLatitude() == this.getLatitude() && l.getLongitude() == this.getLongitude())
+			return true;
 		return false;
 	}
 

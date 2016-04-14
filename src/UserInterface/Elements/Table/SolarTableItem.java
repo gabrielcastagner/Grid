@@ -15,13 +15,13 @@ import Constants.FilePaths;
 /**
  * SolarTableItem instance
  */
-public class SolarTableItem{
+public class SolarTableItem {
 
 	private TableEditor editor;
 	private Button removeItemButton;
 	private TableItem item;
 	private Table solarTable;
-	
+
 	/**
 	 * Solar table item instance
 	 * 
@@ -33,7 +33,7 @@ public class SolarTableItem{
 	public SolarTableItem(Table table, int SWTargs) {
 		solarTable = table;
 		item = new TableItem(table, SWTargs);
-		
+
 		editor = new TableEditor(table);
 		removeItemButton = new Button(table, SWT.NULL);
 
@@ -49,12 +49,12 @@ public class SolarTableItem{
 
 		editor.setEditor(removeItemButton, item, 7);
 	}
-	
+
 	//Behaviour
 	/**
 	 * Frees all memory for this item and removes it from the table
 	 */
-	public void destroy(){
+	public void destroy() {
 		removeItemButton.dispose();
 		editor.dispose();
 		item.dispose();
@@ -63,101 +63,108 @@ public class SolarTableItem{
 
 	// SETTERS
 	/**
-	 * @param s set Longitude to s on the view
+	 * @param s
+	 *            set Longitude to s on the view
 	 */
-	public void setLongitude(String s){
+	public void setLongitude(String s) {
 		item.setText(0, s);
 	}
-	
+
 	/**
-	 * @param s set Latitude to s on the view
+	 * @param s
+	 *            set Latitude to s on the view
 	 */
-	public void setLatitude(String s){
+	public void setLatitude(String s) {
 		item.setText(1, s);
 	}
-	
+
 	/**
-	 * @param s set solar panel area to s on the view
+	 * @param s
+	 *            set solar panel area to s on the view
 	 */
-	public void setArea(String s){
+	public void setArea(String s) {
 		item.setText(2, s);
 	}
 
 	/**
-	 * @param s set the power loss coefficient to s on the view
+	 * @param s
+	 *            set the power loss coefficient to s on the view
 	 */
-	public void setPowerLoss(String s){
+	public void setPowerLoss(String s) {
 		item.setText(3, s);
 	}
-	
+
 	/**
-	 * @param s set efficiency to s on the view
+	 * @param s
+	 *            set efficiency to s on the view
 	 */
-	public void setEfficiency(String s){
+	public void setEfficiency(String s) {
 		item.setText(4, s);
 	}
-	
+
 	/**
-	 * @param s set number of panels to s on the view
+	 * @param s
+	 *            set number of panels to s on the view
 	 */
-	public void setNumberOfPanels(String s){
+	public void setNumberOfPanels(String s) {
 		item.setText(5, s);
 	}
-	
+
 	/**
-	 * @param s set cost of a panel to s on the view
+	 * @param s
+	 *            set cost of a panel to s on the view
 	 */
-	public void setCostPerUnit(String s){
+	public void setCostPerUnit(String s) {
 		item.setText(6, s);
 	}
-	
+
 	//GETTERS
 	/**
 	 * @return items longitude
 	 */
-	public String getLatitude(){
-		return item.getText(0);
+	public String getLatitude() {
+		return item.getText(1);
 	}
 
 	/**
 	 * @return items latitude
 	 */
-	public String getLongitude(){
-		return item.getText(1);
+	public String getLongitude() {
+		return item.getText(0);
 	}
-	
+
 	/**
 	 * @return items area
 	 */
-	public String getArea(){
+	public String getArea() {
 		return item.getText(2);
 	}
 
 	/**
 	 * @return items power loss coefficient
 	 */
-	public String getPowerLoss(){
+	public String getPowerLoss() {
 		return item.getText(3);
 	}
-	
+
 	/**
 	 * @return items efficiency
 	 */
-	public String getEfficiency(){
+	public String getEfficiency() {
 		return item.getText(4);
 	}
-	
+
 	/**
 	 * @return items number of panels
 	 */
-	public String getNumberOfPanels(){
+	public String getNumberOfPanels() {
 		return item.getText(5);
 	}
-	
+
 	/**
 	 * @return items cost per solar panel
 	 */
-	public String getCostPerUnit(){
+	public String getCostPerUnit() {
 		return item.getText(6);
 	}
 

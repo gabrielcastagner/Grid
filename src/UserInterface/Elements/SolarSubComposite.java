@@ -128,6 +128,7 @@ public class SolarSubComposite extends Composite {
 		textBoxes = new Text[] { areaText, powerLossCoefficientText, solarPowerEfficienyText, numberText, costText,
 				longText, latText };
 	}
+
 	/**
 	 * Clears the text boxes.
 	 */
@@ -143,28 +144,28 @@ public class SolarSubComposite extends Composite {
 	public String getAreaText() {
 		return areaText.getText();
 	}
-	
+
 	/**
 	 * @return Get the POwer Loss Coefficient from text box.
 	 */
 	public String getPowerLossCoefficientText() {
 		return powerLossCoefficientText.getText();
 	}
-	
+
 	/**
 	 * @return Get the Panel Efficiency from text box.
 	 */
 	public String getSolarPowerEfficienyText() {
 		return solarPowerEfficienyText.getText();
 	}
-	
+
 	/**
 	 * @return Get the Quantity from text box.
 	 */
 	public String getNumberText() {
 		return numberText.getText();
 	}
-	
+
 	/**
 	 * @return Get the Cost from text box.
 	 */
@@ -172,7 +173,7 @@ public class SolarSubComposite extends Composite {
 		return costText.getText();
 
 	}
-	
+
 	/**
 	 * @return Get the Area from text box.
 	 */
@@ -180,8 +181,10 @@ public class SolarSubComposite extends Composite {
 		return longText.getText();
 
 	}
-	
+
 	/**
+	 * c
+	 * 
 	 * @return Get the Area from text box.
 	 */
 	public String getLatText() {

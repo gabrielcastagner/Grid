@@ -66,7 +66,6 @@ public class SolarGraph {
 		printlist.add(l);
 		visited.add(l);
 		while (!queue.isEmpty()) {
-			System.out.println(l.toString());
 			Location current = queue.remove(0);
 			visited.add(current);
 			for (Location temp : adj.get(current)) {
@@ -159,11 +158,15 @@ public class SolarGraph {
 		for (Location loc : solar.keySet())
 			if (loc.equals(l))
 				return loc;
+			else if (loc.getLatitude() == -85 && loc.getLongitude() == 174)
+				System.out.println("Call Jove");
+		System.out.println("NOT FOUND");
 		return null;
 	}
 
 	public ArrayList<SolarDataNode> getInterferenceZone(Location l) {
 		l = getSourceLocation(l);
+		System.out.println(l.toString());
 		ArrayList<SolarDataNode> retval = new ArrayList<>();
 		retval.add(solar.get(l));
 		for (Location loc : BFS(l, 200)) {
