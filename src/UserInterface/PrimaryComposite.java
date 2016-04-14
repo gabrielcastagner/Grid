@@ -48,7 +48,7 @@ public class PrimaryComposite extends Composite {
 	private Composite currentSubComposite = new Composite(this, SWT.None);
 	private Composite[] subComposites;
 
-	final StackLayout layout = new StackLayout();
+	final private StackLayout layout = new StackLayout();
 
 	/**
 	 * Primary Composite Constructor for the gui.

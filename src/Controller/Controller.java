@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -297,13 +298,14 @@ public class Controller {
 	/**
 	 * Sets up a solar model instance based on the user inputs
 	 */
-	public boolean inputsToSolarModel(SolarModel model) {
+	private boolean inputsToSolarModel(SolarModel model) {
 		SolarSubComposite sc = primaryComposite.getSolarSubComposite();
 		//Check values against proper formats
 		if (!(matchesDoubleCharSequence(sc.getAreaText()) && matchesDoubleCharSequence(sc.getPowerLossCoefficientText())
 				&& matchesDoubleCharSequence(sc.getSolarPowerEfficienyText())
-				&& matchesDoubleCharSequence(sc.getCostText()) && matchesDoubleCharSequence(sc.getLatText())
-				&& matchesDoubleCharSequence(sc.getLongText()) && matchesDoubleCharSequence(sc.getNumberText()))) {
+				&& matchesDoubleCharSequence(sc.getCostText()) && matchesDoubleCharSequenceWithNegative(sc.getLatText())
+				&& matchesDoubleCharSequenceWithNegative(sc.getLongText())
+				&& matchesDoubleCharSequence(sc.getNumberText()))) {
 
 			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
@@ -311,6 +313,16 @@ public class Controller {
 
 		if (!matchesIntegerCharSequence(sc.getNumberText())) {
 			console.addToConsole("Error: Number of Solar Panels requires a whole number input", true);
+			return false;
+		}
+
+		if (!(Double.parseDouble(sc.getLongText()) >= -175 && Double.parseDouble(sc.getLongText()) <= 174)) {
+			console.addToConsole("Longitude must be in the domain of [-175,174]", true);
+			return false;
+		}
+
+		if (!(Double.parseDouble(sc.getLatText()) >= -85 && Double.parseDouble(sc.getLatText()) <= 84)) {
+			console.addToConsole("Longitude must be in the domain of [-85,84]", true);
 			return false;
 		}
 
@@ -360,7 +372,7 @@ public class Controller {
 	 *            String to be matched
 	 * @return true if it matches a double else return false
 	 */
-	public boolean matchesDoubleCharSequence(String s) {
+	private boolean matchesDoubleCharSequence(String s) {
 		s = s.trim();
 		if (s.isEmpty())
 			return false;
@@ -376,11 +388,29 @@ public class Controller {
 	 *            String to be matched
 	 * @return true if it matches an int else return false
 	 */
-	public boolean matchesIntegerCharSequence(String s) {
+	private boolean matchesIntegerCharSequence(String s) {
 		s = s.trim();
 		if (s.isEmpty())
 			return false;
 		Matcher m = invalidInteger.matcher(s);
+		return !m.find();
+
+	}
+
+	/**
+	 * Matches a string to see if it represents a double
+	 * 
+	 * @param s
+	 *            String to be matched
+	 * @return true if it matches a double else return false
+	 */
+	private boolean matchesDoubleCharSequenceWithNegative(String s) {
+		StringTokenizer st = new StringTokenizer(s, "-");
+		s = st.nextToken();
+		s = s.trim();
+		if (s.isEmpty())
+			return false;
+		Matcher m = invalidDouble.matcher(s);
 		return !m.find();
 
 	}
@@ -396,7 +426,7 @@ public class Controller {
 	 * @param select
 	 *            0 for total power, 1 for total power/total cost
 	 */
-	public void sortTable(List<AbstractPowerItemController> originalS, List<AbstractPowerItemController> originalW,
+	private void sortTable(List<AbstractPowerItemController> originalS, List<AbstractPowerItemController> originalW,
 			int select) {
 
 		combined = originalS;

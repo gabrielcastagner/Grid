@@ -7,11 +7,13 @@ import java.util.HashMap;
  */
 public class WindDataNode {
 	private HashMap<Month, Double> avgWindSpeedData;
-	
+
 	/**
 	 * Creates a WindDataNode instance
-	 * @param group Formatted String array of numbers for Wind Speed Averages
-	 * 		"Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Ann"
+	 * 
+	 * @param group
+	 *            Formatted String array of numbers for Wind Speed Averages
+	 *            "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Ann"
 	 */
 	public WindDataNode(String[] data) {
 		avgWindSpeedData = new HashMap<>();
@@ -20,20 +22,22 @@ public class WindDataNode {
 		for (Month m : Month.values())
 			avgWindSpeedData.put(m, Double.parseDouble(data[ind++]));
 	}
-	
+
 	/**
 	 * @return a HashMap of Months to average wind speeds in m/s
 	 */
-	public HashMap<Month, Double> getAnnualWindSpeedAvg(){
+	public HashMap<Month, Double> getAnnualWindSpeedAvg() {
 		return this.avgWindSpeedData;
 	}
-	
+
 	/**
-	 * Gets a single Average windspeed from the node
-	 * @param m -Month of desired parse
+	 * Gets a single Average wind speed from the node
+	 * 
+	 * @param m
+	 *            -Month of desired parse
 	 * @return Average wind speed for m
 	 */
-	public Double getMonthlyAverageWindSpeed(Month m){
+	public Double getMonthlyAverageWindSpeed(Month m) {
 		return this.avgWindSpeedData.get(m);
 	}
 }

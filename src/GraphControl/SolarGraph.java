@@ -8,7 +8,7 @@ import PowerModels.Graph.Location;
 import PowerModels.Graph.SolarDataNode;
 
 public class SolarGraph {
-	final double topLat = 89, topLon = 179, bottomLat = -90, bottomLon = -180;
+	private final double topLat = 89, topLon = 179, bottomLat = -90, bottomLon = -180;
 	private int V;
 	private int E;
 	private HashMap<Location, SolarDataNode> solar;
@@ -27,10 +27,10 @@ public class SolarGraph {
 		}
 	}
 
-	public void setupGraph() {
+	private void setupGraph() {
 		solar = new HashMap<>();
 		adj = new HashMap<>();
-		
+
 		solar = DataParser.getSolarData();
 
 		locations = new Location[solar.keySet().size()];
@@ -66,6 +66,7 @@ public class SolarGraph {
 		printlist.add(l);
 		visited.add(l);
 		while (!queue.isEmpty()) {
+			System.out.println(l.toString());
 			Location current = queue.remove(0);
 			visited.add(current);
 			for (Location temp : adj.get(current)) {
@@ -87,9 +88,6 @@ public class SolarGraph {
 
 		return printlist;
 	}
-	//public TernarryFunction<Integer, Location> up = (ts) -> { int x = ts[0]; int y = ts[1]; return (x != 359) ? locations[y + 1] : locations[y - 359];};
-	//	public TernarryFunction<Integer, Location> down = (ts) -> { int x = ts[0]; int y = ts[1]; return (x != 0) ? locations[y - 1] : locations[y + 359];};
-	//	public TernarryFunction<Integer, Location> right = (ts) -> { int w = ts[0]; int x = ts[1]; int y = ts[2]; return (w != 179) ? locations[y + 359] : locations[x];};
 
 	private ArrayList<Location> surroundingEdges(Location l) {
 		int lat = (int) l.getLatitude() + 90;
@@ -157,7 +155,6 @@ public class SolarGraph {
 		return printlist;
 	}
 
-	
 	private Location getSourceLocation(Location l) {
 		for (Location loc : solar.keySet())
 			if (loc.equals(l))
@@ -175,20 +172,4 @@ public class SolarGraph {
 
 		return retval;
 	}
-	
-	
-	public Location getALoc(){
-		
-		return adj.keySet().iterator().next();
-	}
-	
-	public static void main(String args[]) {
-		System.out.println("Start");
-		SolarGraph sg = new SolarGraph();
-		System.out.println("parsed");
-		System.out.println(sg.BFS(sg.getALoc(), 500).toString());
-		System.out.println("Stop");
-
-	}
-
 }
