@@ -340,7 +340,8 @@ public class Controller {
 		//Error Check
 		if (!(matchesDoubleCharSequence(wc.getAirDensityText()) && matchesDoubleCharSequence(wc.getBladeRadiusText())
 				&& matchesDoubleCharSequence(wc.getEfficiencyText()) && matchesDoubleCharSequence(wc.getCostText())
-				&& matchesDoubleCharSequence(wc.getLatText()) && matchesDoubleCharSequence(wc.getLongText())
+				&& matchesDoubleCharSequenceWithNegative(wc.getLatText())
+				&& matchesDoubleCharSequenceWithNegative(wc.getLongText())
 				&& matchesDoubleCharSequence(wc.getNumberText()))) {
 			console.addToConsole("Error: Some or all inputs are incomplete or non numerical in form!", true);
 			return false;
@@ -348,6 +349,16 @@ public class Controller {
 
 		if (!matchesIntegerCharSequence(wc.getNumberText())) {
 			console.addToConsole("Error: Number of Wind Turbines requires a whole number input", true);
+			return false;
+		}
+
+		if (!(Double.parseDouble(wc.getLongText()) >= -179 && Double.parseDouble(wc.getLongText()) <= 179)) {
+			console.addToConsole("Longitude must be in the domain of [-180,179]", true);
+			return false;
+		}
+
+		if (!(Double.parseDouble(wc.getLatText()) >= -90 && Double.parseDouble(wc.getLatText()) <= 89)) {
+			console.addToConsole("Longitude must be in the domain of [-90,89]", true);
 			return false;
 		}
 
